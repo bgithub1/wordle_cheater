@@ -1,0 +1,18 @@
+name: wordl_helper
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
+dependencies:
+  - ipywidgets
+  - jupytext
+  - notebook
+  - seaborn
+  - jupyterlab
+  - matplotlib-base
+  - ipython
+  - pandas[version='>=1']
+  - tqdm
+  - holoviews
+  - cufflinks-py
+  - lxml
