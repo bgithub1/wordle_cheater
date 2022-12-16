@@ -97,9 +97,10 @@
 </div>
 <div>
   <button type="button" onClick="add_word()">Add Word</button>
+  <button type="button" onClick="try_it()">Try It</button>
 </div>
 <div>
-  <button type="button" onClick="try_it()">Try It</button>
+  <div id="add_word_results"></div>
 </div>
 <div>
   <table id="json_results"></table>
@@ -185,7 +186,7 @@ function add_word(){
 
   words.push(word);
   words_choices.push(ggg_choices);
-  alert([words,words_choices]);
+  document.getElementById("add_word_results").innerHTML = [words,words_choices].join();
   reset_all(reset_words=0);
 };
 
@@ -214,14 +215,20 @@ function try_it(){
   // .then(text => console.log(text))
   .then(text => JSON.parse(text))
   .then(function(json_results){
-    $('#json_results').dataTable( {
-        "data": json_results,
-        "columns":[
-          {"data":"word","title":"word"},
-          {"data":"count","title":"count"},
-          {"data":"probability","title":"probability"}
-        ]
-    } );      
+    if ( ! $.fn.DataTable.isDataTable( '#json_results' ) ) {
+      $('#json_results').dataTable( {
+          "data": json_results,
+          "columns":[
+            {"data":"word","title":"word"},
+            {"data":"count","title":"count"},
+            {"data":"probability","title":"probability"}
+          ]
+      } );      
+    } else {
+      var dt = $('#json_results').dataTable();
+      dt.fnClearTable();
+      dt.fnAddData(json_results,redraw=true);
+    }   
   })
 }
 
