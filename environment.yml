@@ -16,3 +16,5 @@ dependencies:
   - holoviews
   - cufflinks-py
   - lxml
+  - fastapi
+  - uvicorn

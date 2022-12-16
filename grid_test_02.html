@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+:root {
+  --green: #49BE25;
+  --gold: #D5C450; 
+  --grey: #A0A0A0;
+  --height: 50px;
+  --width1: 100%;
+  --width2: 90%;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  background-color: #2196F3;
+  height: var(--height);
+/*  padding: 5px;
+*/}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+/*  padding: 20px;
+*/  /*font-size: 30px;*/
+  text-align: center;
+  height: var(--height);
+  width: var(--width1);
+}
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+  background-color: #2196F3;
+/*  height: var(--height);
+*//*  padding: 5px;
+*/
+}
+
+/* ["#49BE25","#D5C450","#A0A0A0"] */
+
+.grid-item2 {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+/*  padding: 20px;
+*//*  font-size: 30px;  
+*/  text-align: center;
+  height: var(--height);
+  width: var(--width2);
+}
+.green {
+  background-color: var(--green);
+}
+.gold {
+  background-color: var(--gold);
+}
+.grey {
+  background-color: var(--grey);
+}
+</style>
+
+
+</head>
+<body>
+<div><input id="wordinput" onkeyup="textToButton()" maxlength="5" type="text"></div>
+<div class="grid-container">
+  <!--
+  <input id="t1" size=1 type="text" class="grid-item">
+  <input id="t2" size=1 type="text" class="grid-item">
+  <input id="t3" size=1 type="text" class="grid-item">
+  <input id="t4" size=1 type="text" class="grid-item">
+  <input id="t5" size=1 type="text" class="grid-item">
+  -->
+  <button id="t1" size=1 type="text" class="grid-item">
+  <button id="t2" size=1 type="text" class="grid-item">
+  <button id="t3" size=1 type="text" class="grid-item">
+  <button id="t4" size=1 type="text" class="grid-item">
+  <button id="t5" size=1 type="text" class="grid-item">
+</div>
+<div class="grid-container2">
+  <button id="b11" size=1 type="button" class="grid-item2 green" onClick="onbt1(this.id)">
+  <button id="b12" size=1 type="button" class="grid-item2 gold" onClick="onbt1(this.id)">
+  <button id="b13" size=1 type="button" class="grid-item2 grey" onClick="onbt1(this.id)">
+  <button id="b21" size=1 type="button" class="grid-item2 green" onClick="onbt1(this.id)">
+  <button id="b22" size=1 type="button" class="grid-item2 gold" onClick="onbt1(this.id)">
+  <button id="b23" size=1 type="button" class="grid-item2 grey" onClick="onbt1(this.id)">
+  <button id="b31" size=1 type="button" class="grid-item2 green" onClick="onbt1(this.id)">
+  <button id="b32" size=1 type="button" class="grid-item2 gold" onClick="onbt1(this.id)">
+  <button id="b33" size=1 type="button" class="grid-item2 grey" onClick="onbt1(this.id)">
+  <button id="b41" size=1 type="button" class="grid-item2 green" onClick="onbt1(this.id)">
+  <button id="b42" size=1 type="button" class="grid-item2 gold" onClick="onbt1(this.id)">
+  <button id="b43" size=1 type="button" class="grid-item2 grey" onClick="onbt1(this.id)">
+  <button id="b51" size=1 type="button" class="grid-item2 green" onClick="onbt1(this.id)">
+  <button id="b52" size=1 type="button" class="grid-item2 gold" onClick="onbt1(this.id)">
+  <button id="b53" size=1 type="button" class="grid-item2 grey" onClick="onbt1(this.id)">
+</div>
+<div>
+  <button type="button" onClick="add_word()">Add Word</button>
+</div>
+<div>
+  <button type="button" onClick="try_it()">Try It</button>
+</div>
+<div>
+  <table id="json_results"></table>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+<script> 
+var words = [];
+var words_choices = [];
+
+function reset_all(reset_words=1) {
+
+  for (let i = 1; i < 6; i++) {
+    v = "t" + i;
+    document.getElementById(v).innerHTML = "";
+    for (j=1;j<4;j++){
+      col_id = "b"+i+j;
+      if (j==3){
+        document.getElementById(col_id).innerHTML = "X";  
+      } else {
+        document.getElementById(col_id).innerHTML = "";  
+      }
+      
+    }
+  };
+  if (reset_words==1){
+    words = [];
+    words_choices = [];
+  };
+  document.getElementById("wordinput").value = "";
+};
+
+function textToButton() {
+  var x = document.getElementById("wordinput").value;
+  for (let i = 0; i < 5; i++) {
+    var v = i+1;
+    v = "t" + v.toString();
+    document.getElementById(v).innerHTML = "";
+  };  
+  xlen = Math.min(x.length,5);
+  for (let i = 0; i < xlen; i++) {
+    var v = i+1;
+    v = "t" + v.toString();
+    document.getElementById(v).innerHTML = x[i].toUpperCase();
+  }; 
+  
+  
+};
+
+var br_list = ["br1","br2","br3"];
+function onbt1(clicked_id) {
+  var row_id = clicked_id[1];
+  
+  for (let i = 0;i<3;i++){
+      var col_id = i+1
+      b_clicked = "b"+row_id+col_id;
+      if (clicked_id != b_clicked) {
+        document.getElementById(b_clicked).innerHTML = "";
+      }
+  };
+  document.getElementById(clicked_id).innerHTML = "X";
+}
+
+
+function add_word(){
+  var word = "";
+  // ggg is GreenGoldGrey
+  var ggg_choices = "";
+  for (i=1;i<6;i++) {
+    word = word + document.getElementById("t"+i).innerHTML;
+    for (j=1;j<4;j++){
+      var button_value = document.getElementById("b"+i+j).innerHTML.toLowerCase();
+      if ( button_value=="x"){
+          ggg_choices = ggg_choices + j;
+      };
+    };
+  };
+
+  words.push(word);
+  words_choices.push(ggg_choices);
+  alert([words,words_choices]);
+  reset_all(reset_words=0);
+};
+
+
+function try_it(){
+  var filters = "";
+  for (i=0;i<words.length;i++){
+    filters = filters + words[i] + "," + words_choices[i] + ",";
+  };
+  filters = filters.slice(0,filters.length-1).toLowerCase();
+  fetch("http://127.0.0.1:8000/wordl?filters="+filters, 
+  {
+      method: 'GET',
+      headers: {
+          'Accept': 'application/json',
+      },
+  })
+  // .then(response => response.text())
+  .then(
+    function(response) {
+      var r = response.text();
+      // console.log(r);
+      return r;
+    }
+  )
+  // .then(text => console.log(text))
+  .then(text => JSON.parse(text))
+  .then(function(json_results){
+    $('#json_results').dataTable( {
+        "data": json_results,
+        "columns":[
+          {"data":"word","title":"word"},
+          {"data":"count","title":"count"},
+          {"data":"probability","title":"probability"}
+        ]
+    } );      
+  })
+}
+
+// 
+window.onload = reset_all();
+
+</script>
+
+
+</body>
+</html>
+
