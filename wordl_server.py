@@ -138,22 +138,9 @@ async def load_wordl(filters:str="slate,33333,minor,33223,goony,32123"):
         num_list = [int(v) for v in p[1]]
         wdl.add_word(word,num_list)        
     df = filter_words(wdl.try_it()) 
+    df.probability = df.probability.round(5)
     print(filters)
     print(df)
     
     return df.to_dict(orient="records")    
-
-@app.get("/wordlhtml")
-async def load_wordlhtml(filters:str="slate,33333,minor,33223,goony,32123"):
-    params = np.array(filters.split(',')).reshape(-1,2)
-    wdl = wordl()
-    for p in params:
-        word = p[0]
-        num_list = [int(v) for v in p[1]]
-        wdl.add_word(word,num_list)        
-    df = filter_words(wdl.try_it()) 
-    print(filters)
-    print(df)
-    
-    return df.to_html()    
 

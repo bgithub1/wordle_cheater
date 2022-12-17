@@ -13,7 +13,18 @@
   --width2: 90%;
 }
 
-.grid-container {
+.grid-container-0 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: var(--height);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+.grid-item-0{
+  font-size: 25px;
+  text-align: center; 
+}
+
+.grid-container-1 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   background-color: #2196F3;
@@ -23,14 +34,15 @@
 .grid-item {
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.8);
-/*  padding: 20px;
-*/  /*font-size: 30px;*/
+/*  padding: 20px;*/  
+  font-size: 30px;
+  font-weight: bold;
   text-align: center;
   height: var(--height);
   width: var(--width1);
 }
 
-.grid-container2 {
+.grid-container-2 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
   background-color: #2196F3;
@@ -39,13 +51,11 @@
 */
 }
 
-/* ["#49BE25","#D5C450","#A0A0A0"] */
-
 .grid-item2 {
   border: 1px solid rgba(0, 0, 0, 0.8);
-/*  padding: 20px;
-*//*  font-size: 30px;  
-*/  text-align: center;
+/*  padding: 20px;*/
+  font-size: 30px;    
+  text-align: center;
   height: var(--height);
   width: var(--width2);
 }
@@ -58,27 +68,34 @@
 .grey {
   background-color: var(--grey);
 }
+
+.grid-container-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: var(--height); 
+  border: 1px solid rgba(0, 0, 0, 0.8); 
+}
+.grid-item-3{
+  font-size: 30px;
+  background-color: red;
+}
 </style>
 
 
 </head>
 <body>
-<div><input id="wordinput" onkeyup="textToButton()" maxlength="5" type="text"></div>
-<div class="grid-container">
-  <!--
-  <input id="t1" size=1 type="text" class="grid-item">
-  <input id="t2" size=1 type="text" class="grid-item">
-  <input id="t3" size=1 type="text" class="grid-item">
-  <input id="t4" size=1 type="text" class="grid-item">
-  <input id="t5" size=1 type="text" class="grid-item">
-  -->
+<div class="grid-container-0">
+  <label class="grid-item-0">Enter A Word -></label>
+  <input id="wordinput" class="grid-item-0" onkeyup="textToButton()" maxlength="5" type="text">
+</div>
+<div class="grid-container-1">
   <button id="t1" size=1 type="text" class="grid-item">
   <button id="t2" size=1 type="text" class="grid-item">
   <button id="t3" size=1 type="text" class="grid-item">
   <button id="t4" size=1 type="text" class="grid-item">
   <button id="t5" size=1 type="text" class="grid-item">
 </div>
-<div class="grid-container2">
+<div class="grid-container-2">
   <button id="b11" size=1 type="button" class="grid-item2 green" onClick="onbt1(this.id)">
   <button id="b12" size=1 type="button" class="grid-item2 gold" onClick="onbt1(this.id)">
   <button id="b13" size=1 type="button" class="grid-item2 grey" onClick="onbt1(this.id)">
@@ -95,8 +112,10 @@
   <button id="b52" size=1 type="button" class="grid-item2 gold" onClick="onbt1(this.id)">
   <button id="b53" size=1 type="button" class="grid-item2 grey" onClick="onbt1(this.id)">
 </div>
+<div class="grid-container-3">
+  <button type="button" class="grid-item-3" onClick="add_word()">Add Word</button>
+</div>
 <div>
-  <button type="button" onClick="add_word()">Add Word</button>
   <button type="button" onClick="try_it()">Try It</button>
 </div>
 <div>
@@ -222,7 +241,8 @@ function try_it(){
             {"data":"word","title":"word"},
             {"data":"count","title":"count"},
             {"data":"probability","title":"probability"}
-          ]
+          ],
+          order: [[2, 'desc']],
       } );      
     } else {
       var dt = $('#json_results').dataTable();
