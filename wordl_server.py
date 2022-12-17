@@ -27,7 +27,13 @@ else:
     df_ugf = pd.read_csv(csv_export_url)
 
     
-nltk_words = df.word.values
+# nltk_words = df.word.values
+df_ugf = df_ugf[~df_ugf.word.isna()]    
+df_ugf.words = df_ugf.word.str.strip(' ')
+c1 = df_ugf.word.str.len()==5
+c2 = df_ugf.word.str.slice(0,1).str.lower() == df_ugf.word.str.slice(0,1)
+nltk_words = df_ugf[c1 & c2].word.values
+
 
 def new_condition(word,letter_status):
     good_letters = []
