@@ -26,14 +26,24 @@ else:
     csv_export_url = sheet_url.replace('/edit#gid=', '/export?format=csv&gid=')
     df_ugf = pd.read_csv(csv_export_url)
 
-    
+
+# +
 # nltk_words = df.word.values
+df_ww = pd.read_csv('wordle_words.csv')
+df_ww['word'] = df_ww.index
+df_ww.index = range(len(df_ww))
+
 df_ugf = df_ugf[~df_ugf.word.isna()]    
 df_ugf.words = df_ugf.word.str.strip(' ')
+
+df_ugf = df_ugf[df_ugf.word.isin(df_ww.word.values)]
+
 c1 = df_ugf.word.str.len()==5
 c2 = df_ugf.word.str.slice(0,1).str.lower() == df_ugf.word.str.slice(0,1)
 nltk_words = df_ugf[c1 & c2].word.values
 
+
+# -
 
 def new_condition(word,letter_status):
     good_letters = []
@@ -107,7 +117,7 @@ class wordl():
             if self.conds(w):
                 words.append(w)
         return words
-        
+
 def filter_words(words):
     df_new = df_ugf[df_ugf.word.isin(words)].sort_values('count',ascending=False).copy()
     count_sum = df_new['count'].sum()
