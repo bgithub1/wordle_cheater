@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+  <title>Wordle Helper</title>
 <style>
 
 :root {
@@ -18,7 +18,7 @@
   --verylightmagenta:#F8E0F7;
   --halfheight:30px;
   --height: 50px;
-  --height_0:70px;
+  --height_0:50px;
   --width1: 100%;
   --width2: 94%;
 }
@@ -27,6 +27,20 @@ body {
   display: grid;
 /*  grid-template-rows:  20%;*/
   justify-content: center;
+}
+
+.grid-container-title {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: var(--height_0);
+  line-height: var(--height_0);
+/*  border: 1px solid rgba(0, 0, 0, 0.8);*/
+}
+.grid-item-title{
+  font-size: 35px;
+  text-align: center; 
+  justify-content: center;
+  color:var(--blue);
 }
 
 .grid-container-0 {
@@ -162,6 +176,9 @@ table.dataTable tr.dtrg-level-0 td {
 
 </head>
 <body>
+<div class="grid-container-title">
+  <div class="grid-item-title">Wordle Helper</div>
+</div>
 <div class="grid-container-0">
   <div class="grid-item-0">Enter A Word -></div>
   <input id="wordinput" class="grid-item-0" onkeyup="textToButton()" maxlength="5" type="text">
