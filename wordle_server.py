@@ -131,6 +131,8 @@ origins = [
     "https://localhost.tiangolo.com",
     "http://www.billybyte.com",
     "https://www.billybyte.com",
+    "http://billybyte.com",
+    "https://billybyte.com",
     "http://localhost",
     "http://localhost:3001",
 ]
