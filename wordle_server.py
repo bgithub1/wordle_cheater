@@ -14,7 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import io
 
 
-USE_LOCAL_CSV=False
+USE_LOCAL_CSV=True
 if USE_LOCAL_CSV:
     df = pd.read_csv('df_wordl_words.csv')
     df_ugf = pd.read_csv('unigram_freq.csv')
@@ -127,8 +127,10 @@ def filter_words(words):
 
 app = FastAPI()
 origins = [
-#     "http://localhost.tiangolo.com",
-#     "https://localhost.tiangolo.com",
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://www.billybyte.com",
+    "https://www.billybyte.com",
     "http://localhost",
     "http://localhost:3001",
 ]
