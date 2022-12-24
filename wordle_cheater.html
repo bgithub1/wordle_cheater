@@ -409,7 +409,8 @@ function try_it(){
     filters = filters + words[i] + "," + words_choices[i] + ",";
   };
   filters = filters.slice(0,filters.length-1).toLowerCase();
-  fetch("http://127.0.0.1:8000/wordl?filters="+filters, 
+  // fetch("http://127.0.0.1:8000/wordl?filters="+filters, 
+  fetch("https://e45f-23-93-104-250.ngrok.io/wordl?filters="+filters, 
   {
       method: 'GET',
       headers: {
