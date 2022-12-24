@@ -280,6 +280,10 @@ var grey = "#C9C9C9" // "#A0A0A0" #D8D8D8
 
 var color_arr = [green, gold, grey]
 
+// var fetch_url = "http://127.0.0.1:8000/wordl?filters";
+var fetch_url = "https://e45f-23-93-104-250.ngrok.io/wordl?filters=";
+
+
 function reset_all(reset_words=1) {
   for (let i = 1; i < 6; i++) {
     v = "t" + i;
@@ -410,7 +414,7 @@ function try_it(){
   };
   filters = filters.slice(0,filters.length-1).toLowerCase();
   // fetch("http://127.0.0.1:8000/wordl?filters="+filters, 
-  fetch("https://e45f-23-93-104-250.ngrok.io/wordl?filters="+filters, 
+  fetch(fetch_url+filters, 
   {
       method: 'GET',
       headers: {
