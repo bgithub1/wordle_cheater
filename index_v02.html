@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wordle Cheater</title>
+<style>
+
+:root {
+  --green: #49BE25;
+  --gold: #D5C450; 
+  /*--grey: #A0A0A0;*/
+  --grey:#C9C9C9;
+  --blue: #0040FF;
+  --lighttan: #F6E3CE;
+  --midtan: #F5D0A9;
+  --lightblue:#A9D0F5;
+  --midblue: #5882FA;
+  --lightmagenta:#F6CEF5;
+  --verylightmagenta:#F8E0F7;
+  --halfheight:30px;
+  --height: 50px;
+  --height_0:50px;
+  --width1: 100%;
+  --width2: 94%;
+}
+
+.green {
+  background-color: var(--green);
+}
+.gold {
+  background-color: var(--gold);
+}
+.grey {
+  background-color: var(--grey);
+}
+.lighttan {
+  background-color: var(--lighttan);
+}
+.midtan {
+  background-color: var(--midtan);
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(30, [col-start] 3.333%);
+  /*gap: 3px;*/
+}
+
+.title {
+  grid-column: col-start 1 / span 30;
+  text-align:center;
+  font-size: 35px;
+  justify-content: center;
+  color:var(--blue);
+}
+.enterword_1 {
+  grid-column: col-start 1 / span 15;
+  grid-row: 2;
+  text-align:center;
+  height: var(--height_0);
+  line-height: var(--height_0);
+  font-size: 20px;
+  justify-content: center;
+  
+}
+.enterword_2 {
+  grid-column: col-start 16 / span 15;
+  grid-row: 2;
+  text-align:center;
+  font-size: 20px;
+  justify-content: center;
+}
+.letters_1 {
+  grid-column: 1 / span 6;
+  grid-row: 3;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  height: var(--height);
+}
+.letters_2 {
+  grid-column: 7 / span 6;
+  grid-row: 3;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  height: var(--height);
+}
+.letters_3 {
+  grid-column: 13 / span 6;
+  grid-row: 3;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  height: var(--height);
+}
+.letters_4 {
+  grid-column: 19 / span 6;
+  grid-row: 3;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  height: var(--height);
+}
+.letters_5 {
+  grid-column: 25 / span 6;
+  grid-row: 3;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  height: var(--height);
+}
+
+.colors_1_1 {
+  grid-column: 1 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+  
+}
+.colors_1_2 {
+  grid-column: 3 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+.colors_1_3 {
+  grid-column: 5 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+
+.colors_2_1 {
+  grid-column: 7 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+.colors_2_2 {
+  grid-column: 9 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+.colors_2_3 {
+  grid-column: 11 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+
+.colors_3_1 {
+  grid-column: 13 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+.colors_3_2 {
+  grid-column: 15 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+.colors_3_3 {
+  grid-column: 17 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+} 
+.colors_4_1 {
+  grid-column: 19 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+.colors_4_2 {
+  grid-column: 21 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+.colors_4_3 {
+  grid-column: 23 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+.colors_5_1 {
+  grid-column: 25 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+.colors_5_2 {
+  grid-column: 27 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+.colors_5_3 {
+  grid-column: 29 / span 2;
+  grid-row: 4;
+  text-align: center;
+  height: var(--halfheight);
+}
+
+.rowspace5 {
+ grid-column 1;
+ grid-row 5;
+}
+
+
+.addword {
+  grid-column: 1 / span 30;
+  grid-row: 6;
+  font-size:25px;
+  text-align:center;
+  height: var(--height); 
+  background-color: var(--lightblue);
+  border-radius: 50px;
+}
+
+.wordsadded_1_1 {
+  grid-column: 1;
+  grid-row: 7;
+}
+.wordsadded_1_2 {
+  grid-column: 2;
+  grid-row: 7;
+}
+.wordsadded_1_3 {
+  grid-column: 3;
+  grid-row: 7;
+}
+.wordsadded_1_4 {
+  grid-column: 4;
+  grid-row: 7;
+}
+.wordsadded_1_5 {
+  grid-column: 5;
+  grid-row: 7;
+}
+
+
+.wordsadded_2_1 {
+  grid-column: 7;
+  grid-row: 7;
+}
+.wordsadded_2_2 {
+  grid-column: 8;
+  grid-row: 7;
+}
+.wordsadded_2_3 {
+  grid-column: 9;
+  grid-row: 7;
+}
+.wordsadded_2_4 {
+  grid-column: 10;
+  grid-row: 7;
+}
+.wordsadded_2_5 {
+  grid-column: 11;
+  grid-row: 7;
+}
+
+.wordsadded_3_1 {
+  grid-column: 13;
+  grid-row: 7;
+}
+.wordsadded_3_2 {
+  grid-column: 14;
+  grid-row: 7;
+}
+.wordsadded_3_3 {
+  grid-column: 15;
+  grid-row: 7;
+}
+.wordsadded_3_4 {
+  grid-column: 16;
+  grid-row: 7;
+}
+.wordsadded_3_5 {
+  grid-column: 17;
+  grid-row: 7;
+}
+
+.wordsadded_4_1 {
+  grid-column: 19;
+  grid-row: 7;
+}
+.wordsadded_4_2 {
+  grid-column: 20;
+  grid-row: 7;
+}
+.wordsadded_4_3 {
+  grid-column: 21;
+  grid-row: 7;
+}
+.wordsadded_4_4 {
+  grid-column: 22;
+  grid-row: 7;
+}
+.wordsadded_4_5 {
+  grid-column: 23;
+  grid-row: 7;
+}
+
+.wordsadded_5_1 {
+  grid-column: 25;
+  grid-row: 7;
+}
+.wordsadded_5_2 {
+  grid-column: 26;
+  grid-row: 7;
+}
+.wordsadded_5_3 {
+  grid-column: 27;
+  grid-row: 7;
+}
+.wordsadded_5_4 {
+  grid-column: 28;
+  grid-row: 7;
+}
+.wordsadded_5_5 {
+  grid-column: 29;
+  grid-row: 7;
+}
+
+.rowspacer8 {
+ grid-column:1;
+ grid-row:8;
+}
+
+.findwords {
+  grid-column: 1 / span 30;
+  grid-row: 9;
+  text-align:center;
+  height: var(--height); 
+  border-radius: 50px;
+  font-size: 25px;
+  background-color: magenta;
+}
+  
+
+
+
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="title">Wordle Cheater</div>
+  <button type="button" class="enterword_1">Enter Word -></button>
+  <input id="wordinput" class="enterword_2" onkeyup="textToButton()" maxlength="5" type="text">
+  <button type="button" class="letters_1">A</button>
+  <button type="button" class="letters_2">B</button>
+  <button type="button" class="letters_3">C</button>
+  <button type="button" class="letters_4">D</button>
+  <button type="button" class="letters_5">E</button>
+  <button type="button" class="colors_1_1">G</button>
+  <button type="button" class="colors_1_2">G</button>
+  <button type="button" class="colors_1_3">G</button>
+  <button type="button" class="colors_2_1">G</button>
+  <button type="button" class="colors_2_2">G</button>
+  <button type="button" class="colors_2_3">G</button>
+  <button type="button" class="colors_3_1">G</button>
+  <button type="button" class="colors_3_2">G</button>
+  <button type="button" class="colors_3_3">G</button>
+  <button type="button" class="colors_4_1">G</button>
+  <button type="button" class="colors_4_2">G</button>
+  <button type="button" class="colors_4_3">G</button>
+  <button type="button" class="colors_5_1">G</button>
+  <button type="button" class="colors_5_2">G</button>
+  <button type="button" class="colors_5_3">G</button>
+  <p class=rowspacer5></p>
+  <button type="button" class="addword">ADD WORD</button>
+  <div class="wordsadded_1_1">A</div>
+  <div class="wordsadded_1_2">B</div>
+  <div class="wordsadded_1_3">C</div>
+  <div class="wordsadded_1_4">D</div>
+  <div class="wordsadded_1_5">E</div>
+  <div class="wordsadded_2_1">A</div>
+  <div class="wordsadded_2_2">B</div>
+  <div class="wordsadded_2_3">C</div>
+  <div class="wordsadded_2_4">D</div>
+  <div class="wordsadded_2_5">E</div>
+  <div class="wordsadded_3_1">A</div>
+  <div class="wordsadded_3_2">B</div>
+  <div class="wordsadded_3_3">C</div>
+  <div class="wordsadded_3_4">D</div>
+  <div class="wordsadded_3_5">E</div>
+  <div class="wordsadded_4_1">A</div>
+  <div class="wordsadded_4_2">B</div>
+  <div class="wordsadded_4_3">C</div>
+  <div class="wordsadded_4_4">D</div>
+  <div class="wordsadded_4_5">E</div>
+  <div class="wordsadded_5_1">A</div>
+  <div class="wordsadded_5_2">B</div>
+  <div class="wordsadded_5_3">C</div>
+  <div class="wordsadded_5_4">D</div>
+  <div class="wordsadded_5_5">E</div>
+  <p class="rowspacer8"></p>
+  <button type="button" class="findwords">Find All Possible Words</button>
+</div>
+</body>
+</html>
