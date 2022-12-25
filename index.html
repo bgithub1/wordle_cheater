@@ -4,7 +4,6 @@
   <title>Wordle Cheater</title>
 <style>
 
-
 :root {
   --green: #49BE25;
   --gold: #D5C450; 
@@ -23,503 +22,286 @@
   --width1: 100%;
   --width2: 94%;
 }
-
-
-/* make it mobile first*/
-/* Prevents Padding or borders from changing box size */
-html { box-sizing: border-box; }
-*, 
-*:before, 
-*:after { box-sizing: inherit; }
-.row { position: relative; }
-.row::after {
-  content: "";
-  display: block;
-  clear: both;
-}
-/* Columns */
-.col { 
-  width: 100%; 
-  float: left;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-/* Small Devices */
-@media (min-width: 576px) {
-  .sm-1 { width: 10%; }
-  .sm-2 { width: 20%; }
-  .sm-3 { width: 30%; }
-  .sm-4 { width: 40%; }
-  .sm-5 { width: 50%; }
-  .sm-6 { width: 60%; }
-  .sm-7 { width: 70%; }
-  .sm-8 { width: 80%; }
-  .sm-9 { width: 90%; }
-  .sm-10 { width: 100%; }
-}
-/* Medium Devices */
-@media (min-width: 768px) {
-  .md-1 { width: 10%; }
-  .md-2 { width: 20%; }
-  .md-3 { width: 30%; }
-  .md-4 { width: 40%; }
-  .md-5 { width: 50%; }
-  .md-6 { width: 60%; }
-  .md-7 { width: 70%; }
-  .md-8 { width: 80%; }
-  .md-9 { width: 90%; }
-  .md-10 { width: 100%; }
-}
-/* Large Devices */
-@media (min-width: 992px) {
-  .lg-1 { width: 10%; }
-  .lg-2 { width: 20%; }
-  .lg-3 { width: 30%; }
-  .lg-4 { width: 40%; }
-  .lg-5 { width: 50%; }
-  .lg-6 { width: 60%; }
-  .lg-7 { width: 70%; }
-  .lg-8 { width: 80%; }
-  .lg-9 { width: 90%; }
-  .lg-10 { width: 100%; }
-}
-/* END make it mobile first*/
-
-
-body {
+.wrapper {
   display: grid;
-/*  grid-template-rows:  20%;*/
-  justify-content: center;
-  max-width: :500px;
+  grid-template-columns: repeat(30, [col-start] 3.333%);
+  /*gap: 3px;*/
 }
 
-.grid-container-title {
-  display: grid;
-  grid-template-columns: 1fr;
-  height: var(--height_0);
-  line-height: var(--height_0);
-/*  border: 1px solid rgba(0, 0, 0, 0.8);*/
+.header {
+  grid-column: col-start 1 / span 30;
+  text-align:center;
 }
-.grid-item-title{
-  font-size: 35px;
-  text-align: center; 
-  justify-content: center;
-  color:var(--blue);
+.enterword_1 {
+  grid-column: col-start 1 / span 15;
+  grid-row: 2;
+  text-align:center;
 }
-
-.grid-container-0 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: var(--height_0);
-  line-height: var(--height_0);
-  border: 1px solid rgba(0, 0, 0, 0.8);
+.enterword_2 {
+  grid-column: col-start 16 / span 15;
+  grid-row: 2;
+  text-align:center;
 }
-.grid-item-0{
-  font-size: 25px;
-  text-align: center; 
-  justify-content: center;
+.letters_1 {
+  grid-column: 1 / span 6;
+  grid-row: 3;
 }
-
-.grid-container-1 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  height: var(--height);
-/*  padding: 5px;
-*/}
-.grid-item-1 {
-/*  background-color: var(--lighttan);*/
-  border: 1px solid rgba(0, 0, 0, 0.8);
-/*  padding: 20px;*/  
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-  height: var(--height);
-  width: var(--width1);
+.letters_2 {
+  grid-column: 7 / span 6;
+  grid-row: 3;
+}
+.letters_3 {
+  grid-column: 13 / span 6;
+  grid-row: 3;
+}
+.letters_4 {
+  grid-column: 19 / span 6;
+  grid-row: 3;
+}
+.letters_5 {
+  grid-column: 25 / span 6;
+  grid-row: 3;
 }
 
-.grid-container-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  background-color: black;
-/*  height: var(--height);
-*//*  padding: 5px;
-*/
+.colors_1_1 {
+  grid-column: 1 / span 2;
+  grid-row: 4;
+}
+.colors_1_2 {
+  grid-column: 3 / span 2;
+  grid-row: 4;
+}
+.colors_1_3 {
+  grid-column: 5 / span 2;
+  grid-row: 4;
 }
 
-.grid-item-2 {
-  border: 1px solid rgba(0, 0, 0, 0.8);
-/*  padding: 20px;*/
-  font-size: 30px;    
-  text-align: center;
-  height: var(--halfheight);
-  width: var(--width2);
+.colors_2_1 {
+  grid-column: 7 / span 2;
+  grid-row: 4;
 }
-.green {
-  background-color: var(--green);
+.colors_2_2 {
+  grid-column: 9 / span 2;
+  grid-row: 4;
 }
-.gold {
-  background-color: var(--gold);
-}
-.grey {
-  background-color: var(--grey);
-}
-.lighttan {
-  background-color: var(--lighttan);
-}
-.midtan {
-  background-color: var(--midtan);
+.colors_2_3 {
+  grid-column: 11 / span 2;
+  grid-row: 4;
 }
 
-.grid-container-3 {
-  display: grid;
-  grid-template-columns: 1fr;
-  height: var(--height); 
-/*  border: 1px solid rgba(0, 0, 0, 0.8); */
+.colors_3_1 {
+  grid-column: 13 / span 2;
+  grid-row: 4;
 }
-.grid-item-3{
-  font-size: 30px;
-  background-color: var(--lightblue);
-  border-radius: 50px;
+.colors_3_2 {
+  grid-column: 15 / span 2;
+  grid-row: 4;
 }
-.grid-container-4 {
-  display: grid;
-  grid-template-columns: 1fr;
-  height: var(--height); 
-/*  border: 1px solid rgba(0, 0, 0, 0.8); */
-  border-radius: 50px;
+.colors_3_3 {
+  grid-column: 17 / span 2;
+  grid-row: 4;
+} 
+.colors_4_1 {
+  grid-column: 19 / span 2;
+  grid-row: 4;
 }
-.grid-item-4{
-  font-size: 30px;
-  background-color: magenta;
-  border-radius: 50px;
+.colors_4_2 {
+  grid-column: 21 / span 2;
+  grid-row: 4;
 }
-
-.grid-container-5 {
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
-/*  height: var(--halfheight); */
-/*  border: 1px solid rgba(0, 0, 0, 0.8); */
+.colors_4_3 {
+  grid-column: 23 / span 2;
+  grid-row: 4;
 }
-.grid-container-5w{
-  display: grid;
-  grid-template-columns: repeat(6,1fr);
-/*  height: var(--halfheight); */
+.colors_5_1 {
+  grid-column: 25 / span 2;
+  grid-row: 4;
 }
-
-.grid-item-5w{
-  font-size: 14px;
-  height: var(--halfheight); 
-  width:20px;
+.colors_5_2 {
+  grid-column: 27 / span 2;
+  grid-row: 4;
+}
+.colors_5_3 {
+  grid-column: 29 / span 2;
+  grid-row: 4;
 }
 
-.grid-item-5s{
-  font-size: 2px;
-  height: var(--halfheight); 
-  width:3px;
+.addword {
+  grid-column: 1 / span 30;
+  grid-row: 5;
+  text-align:center
+}
+
+.wordsadded_1_1 {
+  grid-column: 1;
+  grid-row: 6;
+}
+.wordsadded_1_2 {
+  grid-column: 2;
+  grid-row: 6;
+}
+.wordsadded_1_3 {
+  grid-column: 3;
+  grid-row: 6;
+}
+.wordsadded_1_4 {
+  grid-column: 4;
+  grid-row: 6;
+}
+.wordsadded_1_5 {
+  grid-column: 5;
+  grid-row: 6;
 }
 
 
-.grid-container-6 {
-  display: grid;
+.wordsadded_2_1 {
+  grid-column: 7;
+  grid-row: 6;
 }
-.grid-item-6{
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  background-color:var(--verylightmagenta);
+.wordsadded_2_2 {
+  grid-column: 8;
+  grid-row: 6;
+}
+.wordsadded_2_3 {
+  grid-column: 9;
+  grid-row: 6;
+}
+.wordsadded_2_4 {
+  grid-column: 10;
+  grid-row: 6;
+}
+.wordsadded_2_5 {
+  grid-column: 11;
+  grid-row: 6;
 }
 
-table.dataTable td {
-  font-size: 1.6em;
+.wordsadded_3_1 {
+  grid-column: 13;
+  grid-row: 6;
 }
-table.dataTable tr.dtrg-level-0 td {
-  font-size: 1.8em;
+.wordsadded_3_2 {
+  grid-column: 14;
+  grid-row: 6;
 }
+.wordsadded_3_3 {
+  grid-column: 15;
+  grid-row: 6;
+}
+.wordsadded_3_4 {
+  grid-column: 16;
+  grid-row: 6;
+}
+.wordsadded_3_5 {
+  grid-column: 17;
+  grid-row: 6;
+}
+
+.wordsadded_4_1 {
+  grid-column: 19;
+  grid-row: 6;
+}
+.wordsadded_4_2 {
+  grid-column: 20;
+  grid-row: 6;
+}
+.wordsadded_4_3 {
+  grid-column: 21;
+  grid-row: 6;
+}
+.wordsadded_4_4 {
+  grid-column: 22;
+  grid-row: 6;
+}
+.wordsadded_4_5 {
+  grid-column: 23;
+  grid-row: 6;
+}
+
+.wordsadded_5_1 {
+  grid-column: 25;
+  grid-row: 6;
+}
+.wordsadded_5_2 {
+  grid-column: 26;
+  grid-row: 6;
+}
+.wordsadded_5_3 {
+  grid-column: 27;
+  grid-row: 6;
+}
+.wordsadded_5_4 {
+  grid-column: 28;
+  grid-row: 6;
+}
+.wordsadded_5_5 {
+  grid-column: 29;
+  grid-row: 6;
+}
+
+.findwords {
+  grid-column: 1 / span 30;
+  grid-row: 7;
+  text-align:center
+}
+
+
 
 </style>
-
-
 </head>
+
 <body>
-<div class="grid-container-title">
-  <div class="grid-item-title">Wordle Cheater</div>
+<div class="wrapper">
+  <div class="header">Wordle Cheater</div>
+  <button type="button" class="enterword_1">Enter Word -></button>
+  <input id="wordinput" class="enterword_2" onkeyup="textToButton()" maxlength="5" type="text">
+  <button type="button" class="letters_1">A</button>
+  <button type="button" class="letters_2">B</button>
+  <button type="button" class="letters_3">C</button>
+  <button type="button" class="letters_4">D</button>
+  <button type="button" class="letters_5">E</button>
+  <button type="button" class="colors_1_1">G</button>
+  <button type="button" class="colors_1_2">G</button>
+  <button type="button" class="colors_1_3">G</button>
+  <button type="button" class="colors_2_1">G</button>
+  <button type="button" class="colors_2_2">G</button>
+  <button type="button" class="colors_2_3">G</button>
+  <button type="button" class="colors_3_1">G</button>
+  <button type="button" class="colors_3_2">G</button>
+  <button type="button" class="colors_3_3">G</button>
+  <button type="button" class="colors_4_1">G</button>
+  <button type="button" class="colors_4_2">G</button>
+  <button type="button" class="colors_4_3">G</button>
+  <button type="button" class="colors_5_1">G</button>
+  <button type="button" class="colors_5_2">G</button>
+  <button type="button" class="colors_5_3">G</button>
+  <button type="button" class="addword">ADD WORD</button>
+  <div class="wordsadded_1_1">A</div>
+  <div class="wordsadded_1_2">B</div>
+  <div class="wordsadded_1_3">C</div>
+  <div class="wordsadded_1_4">D</div>
+  <div class="wordsadded_1_5">E</div>
+  <div class="wordsadded_2_1">A</div>
+  <div class="wordsadded_2_2">B</div>
+  <div class="wordsadded_2_3">C</div>
+  <div class="wordsadded_2_4">D</div>
+  <div class="wordsadded_2_5">E</div>
+  <div class="wordsadded_3_1">A</div>
+  <div class="wordsadded_3_2">B</div>
+  <div class="wordsadded_3_3">C</div>
+  <div class="wordsadded_3_4">D</div>
+  <div class="wordsadded_3_5">E</div>
+  <div class="wordsadded_4_1">A</div>
+  <div class="wordsadded_4_2">B</div>
+  <div class="wordsadded_4_3">C</div>
+  <div class="wordsadded_4_4">D</div>
+  <div class="wordsadded_4_5">E</div>
+  <div class="wordsadded_5_1">A</div>
+  <div class="wordsadded_5_2">B</div>
+  <div class="wordsadded_5_3">C</div>
+  <div class="wordsadded_5_4">D</div>
+  <div class="wordsadded_5_5">E</div>
+
+  <button type="button" class="findwords">Find All Possible Words</button>
 </div>
-<div class="grid-container-0">
-  <div class="grid-item-0">Enter A Word -></div>
-  <input id="wordinput" class="grid-item-0" onkeyup="textToButton()" maxlength="5" type="text">
-</div>
-<div class="grid-container-1">
-  <button id="t1" size=1 type="text" class="grid-item-1">
-  <button id="t2" size=1 type="text" class="grid-item-1">
-  <button id="t3" size=1 type="text" class="grid-item-1">
-  <button id="t4" size=1 type="text" class="grid-item-1">
-  <button id="t5" size=1 type="text" class="grid-item-1">
-</div>
-<div class="grid-container-2">
-  <button id="b11" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b12" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b13" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-  <button id="b21" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b22" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b23" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-  <button id="b31" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b32" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b33" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-  <button id="b41" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b42" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b43" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-  <button id="b51" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b52" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b53" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-</div>
-
-<p class="grid-container-3">
-  <button type="button" class="grid-item-3" onClick="add_word()">Add Word</button>
-</p>
-
-<div class="grid-container-5">
-  <div class="grid-container-5w">
-    <button id="w11" size=1 type="text" class="grid-item-5w">
-    <button id="w12" size=1 type="text" class="grid-item-5w">
-    <button id="w13" size=1 type="text" class="grid-item-5w">
-    <button id="w14" size=1 type="text" class="grid-item-5w">
-    <button id="w15" size=1 type="text" class="grid-item-5w">
-    <div class="grid-item-5s"></div>
-  </div>
-  <div class="grid-container-5w">
-    <button id="w21" size=1 type="text" class="grid-item-5w">
-    <button id="w22" size=1 type="text" class="grid-item-5w">
-    <button id="w23" size=1 type="text" class="grid-item-5w">
-    <button id="w24" size=1 type="text" class="grid-item-5w">
-    <button id="w25" size=1 type="text" class="grid-item-5w">
-    <div class="grid-item-5s"></div>
-  </div>
-  <div class="grid-container-5w">
-    <button id="w31" size=1 type="text" class="grid-item-5w">
-    <button id="w32" size=1 type="text" class="grid-item-5w">
-    <button id="w33" size=1 type="text" class="grid-item-5w">
-    <button id="w34" size=1 type="text" class="grid-item-5w">
-    <button id="w35" size=1 type="text" class="grid-item-5w">
-    <div class="grid-item-5s"></div>
-  </div>
-  <div class="grid-container-5w">
-    <button id="w41" size=1 type="text" class="grid-item-5w">
-    <button id="w42" size=1 type="text" class="grid-item-5w">
-    <button id="w43" size=1 type="text" class="grid-item-5w">
-    <button id="w44" size=1 type="text" class="grid-item-5w">
-    <button id="w45" size=1 type="text" class="grid-item-5w">
-    <div class="grid-item-5s"></div>
-  </div>
-  <div class="grid-container-5w">
-    <button id="w51" size=1 type="text" class="grid-item-5w">
-    <button id="w52" size=1 type="text" class="grid-item-5w">
-    <button id="w53" size=1 type="text" class="grid-item-5w">
-    <button id="w54" size=1 type="text" class="grid-item-5w">
-    <button id="w55" size=1 type="text" class="grid-item-5w">
-    <div class="grid-item-5s"></div>
-  </div>
-</div>
-
-<p class="grid-container-4">
-  <button class="grid-item-4" type="button" onClick="try_it()">Find All Possible Words</button>
-</p>
-
-<div class="grid-container-6">
-  <table class="grid-item-6" id="json_results"></table>
-</div>
-
-
-<!--  ************ Scripts below ************** -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-  
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-
-<script> 
-var words = [];
-var words_choices = [];
-var green = "#49BE25";
-var gold = "#D5C450"; 
-var grey = "#C9C9C9" // "#A0A0A0" #D8D8D8
-
-var color_arr = [green, gold, grey]
-
-// var fetch_url = "http://127.0.0.1:8000/wordl?filters";
-var fetch_url = "https://db40-23-93-104-250.ngrok.io/wordl?filters=";
-
-
-function reset_all(reset_words=1) {
-  for (let i = 1; i < 6; i++) {
-    v = "t" + i;
-    document.getElementById(v).innerHTML = "";
-    document.getElementById(v).style.backgroundColor = grey;
-    // for (j=1;j<4;j++){
-    //   col_id = "b"+i+j;
-    //   document.getElementById(col_id).innerHTML = "";  
-      
-    // }
-  };
-  if (reset_words==1){
-    words = [];
-    words_choices = [];
-    for (i=0;i<5;i++){
-      reset_saved_word(i);
-    }
-  };
-  document.getElementById("wordinput").value = "";
-};
-
-function textToButton() {
-  var x = document.getElementById("wordinput").value;
-  for (let i = 0; i < 5; i++) {
-    var v = i+1;
-    v = "t" + v.toString();
-    document.getElementById(v).innerHTML = "";
-  };  
-  xlen = Math.min(x.length,5);
-  for (let i = 0; i < xlen; i++) {
-    var v = i+1;
-    v = "t" + v.toString();
-    document.getElementById(v).innerHTML = x[i].toUpperCase();
-  }; 
-  
-  
-};
-
-// var br_list = ["br1","br2","br3"];
-
-// function onbt1(clicked_id) {
-//   var row_id = clicked_id[1];
-  
-//   for (let i = 0;i<3;i++){
-//       var col_id = i+1
-//       b_clicked = "b"+row_id+col_id;
-//       if (clicked_id != b_clicked) {
-//         document.getElementById(b_clicked).innerHTML = "";
-//       }
-//   };
-//   document.getElementById(clicked_id).innerHTML = "X";
-// }
-
-function rgb_to_hex(rgb_object) {
-  rgb_string = rgb_object.toString();
-  rgb = rgb_string.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-
-  function hexCode(i) {
-    return ("0" + parseInt(i).toString(16)).slice(-2);
-  }
-  var hex_value = "#" + hexCode(rgb[1]) + hexCode(rgb[2]) 
-          + hexCode(rgb[3]);
-  hex_value = hex_value.toUpperCase();
-  return hex_value;
-  }
-
-function onbt1(clicked_id) {
-  var t_id = clicked_id[1];
-  var letter_id = Number(clicked_id[2])
-  var color_sub = letter_id-1;
-  var color = color_arr[color_sub];
-  document.getElementById("t"+t_id).style.backgroundColor = color;
-}
-
-function reset_saved_word(word_index){
-  var idx1 = word_index + 1;
-  for (k=0;k<5;k++){
-    var idx2 = k+1;
-    var letter_element = document.getElementById("w"+idx1+idx2);
-    letter_element.innerHTML = "_";
-    letter_element.style.backgroundColor = grey;
-  }
-}
-
-function display_saved_word(word_index){
-  var word = words[word_index]
-  var word_choices = words_choices[word_index];
-  var idx1 = word_index + 1;
-  for (i=0;i<5;i++){
-    var idx2 = i+1;
-    var letter_element = document.getElementById("w"+idx1+idx2);
-    letter_element.innerHTML = word[i];
-    var color_index = Number(word_choices[i])-1;
-    letter_element.style.backgroundColor = color_arr[color_index];
-  }
-}
-
-function add_word(){
-  var word = "";
-  // ggg is GreenGoldGrey
-  var ggg_choices = "";
-  for (i=1;i<6;i++) {
-    word = word + document.getElementById("t"+i).innerHTML;
-    var rgb_value = document.getElementById("t"+i).style.backgroundColor;
-    var hex_value = rgb_to_hex(rgb_value)
-    color_id = color_arr.indexOf(hex_value) + 1;
-    ggg_choices = ggg_choices + color_id;
-    // for (j=1;j<4;j++){
-    //   var button_value = document.getElementById("b"+i+j).innerHTML.toLowerCase();
-    //   if ( button_value=="x"){
-    //       ggg_choices = ggg_choices + j;
-    //   };
-    // };
-  };
-
-  words.push(word);
-  words_choices.push(ggg_choices);
-  // document.getElementById("add_word_results").innerHTML = [words,words_choices].join();
-  display_saved_word(words.length-1);
-  reset_all(reset_words=0);
-};
-
-
-function try_it(){
-  var filters = "";
-  for (i=0;i<words.length;i++){
-    filters = filters + words[i] + "," + words_choices[i] + ",";
-  };
-  filters = filters.slice(0,filters.length-1).toLowerCase();
-  // fetch("http://127.0.0.1:8000/wordl?filters="+filters, 
-  fetch(fetch_url+filters, 
-  {
-      method: 'GET',
-      headers: {
-          'Accept': 'application/json',
-      },
-  })
-  // .then(response => response.text())
-  .then(
-    function(response) {
-      var r = response.text();
-      // console.log(r);
-      return r;
-    }
-  )
-  .then(text => JSON.parse(text))
-  .then(function(json_results){
-    if ( ! $.fn.DataTable.isDataTable( '#json_results' ) ) {
-      $('#json_results').dataTable( {
-          "data": json_results,
-          "columns":[
-            {"data":"word","title":"word"},
-            {"data":"count","title":"count"},
-            {"data":"probability","title":"probability"}
-          ],
-          order: [[2, 'desc']],
-          "pageLength": 25,
-      } );      
-    } else {
-      var dt = $('#json_results').dataTable();
-      dt.fnClearTable();
-      dt.fnAddData(json_results,redraw=true);
-    }   
-  })
-}
-
-// 
-window.onload = reset_all();
-
-</script>
-
-
 </body>
 </html>
-
