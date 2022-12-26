@@ -4,7 +4,6 @@
   <title>Wordle Cheater</title>
 <style>
 
-
 :root {
   --green: #49BE25;
   --gold: #D5C450; 
@@ -18,87 +17,58 @@
   --lightmagenta:#F6CEF5;
   --verylightmagenta:#F8E0F7;
   --halfheight:30px;
-  --height: 50px;
-  --height_0:50px;
+  --height: 120px;
+  --height_0:120px;
   --width1: 100%;
   --width2: 94%;
 }
 
-
-/* make it mobile first*/
-
-/* END make it mobile first*/
-
-
-body {
-  display: grid;
-/*  grid-template-rows:  20%;*/
-  justify-content: center;
-  max-width: :500px;
+.title {
+  text-align:center;
+  font-size:50px;
+  height: var(--height)
 }
-
-.grid-container-title {
-  display: grid;
-  grid-template-columns: 1fr;
-  height: var(--height_0);
-  line-height: var(--height_0);
-/*  border: 1px solid rgba(0, 0, 0, 0.8);*/
-}
-.grid-item-title{
-  font-size: 35px;
-  text-align: center; 
-  justify-content: center;
-  color:var(--blue);
-}
-
-.grid-container-0 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: var(--height_0);
-  line-height: var(--height_0);
+.enterword{
+  display:grid;
+  grid-template-columns:1fr;
+  text-align:center;
+  font-size:30px;
   border: 1px solid rgba(0, 0, 0, 0.8);
-}
-.grid-item-0{
-  font-size: 25px;
-  text-align: center; 
   justify-content: center;
+  height: var(--height)
 }
 
-.grid-container-1 {
+.letters {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows:repeat(1,1fr);
+  /*gap: 3px;*/
+}
+
+.col-1 {
+  display:grid;
+  grid-template-columns: subgrid;
+  grid-template-rows: repeat(5,1fr);
+  grid-column:1;
+}
+
+.col-2 {
+  display:grid;
+  grid-template-columns: subgrid;
+  grid-template-rows: repeat(15,1fr);
+  grid-column:2;
+}
+
+.col-1-style {
+  font-size:50px;
+  text-align:center;
   height: var(--height);
-/*  padding: 5px;
-*/}
-.grid-item-1 {
-/*  background-color: var(--lighttan);*/
-  border: 1px solid rgba(0, 0, 0, 0.8);
-/*  padding: 20px;*/  
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-  height: var(--height);
-  width: var(--width1);
 }
 
-.grid-container-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  background-color: black;
-/*  height: var(--height);
-*//*  padding: 5px;
-*/
+.col-2-style {
+  text-align:center;
 }
 
-.grid-item-2 {
-  border: 1px solid rgba(0, 0, 0, 0.8);
-/*  padding: 20px;*/
-  font-size: 30px;    
-  text-align: center;
-  height: var(--halfheight);
-  width: var(--width2);
-}
 .green {
   background-color: var(--green);
 }
@@ -115,28 +85,14 @@ body {
   background-color: var(--midtan);
 }
 
-.grid-container-3 {
-  display: grid;
-  grid-template-columns: 1fr;
+.addword {
+  display:grid;
+  grid-template-columns:1fr;
   height: var(--height); 
-/*  border: 1px solid rgba(0, 0, 0, 0.8); */
-}
-.grid-item-3{
+  width:100%;
   font-size: 30px;
   background-color: var(--lightblue);
-  border-radius: 50px;
-}
-.grid-container-4 {
-  display: grid;
-  grid-template-columns: 1fr;
-  height: var(--height); 
-/*  border: 1px solid rgba(0, 0, 0, 0.8); */
-  border-radius: 50px;
-}
-.grid-item-4{
-  font-size: 30px;
-  background-color: magenta;
-  border-radius: 50px;
+  border-radius: 50px;  
 }
 
 .grid-container-5 {
@@ -154,7 +110,9 @@ body {
 .grid-item-5w{
   font-size: 14px;
   height: var(--halfheight); 
-  width:20px;
+  text-align:center;
+  justify-content: center;
+  width:15px;
 }
 
 .grid-item-5s{
@@ -163,6 +121,22 @@ body {
   width:3px;
 }
 
+
+.wordsadded {
+  display:grid;
+  grid-template-columns: repeat(5,1fr);
+}
+
+.findwords {
+  display:grid;
+  grid-template-columns:1fr;
+  height: var(--height); 
+  width:100%;
+  font-size: 30px;
+  background-color: magenta;
+  border-radius: 50px;
+  
+}
 
 .grid-container-6 {
   display: grid;
@@ -179,100 +153,95 @@ table.dataTable tr.dtrg-level-0 td {
   font-size: 1.8em;
 }
 
+
 </style>
 
-
-</head>
-<body>
-<div class="grid-container-title">
-  <div class="grid-item-title">Wordle Cheater</div>
-</div>
-<div class="grid-container-0">
-  <div class="grid-item-0">Enter A Word -></div>
-  <input id="wordinput" class="grid-item-0" onkeyup="textToButton()" maxlength="5" type="text">
-</div>
-<div class="grid-container-1">
-  <button id="t1" size=1 type="text" class="grid-item-1">
-  <button id="t2" size=1 type="text" class="grid-item-1">
-  <button id="t3" size=1 type="text" class="grid-item-1">
-  <button id="t4" size=1 type="text" class="grid-item-1">
-  <button id="t5" size=1 type="text" class="grid-item-1">
-</div>
-<div class="grid-container-2">
-  <button id="b11" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b12" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b13" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-  <button id="b21" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b22" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b23" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-  <button id="b31" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b32" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b33" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-  <button id="b41" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b42" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b43" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-  <button id="b51" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b52" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b53" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-</div>
-
-<p class="grid-container-3">
-  <button type="button" class="grid-item-3" onClick="add_word()">Add Word</button>
+</body>
+  <div class="title">Wordle Cheater</div>
+  <div class="enterword">Enter Word</div>
+  <input id="wordinput" onkeyup="textToButton()" maxlength="5" class="enterword"></input>
+  <div class="letters">
+    <div class="col-1">
+      <button id="t1" size=1 type="text" class="col-1-style">
+      <button id="t2" size=1 type="text" class="col-1-style">
+      <button id="t3" size=1 type="text" class="col-1-style">
+      <button id="t4" size=1 type="text" class="col-1-style">
+      <button id="t5" size=1 type="text" class="col-1-style">
+    </div>
+    <div class="col-2">
+      <button id="b11" type="button" class="col-2-style green" onClick="onbt1(this.id)"></button>
+      <button id="b12" type="button" class="col-2-style gold" onClick="onbt1(this.id)"></button>
+      <button id="b13" type="button" class="col-2-style grey" onClick="onbt1(this.id)"></button>
+      <button id="b21" type="button" class="col-2-style green" onClick="onbt1(this.id)"></button>
+      <button id="b22" type="button" class="col-2-style gold" onClick="onbt1(this.id)"></button>
+      <button id="b23" type="button" class="col-2-style grey" onClick="onbt1(this.id)"></button>
+      <button id="b31" type="button" class="col-2-style green" onClick="onbt1(this.id)"></button>
+      <button id="b32" type="button" class="col-2-style gold" onClick="onbt1(this.id)"></button>
+      <button id="b33" type="button" class="col-2-style grey" onClick="onbt1(this.id)"></button>
+      <button id="b41" type="button" class="col-2-style green" onClick="onbt1(this.id)"></button>
+      <button id="b42" type="button" class="col-2-style gold" onClick="onbt1(this.id)"></button>
+      <button id="b43" type="button" class="col-2-style grey" onClick="onbt1(this.id)"></button>
+      <button id="b51" type="button" class="col-2-style green" onClick="onbt1(this.id)"></button>
+      <button id="b52" type="button" class="col-2-style gold" onClick="onbt1(this.id)"></button>
+      <button id="b53" type="button" class="col-2-style grey" onClick="onbt1(this.id)"></button>
+    </div>
+  
+  </div>
+<p>
+  <button type="button" class="addword" onClick="add_word()">Add Word</button>
 </p>
-
 <div class="grid-container-5">
   <div class="grid-container-5w">
-    <button id="w11" size=1 type="text" class="grid-item-5w">
-    <button id="w12" size=1 type="text" class="grid-item-5w">
-    <button id="w13" size=1 type="text" class="grid-item-5w">
-    <button id="w14" size=1 type="text" class="grid-item-5w">
-    <button id="w15" size=1 type="text" class="grid-item-5w">
+    <div id="w11" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w12" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w13" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w14" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w15" size=1 type="text" class="grid-item-5w"></div>
     <div class="grid-item-5s"></div>
   </div>
   <div class="grid-container-5w">
-    <button id="w21" size=1 type="text" class="grid-item-5w">
-    <button id="w22" size=1 type="text" class="grid-item-5w">
-    <button id="w23" size=1 type="text" class="grid-item-5w">
-    <button id="w24" size=1 type="text" class="grid-item-5w">
-    <button id="w25" size=1 type="text" class="grid-item-5w">
+    <div id="w21" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w22" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w23" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w24" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w25" size=1 type="text" class="grid-item-5w"></div>
     <div class="grid-item-5s"></div>
   </div>
   <div class="grid-container-5w">
-    <button id="w31" size=1 type="text" class="grid-item-5w">
-    <button id="w32" size=1 type="text" class="grid-item-5w">
-    <button id="w33" size=1 type="text" class="grid-item-5w">
-    <button id="w34" size=1 type="text" class="grid-item-5w">
-    <button id="w35" size=1 type="text" class="grid-item-5w">
+    <div id="w31" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w32" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w33" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w34" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w35" size=1 type="text" class="grid-item-5w"></div>
     <div class="grid-item-5s"></div>
   </div>
   <div class="grid-container-5w">
-    <button id="w41" size=1 type="text" class="grid-item-5w">
-    <button id="w42" size=1 type="text" class="grid-item-5w">
-    <button id="w43" size=1 type="text" class="grid-item-5w">
-    <button id="w44" size=1 type="text" class="grid-item-5w">
-    <button id="w45" size=1 type="text" class="grid-item-5w">
+    <div id="w41" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w42" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w43" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w44" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w45" size=1 type="text" class="grid-item-5w"></div>
     <div class="grid-item-5s"></div>
   </div>
   <div class="grid-container-5w">
-    <button id="w51" size=1 type="text" class="grid-item-5w">
-    <button id="w52" size=1 type="text" class="grid-item-5w">
-    <button id="w53" size=1 type="text" class="grid-item-5w">
-    <button id="w54" size=1 type="text" class="grid-item-5w">
-    <button id="w55" size=1 type="text" class="grid-item-5w">
+    <div id="w51" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w52" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w53" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w54" size=1 type="text" class="grid-item-5w"></div>
+    <div id="w55" size=1 type="text" class="grid-item-5w"></div>
     <div class="grid-item-5s"></div>
   </div>
 </div>
 
-<p class="grid-container-4">
-  <button class="grid-item-4" type="button" onClick="try_it()">Find All Possible Words</button>
+<p>  
+  <button type="button" onClick="try_it()" class="findwords">Find All Possible Words</button>
 </p>
-
 <div class="grid-container-6">
   <table class="grid-item-6" id="json_results"></table>
 </div>
 
 
-<!--  ************ Scripts below ************** -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
@@ -462,8 +431,5 @@ function try_it(){
 window.onload = reset_all();
 
 </script>
-
-
 </body>
 </html>
-
