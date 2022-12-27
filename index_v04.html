@@ -16,9 +16,11 @@
   --midblue: #5882FA;
   --lightmagenta:#F6CEF5;
   --verylightmagenta:#F8E0F7;
-  --halfheight:30px;
-  --height: 50px;
-  --height_0:50px;
+  --halfheight:35px;
+  --threeforthsheight:50px;
+  --clickbuttonheight:100px;
+  --height: 70px;
+  --height_0:70px;
   --width1: 100%;
   --width2: 94%;
 }
@@ -35,6 +37,7 @@
   border: 1px solid rgba(0, 0, 0, 0.8);
   justify-content: center;
   width: var(--width1);
+  height:var(--clickbuttonheight);
 }
 
 .letters {
@@ -91,7 +94,7 @@
 .addword {
   display:grid;
   grid-template-columns:1fr;
-  height: var(--height); 
+  height:var(--clickbuttonheight);
   width:100%;
   font-size: 30px;
   background-color: var(--lightblue);
@@ -112,14 +115,14 @@
 
 .grid-item-5w{
   font-size: 14px;
-  height: var(--halfheight); 
+  height: var(--threeforthsheight); 
   text-align:center;
   width:15px;
 }
 
 .grid-item-5s{
   font-size: 2px;
-  height: var(--halfheight); 
+  height: var(--threeforthsheight); 
   width:3px;
 }
 
@@ -132,7 +135,7 @@
 .findwords {
   display:grid;
   grid-template-columns:1fr;
-  height: var(--height); 
+  height:var(--clickbuttonheight);
   width:100%;
   font-size: 30px;
   background-color: magenta;

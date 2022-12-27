@@ -1,0 +1,1 @@
+screen -S wordl -dm bash -c "bash http_server.sh"
