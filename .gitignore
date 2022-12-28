@@ -8,3 +8,4 @@ logfile
 .pydevproject
 .project
 __pycache__
+wordle.pem
