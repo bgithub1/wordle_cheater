@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<style>
+:root {
+  --green: #49BE25;
+  --gold: #D5C450; 
+  /*--grey: #A0A0A0;*/
+  --grey:#C9C9C9;
+  --blue: #0040FF;
+  --lighttan: #F6E3CE;
+  --midtan: #F5D0A9;
+  --lightblue:#A9D0F5;
+  --midblue: #5882FA;
+  --lightmagenta:#F6CEF5;
+  --verylightmagenta:#F8E0F7;
+  --halfheight:35px;
+  --threeforthsheight:50px;
+  --clickbuttonheight:100px;
+  --height: 70px;
+  --height_0:70px;
+  --width1: 100%;
+  --width2: 100%;
+  --fstitle:90px;
+  --fsenterword:30px;
+}
+.center {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+
+.green {
+  background-color: var(--green);
+}
+.gold {
+  background-color: var(--gold);
+}
+.grey {
+  background-color: var(--grey);
+}
+.lighttan {
+  background-color: var(--lighttan);
+}
+.midtan {
+  background-color: var(--midtan);
+}
+
+.inside{
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.main-head {
+  grid-area: header;
+}
+.content {
+  grid-area: content;
+}
+.main-nav {
+  grid-area: nav;
+}
+.side {
+  grid-area: sidebar;
+}
+.ad {
+  grid-area: ad;
+}
+.main-footer {
+  grid-area: footer;
+}
+
+
+
+.border {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+@media (min-width: 250px) {
+  .wrapper {
+    display: grid;
+    gap: 20px;
+
+    grid-template-areas:
+      "header"
+      "nav"
+      "content"
+      "sidebar"
+      "ad"
+      "footer";
+    font-size:30px;
+  }
+}
+
+@media (min-width: 700px) {
+  .wrapper {
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+      "header  header"
+      "nav     nav"
+      "sidebar content"
+      "ad      footer";
+  }
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+  }
+  font-size:30px;
+}
+
+button {
+ height:100%;
+ width:100%;
+ font-size:30px;
+}
+</style>
+</head>
+
+<div class="wrapper">
+  <header class="main-head border midtan">The header</header>
+  <nav class="main-nav border midtan">
+    <ul>
+      <li><a href="">Nav 1</a></li>
+      <li><a href="">Nav 2</a></li>
+      <li><a href="">Nav 3</a></li>
+    </ul>
+  </nav>
+  <article class="content border midtan">
+    <h1>Main article area</h1>
+    <p>
+      In this layout, we display the areas in source order for any screen less
+      that 500 pixels wide. We go to a two column layout, and then to a three
+      column layout by redefining the grid, and the placement of items on the
+      grid.
+    </p>
+  </article>
+  <aside class="side border midtan"><button>Sidebar</button></aside>
+  <div class="ad border midtan"><button>Advertising</button></div>
+  <div class="main-footer border"><button class=" midtan">The footer</button></div>
+</div>
+
+    
+<body>
+
+</body>
+
+</html>
