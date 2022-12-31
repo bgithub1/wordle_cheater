@@ -13,8 +13,10 @@ ___
     * Wordle returned <img src="chore.png">
 ___
 
-## At this point, I started cheating:
-## I accessed index.html (http://billybyte.com/wordl/index.html):
+## At this point, I started cheating by accessing the index.html page:
+### http://billybyte.com/wordl/index.html
+
+
 <img src="wordle_screen_0.png">
   
 ## I entered the word ```slate``` in the box to the right of **Enter A Word ->**
@@ -52,3 +54,7 @@ ___
 ## This showed ```probe``` as the only possible solution, which was the actual Wordle solution.
 
 <!-- #endregion -->
+
+```python
+
+```
