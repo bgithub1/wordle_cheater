@@ -1,9 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head>
-  <title>Wordle Cheater</title>
-<style>
 
+<head>
+<style>
 :root {
   --green: #49BE25;
   --gold: #D5C450; 
@@ -24,59 +23,12 @@
   --width1: 100%;
   --width2: 100%;
   --fstitle:90px;
-  --fsenterword:50px;
+  --fsenterword:30px;
 }
-
-.title {
-  text-align:center;
-  font-size:var(--fstitle);
-  color:blue;
-}
-.enterword{
-  display:grid;
-  grid-template-columns:1fr;
-  text-align:center;
-  font-size:var(--fsenterword);
-  font-weight: bold;
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  justify-content: center;
-  width: var(--width1);
-  height:var(--clickbuttonheight);
-}
-
-.letters {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows:repeat(1,1fr);
-  /*gap: 3px;*/
-}
-
-.letters-col-1 {
-  grid-column-start: 1;
-  grid-column-end:4;
-}
-
-.colors-col-2-1 {
-  grid-column-start: 4;
-  grid-column-end:5;
-}
-.colors-col-2-2 {
-  grid-column-start: 5;
-  grid-column-end:6;
-}
-.colors-col-2-3 {
-  grid-column-start: 6;
-  grid-column-end:7;
-}
-
-.letters-col-1-style {
-  font-size:50px;
-  text-align:center;
-  height: var(--height);
-}
-
-.colors-col-2-style {
-  text-align:center;
+.center {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
 }
 
 .green {
@@ -95,369 +47,90 @@
   background-color: var(--midtan);
 }
 
-.addword {
-  display:grid;
-  grid-template-columns:1fr;
-  height:var(--clickbuttonheight);
-  width:100%;
-  font-size: 30px;
-  background-color: var(--lightblue);
-  border-radius: 50px;  
-}
-
-.grid-container-5 {
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
-/*  height: var(--halfheight); */
-/*  border: 1px solid rgba(0, 0, 0, 0.8); */
-}
-.grid-container-5w{
-  display: grid;
-  grid-template-columns: repeat(6,1fr);
-/*  height: var(--halfheight); */
-}
-
-
-.grid-item-5w{
-  font-size: 20px;
-  font-weight: bold;
-  /*height: var(--threeforthsheight); */
-  height: var(--clickbuttonheight); 
-  text-align:center;
-  margin: 0;
-  top: 50%;  
-  width:21px;
-  display: flex;
-  justify-content: center;
-  /* align horizontal */
-  align-items: center;
-
-}
-
-.grid-item-5s{
-  font-size: 2px;
-  /*height: var(--threeforthsheight); */
-  height: var(--clickbuttonheight); 
-  width:3px;
-}
-
-
-.wordsadded {
-  display:grid;
-  grid-template-columns: repeat(5,1fr);
-}
-
-.findwords {
-  display:grid;
-  grid-template-columns:1fr;
-  height:var(--clickbuttonheight);
-  width:100%;
-  font-size: 30px;
-  background-color: magenta;
-  border-radius: 50px;
-  
-}
-
-.grid-container-6 {
-  display: grid;
-}
-.grid-item-6{
+.inside{
   border: 1px solid rgba(0, 0, 0, 0.8);
-  background-color:var(--verylightmagenta);
 }
 
-table.dataTable td {
-  font-size: 1.6em;
+.main-head {
+  grid-area: header;
 }
-table.dataTable tr.dtrg-level-0 td {
-  font-size: 1.8em;
+.content {
+  grid-area: content;
+}
+.main-nav {
+  grid-area: nav;
+}
+.side {
+  grid-area: sidebar;
+}
+.ad {
+  grid-area: ad;
+}
+.main-footer {
+  grid-area: footer;
 }
 
+
+.wrapper {
+  display: grid;
+  gap: 20px;
+  grid-template-areas:
+    "header"
+    "nav"
+    "content"
+    "sidebar"
+    "ad"
+    "footer";
+}
+
+.border {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+@media (min-width: 500px) {
+  .wrapper {
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+      "header  header"
+      "nav     nav"
+      "sidebar content"
+      "ad      footer";
+  }
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+  }
+}
 
 </style>
+</head>
 
-</body>
-  <div class="title">Wordle Cheater</div>
-  <div class="enterword midtan">Enter Word Below</div>
-  <input id="wordinput" onkeyup="textToButton()" maxlength="5" class="enterword lighttan"></input>
-  <div class="letters">
-    <button id="t1" size=1 type="text" class="letters-col-1 letters-col-1-style">
-    <button id="b11" type="button" class="colors-col-2-1 colors-col-2-style green" onClick="onbt1(this.id)"></button>
-    <button id="b12" type="button" class="colors-col-2-2 colors-col-2-style gold" onClick="onbt1(this.id)"></button>
-    <button id="b13" type="button" class="colors-col-2-3 colors-col-2-style grey" onClick="onbt1(this.id)"></button>
-  </div>    
-  
-  <div class="letters">
-    <button id="t2" size=1 type="text" class="letters-col-1 letters-col-1-style">
-    <button id="b21" type="button" class="colors-col-2-1 colors-col-2-style green" onClick="onbt1(this.id)"></button>
-    <button id="b22" type="button" class="colors-col-2-2 colors-col-2-style gold" onClick="onbt1(this.id)"></button>
-    <button id="b23" type="button" class="colors-col-2-3 colors-col-2-style grey" onClick="onbt1(this.id)"></button>
-  </div>    
+<div class="wrapper">
+  <header class="main-head border midtan">The header</header>
+  <nav class="main-nav border midtan">
+    <ul>
+      <li><a href="">Nav 1</a></li>
+      <li><a href="">Nav 2</a></li>
+      <li><a href="">Nav 3</a></li>
+    </ul>
+  </nav>
+  <article class="content border midtan">
+    <h1>Main article area</h1>
+    <p>
+      In this layout, we display the areas in source order for any screen less
+      that 500 pixels wide. We go to a two column layout, and then to a three
+      column layout by redefining the grid, and the placement of items on the
+      grid.
+    </p>
+  </article>
+  <aside class="side border midtan">Sidebar</aside>
+  <div class="ad border midtan">Advertising</div>
+  <footer class="main-footer border midtan">The footer</footer>
+</div>
 
-  <div class="letters">
-    <button id="t3" size=1 type="text" class="letters-col-1 letters-col-1-style">
-    <button id="b31" type="button" class="colors-col-2-1 colors-col-2-style green" onClick="onbt1(this.id)"></button>
-    <button id="b32" type="button" class="colors-col-2-2 colors-col-2-style gold" onClick="onbt1(this.id)"></button>
-    <button id="b33" type="button" class="colors-col-2-3 colors-col-2-style grey" onClick="onbt1(this.id)"></button>
-  </div>    
-
-  <div class="letters">
-    <button id="t4" size=1 type="text" class="letters-col-1 letters-col-1-style">
-    <button id="b41" type="button" class="colors-col-2-1 colors-col-2-style green" onClick="onbt1(this.id)"></button>
-    <button id="b42" type="button" class="colors-col-2-2 colors-col-2-style gold" onClick="onbt1(this.id)"></button>
-    <button id="b43" type="button" class="colors-col-2-3 colors-col-2-style grey" onClick="onbt1(this.id)"></button>
-  </div>    
-
-  <div class="letters">
-    <button id="t5" size=1 type="text" class="letters-col-1 letters-col-1-style">
-    <button id="b51" type="button" class="colors-col-2-1 colors-col-2-style green" onClick="onbt1(this.id)"></button>
-    <button id="b52" type="button" class="colors-col-2-2 colors-col-2-style gold" onClick="onbt1(this.id)"></button>
-    <button id="b53" type="button" class="colors-col-2-3 colors-col-2-style grey" onClick="onbt1(this.id)"></button>
-  </div>    
     
-<p>
-  <button type="button" class="addword" onClick="add_word()">Add Word</button>
-</p>
-<div class="grid-container-5">
-  <div class="grid-container-5w">
-    <div id="w11" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w12" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w13" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w14" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w15" size=1 type="text" class="grid-item-5w"></div>
-    <div class="grid-item-5s"></div>
-  </div>
-  <div class="grid-container-5w">
-    <div id="w21" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w22" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w23" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w24" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w25" size=1 type="text" class="grid-item-5w"></div>
-    <div class="grid-item-5s"></div>
-  </div>
-  <div class="grid-container-5w">
-    <div id="w31" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w32" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w33" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w34" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w35" size=1 type="text" class="grid-item-5w"></div>
-    <div class="grid-item-5s"></div>
-  </div>
-  <div class="grid-container-5w">
-    <div id="w41" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w42" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w43" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w44" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w45" size=1 type="text" class="grid-item-5w"></div>
-    <div class="grid-item-5s"></div>
-  </div>
-  <div class="grid-container-5w">
-    <div id="w51" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w52" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w53" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w54" size=1 type="text" class="grid-item-5w"></div>
-    <div id="w55" size=1 type="text" class="grid-item-5w"></div>
-    <div class="grid-item-5s"></div>
-  </div>
-</div>
+<body>
 
-<p>  
-  <button type="button" onClick="try_it()" class="findwords">Find All Possible Words</button>
-</p>
-<div class="grid-container-6">
-  <table class="grid-item-6" id="json_results"></table>
-</div>
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-  
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-
-<script> 
-var words = [];
-var words_choices = [];
-var green = "#49BE25";
-var gold = "#D5C450"; 
-var grey = "#C9C9C9" // "#A0A0A0" #D8D8D8
-
-var color_arr = [green, gold, grey]
-
-// var fetch_url = "http://127.0.0.1:8000/wordl?filters";
-var fetch_url = "https://c732-13-57-204-106.ngrok.io/wordl?filters=";
-
-function reset_all(reset_words=1) {
-  for (let i = 1; i < 6; i++) {
-    v = "t" + i;
-    document.getElementById(v).innerHTML = "";
-    document.getElementById(v).style.backgroundColor = grey;
-    // for (j=1;j<4;j++){
-    //   col_id = "b"+i+j;
-    //   document.getElementById(col_id).innerHTML = "";  
-      
-    // }
-  };
-  if (reset_words==1){
-    words = [];
-    words_choices = [];
-    for (i=0;i<5;i++){
-      reset_saved_word(i);
-    }
-  };
-  document.getElementById("wordinput").value = "";
-};
-
-function textToButton() {
-  var x = document.getElementById("wordinput").value;
-  for (let i = 0; i < 5; i++) {
-    var v = i+1;
-    v = "t" + v.toString();
-    document.getElementById(v).innerHTML = "";
-  };  
-  xlen = Math.min(x.length,5);
-  for (let i = 0; i < xlen; i++) {
-    var v = i+1;
-    v = "t" + v.toString();
-    document.getElementById(v).innerHTML = x[i].toUpperCase();
-  }; 
-  
-  
-};
-
-// var br_list = ["br1","br2","br3"];
-
-// function onbt1(clicked_id) {
-//   var row_id = clicked_id[1];
-  
-//   for (let i = 0;i<3;i++){
-//       var col_id = i+1
-//       b_clicked = "b"+row_id+col_id;
-//       if (clicked_id != b_clicked) {
-//         document.getElementById(b_clicked).innerHTML = "";
-//       }
-//   };
-//   document.getElementById(clicked_id).innerHTML = "X";
-// }
-
-function rgb_to_hex(rgb_object) {
-  rgb_string = rgb_object.toString();
-  rgb = rgb_string.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-
-  function hexCode(i) {
-    return ("0" + parseInt(i).toString(16)).slice(-2);
-  }
-  var hex_value = "#" + hexCode(rgb[1]) + hexCode(rgb[2]) 
-          + hexCode(rgb[3]);
-  hex_value = hex_value.toUpperCase();
-  return hex_value;
-  }
-
-function onbt1(clicked_id) {
-  var t_id = clicked_id[1];
-  var letter_id = Number(clicked_id[2])
-  var color_sub = letter_id-1;
-  var color = color_arr[color_sub];
-  document.getElementById("t"+t_id).style.backgroundColor = color;
-}
-
-function reset_saved_word(word_index){
-  var idx1 = word_index + 1;
-  for (k=0;k<5;k++){
-    var idx2 = k+1;
-    var letter_element = document.getElementById("w"+idx1+idx2);
-    letter_element.innerHTML = "_";
-    letter_element.style.backgroundColor = grey;
-  }
-}
-
-function display_saved_word(word_index){
-  var word = words[word_index]
-  var word_choices = words_choices[word_index];
-  var idx1 = word_index + 1;
-  for (i=0;i<5;i++){
-    var idx2 = i+1;
-    var letter_element = document.getElementById("w"+idx1+idx2);
-    letter_element.innerHTML = word[i];
-    var color_index = Number(word_choices[i])-1;
-    letter_element.style.backgroundColor = color_arr[color_index];
-  }
-}
-
-function add_word(){
-  var word = "";
-  // ggg is GreenGoldGrey
-  var ggg_choices = "";
-  for (i=1;i<6;i++) {
-    word = word + document.getElementById("t"+i).innerHTML;
-    var rgb_value = document.getElementById("t"+i).style.backgroundColor;
-    var hex_value = rgb_to_hex(rgb_value)
-    color_id = color_arr.indexOf(hex_value) + 1;
-    ggg_choices = ggg_choices + color_id;
-    // for (j=1;j<4;j++){
-    //   var button_value = document.getElementById("b"+i+j).innerHTML.toLowerCase();
-    //   if ( button_value=="x"){
-    //       ggg_choices = ggg_choices + j;
-    //   };
-    // };
-  };
-
-  words.push(word);
-  words_choices.push(ggg_choices);
-  // document.getElementById("add_word_results").innerHTML = [words,words_choices].join();
-  display_saved_word(words.length-1);
-  reset_all(reset_words=0);
-};
-
-
-function try_it(){
-  var filters = "";
-  for (i=0;i<words.length;i++){
-    filters = filters + words[i] + "," + words_choices[i] + ",";
-  };
-  filters = filters.slice(0,filters.length-1).toLowerCase();
-  // fetch("http://127.0.0.1:8000/wordl?filters="+filters, 
-  fetch(fetch_url+filters, 
-  {
-      method: 'GET',
-      headers: {
-          'Accept': 'application/json',
-      },
-  })
-  // .then(response => response.text())
-  .then(
-    function(response) {
-      var r = response.text();
-      // console.log(r);
-      return r;
-    }
-  )
-  .then(text => JSON.parse(text))
-  .then(function(json_results){
-    if ( ! $.fn.DataTable.isDataTable( '#json_results' ) ) {
-      $('#json_results').dataTable( {
-          "data": json_results,
-          "columns":[
-            {"data":"word","title":"word"},
-            {"data":"count","title":"count"},
-            {"data":"probability","title":"probability"}
-          ],
-          order: [[2, 'desc']],
-          "pageLength": 25,
-      } );      
-    } else {
-      var dt = $('#json_results').dataTable();
-      dt.fnClearTable();
-      dt.fnAddData(json_results,redraw=true);
-    }   
-  })
-}
-
-// 
-window.onload = reset_all();
-
-</script>
 </body>
+
 </html>
- 
