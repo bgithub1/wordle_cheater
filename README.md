@@ -1,4 +1,3 @@
-<!-- #region -->
 ## Wordle Cheater 
 Use Wordle Helper to find possible words (e.g., *cheat*) while you're playing Wordle. 
 ___
@@ -16,44 +15,70 @@ ___
 ## At this point, I started cheating by accessing the index.html page:
 ### http://billybyte.com/wordl/index.html
 
+___
 
 <img src="wordle_screen_0.png">
-  
-## I entered the word ```slate``` in the box to the right of **Enter A Word ->**
+
+___
+
+## **Step 1**: 
+### I entered the word ```slate``` in the box to the right of ```Enter A Word ->```
 <img src="wordle_screen_1.png">
 
-## I clicked on the ```GREEN button``` underneath the letter **E** in ```SLATE```, and the letter **E** turned GREEN.  (I left the other letters grey).
+___
+
+## **Step 2**: 
+### I clicked on the ```GREEN button``` underneath the letter **E** in ```SLATE```, and the letter **E** turned GREEN.  (I left the other letters grey).
 <img src="wordle_screen_2.png">
 
-## I clicked on the ```Add A Word``` button, which added the word ```SLATE``` below the button.
+___
+
+## **Step 3**:
+### I clicked on the ```Add A Word``` button, which added the word ```SLATE``` below the button.
 <img src="wordle_screen_3.png">
 
-## I repeated the same process for the word ```minor```:
+___
+
+## **Next Steps**:
+### I repeated the same process for the word ```minor```:
 * Enter minor in the box to the right of **Enter A Word ->**
 * Click on the GOLD color for the **O**
 * Click on the GOLD color for the **R**
 * Click the **Add A Word** button
 <img src="wordle_screen_4.png">  
 
-## Now I hit ```Find All Possible Words``` (i.e., I cheated):
+___
+
+## **Final Step - I Cheat!**:
+### Now I hit ```Find All Possible Words``` (i.e., I cheated):
 <img src="slate_minor_results.png">
 
-## The most probable word was ```force```, so I entered that:
+___
+
+### The most probable word was ```force```, so I entered that:
 * Wordle returned <img src="force.png">
 
+___
 
-## ```Find All Possible Words``` returned:
+### ```Find All Possible Words``` returned:
 <img src="slate_minor_force.png">
 
-## The most probable word was ```prove```, so I entered that:
+___
+
+### The most probable word was ```prove```, so I entered that:
 * Wordle returned <img src="prove.png">
 
-## ```Find All Possible Words``` returned:
+___
+
+### ```Find All Possible Words``` returned:
 <img src="slate_minor_force_prove.png">
+
+___
 
 ## This showed ```probe``` as the only possible solution, which was the actual Wordle solution.
 
-<!-- #endregion -->
+___
+
 
 ```python
 
