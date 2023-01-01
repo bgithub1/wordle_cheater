@@ -217,6 +217,14 @@
   grid-area: w55;
 }
 
+#findwords {
+  grid-area:fw;
+}
+
+#json_results {
+  grid-area:df;
+}
+
 .bord {
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.8);
@@ -225,7 +233,7 @@
 .container {
   display:grid;
   grid-template-columns:repeat(15,1fr);
-  grid-template-rows: 3fr 1.5fr 1fr 1fr 1.5fr;
+  grid-template-rows: 3fr 1.5fr 1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr;
   font-size: var(--text_font);
   font-weight: bold;
   grid-template-areas: 
@@ -233,8 +241,17 @@
     "en en en en en en en en en wi wi wi wi wi wi"
     "t1 t1 t1 t2 t2 t2 t3 t3 t3 t4 t4 t4 t5 t5 t5"
     "b11 b12 b13 b21 b22 b23 b31 b32 b33 b41 b42 b43 b51 b52 b53"
-    "ai ai ai ai ai ai ai ai ai ai ai ai ai ai ai";
+    "ai ai ai ai ai ai ai ai ai ai ai ai ai ai ai"
+    ". . w11 w12 w13 w14 w15 . w21 w22 w23 w24 w25 . ."
+    ". . w31 w32 w33 w34 w35 . w41 w42 w43 w44 w45 . ."
+    ". . w51 w52 w53 w54 w55 . .   .   .   .   .   . ."
+    "fw fw fw fw fw fw fw fw fw fw fw fw fw fw fw";
   grid-gap:2px;
+  height:40vh;
+  width:100%;
+}
+
+.container2 {
   height:50vh;
   width:100%;
 }
@@ -294,42 +311,39 @@ table.dataTable tr.dtrg-level-0 td {
 
     <button id="addword" type="button" class="bord" onClick="add_word()">Add Word</button>
 
-<!--    
+    <button id="w11" size=1 type="text" class="bord"></button>
+    <button id="w12" size=1 type="text" class="bord"></button>
+    <button id="w13" size=1 type="text" class="bord"></button>
+    <button id="w14" size=1 type="text" class="bord"></button>
+    <button id="w15" size=1 type="text" class="bord"></button>
 
-    <button id="w11" size=1 type="text" class=""></button>
-    <button id="w12" size=1 type="text" class=""></button>
-    <button id="w13" size=1 type="text" class=""></button>
-    <button id="w14" size=1 type="text" class=""></button>
-    <button id="w15" size=1 type="text" class=""></button>
+    <button id="w21" size=1 type="text" class="bord"></button>
+    <button id="w22" size=1 type="text" class="bord"></button>
+    <button id="w23" size=1 type="text" class="bord"></button>
+    <button id="w24" size=1 type="text" class="bord"></button>
+    <button id="w25" size=1 type="text" class="bord"></button>
 
-    <button id="w21" size=1 type="text" class=""></button>
-    <button id="w22" size=1 type="text" class=""></button>
-    <button id="w23" size=1 type="text" class=""></button>
-    <button id="w24" size=1 type="text" class=""></button>
-    <button id="w25" size=1 type="text" class=""></button>
+    <button id="w31" size=1 type="text" class="bord"></button>
+    <button id="w32" size=1 type="text" class="bord"></button>
+    <button id="w33" size=1 type="text" class="bord"></button>
+    <button id="w34" size=1 type="text" class="bord"></button>
+    <button id="w35" size=1 type="text" class="bord"></button>
 
-    <button id="w31" size=1 type="text" class=""></button>
-    <button id="w32" size=1 type="text" class=""></button>
-    <button id="w33" size=1 type="text" class=""></button>
-    <button id="w34" size=1 type="text" class=""></button>
-    <button id="325" size=1 type="text" class=""></button>
+    <button id="w41" size=1 type="text" class="bord"></button>
+    <button id="w42" size=1 type="text" class="bord"></button>
+    <button id="w43" size=1 type="text" class="bord"></button>
+    <button id="w44" size=1 type="text" class="bord"></button>
+    <button id="w45" size=1 type="text" class="bord"></button>
 
-    <button id="w41" size=1 type="text" class=""></button>
-    <button id="w42" size=1 type="text" class=""></button>
-    <button id="w43" size=1 type="text" class=""></button>
-    <button id="w44" size=1 type="text" class=""></button>
-    <button id="w45" size=1 type="text" class=""></button>
-
-    <button id="w51" size=1 type="text" class=""></button>
-    <button id="w52" size=1 type="text" class=""></button>
-    <button id="w53" size=1 type="text" class=""></button>
-    <button id="w54" size=1 type="text" class=""></button>
-    <button id="w55" size=1 type="text" class=""></button>
-
-    <button class="grid-item-4" type="button" onClick="try_it()">Find All Possible Words</button>
-
-    <div class=""><table class="grid-item-6" id="json_results"></table></div> -->
-
+    <button id="w51" size=1 type="text" class="bord"></button>
+    <button id="w52" size=1 type="text" class="bord"></button>
+    <button id="w53" size=1 type="text" class="bord"></button>
+    <button id="w54" size=1 type="text" class="bord"></button>
+    <button id="w55" size=1 type="text" class="bord"></button>
+    <button id="findwords" class="bord" type="button" onClick="try_it()">Find All Possible Words</button>
+</div>
+<div class="container2">
+    <table class="bord" id="json_results"></table>
 </div>
 
 
