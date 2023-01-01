@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Wordle Cheater</title>
+<!--   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/> -->
+  <meta name="viewport" content="user-scalable=no"/>
 <style>
 
 
@@ -22,83 +24,10 @@
   --height_0:50px;
   --width1: 100%;
   --width2: 94%;
+  --text_font:30px;
+  --button_font:30px;
 }
 
-
-/* make it mobile first*/
-
-/* END make it mobile first*/
-
-
-body {
-  display: grid;
-/*  grid-template-rows:  20%;*/
-  justify-content: center;
-  max-width: :500px;
-}
-
-.grid-container-title {
-  display: grid;
-  grid-template-columns: 1fr;
-  height: var(--height_0);
-  line-height: var(--height_0);
-/*  border: 1px solid rgba(0, 0, 0, 0.8);*/
-}
-.grid-item-title{
-  font-size: 35px;
-  text-align: center; 
-  justify-content: center;
-  color:var(--blue);
-}
-
-.grid-container-0 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: var(--height_0);
-  line-height: var(--height_0);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-}
-.grid-item-0{
-  font-size: 25px;
-  text-align: center; 
-  justify-content: center;
-}
-
-.grid-container-1 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  height: var(--height);
-/*  padding: 5px;
-*/}
-.grid-item-1 {
-/*  background-color: var(--lighttan);*/
-  border: 1px solid rgba(0, 0, 0, 0.8);
-/*  padding: 20px;*/  
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-  height: var(--height);
-  width: var(--width1);
-}
-
-.grid-container-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  background-color: black;
-/*  height: var(--height);
-*//*  padding: 5px;
-*/
-}
-
-.grid-item-2 {
-  border: 1px solid rgba(0, 0, 0, 0.8);
-/*  padding: 20px;*/
-  font-size: 30px;    
-  text-align: center;
-  height: var(--halfheight);
-  width: var(--width2);
-}
 .green {
   background-color: var(--green);
 }
@@ -115,61 +44,225 @@ body {
   background-color: var(--midtan);
 }
 
-.grid-container-3 {
-  display: grid;
-  grid-template-columns: 1fr;
-  height: var(--height); 
-/*  border: 1px solid rgba(0, 0, 0, 0.8); */
-}
-.grid-item-3{
-  font-size: 30px;
-  background-color: var(--lightblue);
-  border-radius: 50px;
-}
-.grid-container-4 {
-  display: grid;
-  grid-template-columns: 1fr;
-  height: var(--height); 
-/*  border: 1px solid rgba(0, 0, 0, 0.8); */
-  border-radius: 50px;
-}
-.grid-item-4{
-  font-size: 30px;
-  background-color: magenta;
-  border-radius: 50px;
+#title {
+  grid-area: ti;
+  color:blue;
+  text-align: center;  
+  font-size: var(--text_font);
 }
 
-.grid-container-5 {
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
-/*  height: var(--halfheight); */
-/*  border: 1px solid rgba(0, 0, 0, 0.8); */
-}
-.grid-container-5w{
-  display: grid;
-  grid-template-columns: repeat(6,1fr);
-/*  height: var(--halfheight); */
+#enterword {
+  grid-area: en;
+  font-size: var(--button_font);
 }
 
-.grid-item-5w{
-  font-size: 14px;
-  height: var(--halfheight); 
-  width:20px;
+#wordinput {
+  grid-area: wi;
+  font-size: var(--text_font);
+  resize: none;
+  initial-scale:1;
+  maximum-scale:1;
+  user-scalable:0;
+
 }
 
-.grid-item-5s{
-  font-size: 2px;
-  height: var(--halfheight); 
-  width:3px;
+#t1 {
+  grid-area:t1;
 }
 
-
-.grid-container-6 {
-  display: grid;
+#t2 {
+  grid-area:t2;
 }
-.grid-item-6{
+#t3 {
+  grid-area:t3;
+}
+#t4 {
+  grid-area:t4;
+}
+#t5 {
+  grid-area:t5;
+}
+
+#b11 {
+  grid-area:b11;
+}
+#b12 {
+  grid-area:b12;
+}
+#b13 {
+  grid-area:b13;
+}
+
+#b21 {
+  grid-area:b21;
+}
+#b22 {
+  grid-area:b22;
+}
+#b23 {
+  grid-area:b23;
+}
+
+#b31 {
+  grid-area:b31;
+}
+#b32 {
+  grid-area:b32;
+}
+#b33 {
+  grid-area:b33;
+}
+
+#b41 {
+  grid-area:b41;
+}
+#b42 {
+  grid-area:b42;
+}
+#b43 {
+  grid-area:b43;
+}
+
+#b51 {
+  grid-area:b51;
+}
+#b52 {
+  grid-area:b52;
+}
+#b53 {
+  grid-area:b53;
+}
+
+#addword {
+  grid-area:ai;
+}
+
+#w11 {
+  grid-area: w11;
+}
+#w12 {
+  grid-area: w12;
+}
+#w13 {
+  grid-area: w13;
+}
+#w14 {
+  grid-area: w14;
+}
+#w15 {
+  grid-area: w15;
+}
+
+#w21 {
+  grid-area: w21;
+}
+#w22 {
+  grid-area: w22;
+}
+#w23 {
+  grid-area: w23;
+}
+#w24 {
+  grid-area: w24;
+}
+#w25 {
+  grid-area: w25;
+}
+
+#w31 {
+  grid-area: w31;
+}
+#w32 {
+  grid-area: w32;
+}
+#w33 {
+  grid-area: w33;
+}
+#w34 {
+  grid-area: w34;
+}
+#w35 {
+  grid-area: w35;
+}
+
+#w41 {
+  grid-area: w41;
+}
+#w42 {
+  grid-area: w42;
+}
+#w43 {
+  grid-area: w43;
+}
+#w44 {
+  grid-area: w44;
+}
+#w45 {
+  grid-area: w45;
+}
+
+#w51 {
+  grid-area: w51;
+}
+#w52 {
+  grid-area: w52;
+}
+#w53 {
+  grid-area: w53;
+}
+#w54 {
+  grid-area: w54;
+}
+#w55 {
+  grid-area: w55;
+}
+
+#findwords {
+  grid-area:fw;
+}
+
+#json_results {
+  grid-area:df;
+}
+
+.bord {
+  text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.8);
-  background-color:var(--verylightmagenta);
+}
+
+.container {
+  display:grid;
+  grid-template-columns:repeat(15,1fr);
+  grid-template-rows: 3fr 1.5fr 1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr;
+  font-size: var(--text_font);
+  font-weight: bold;
+  grid-template-areas: 
+    "ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti"
+    "en en en en en en en en en wi wi wi wi wi wi"
+    "t1 t1 t1 t2 t2 t2 t3 t3 t3 t4 t4 t4 t5 t5 t5"
+    "b11 b12 b13 b21 b22 b23 b31 b32 b33 b41 b42 b43 b51 b52 b53"
+    "ai ai ai ai ai ai ai ai ai ai ai ai ai ai ai"
+    ". . w11 w12 w13 w14 w15 . w21 w22 w23 w24 w25 . ."
+    ". . w31 w32 w33 w34 w35 . w41 w42 w43 w44 w45 . ."
+    ". . w51 w52 w53 w54 w55 . .   .   .   .   .   . ."
+    "fw fw fw fw fw fw fw fw fw fw fw fw fw fw fw";
+  grid-gap:2px;
+  height:40vh;
+  width:100%;
+}
+
+.container2 {
+  height:50vh;
+  width:100%;
+}
+
+button {
+  text-align: center;
+  align-content: center;
+  height:100%;
+  width: 100%;
+  font-size: var(--button_font);
+  font-weight: bold;
 }
 
 table.dataTable td {
@@ -179,96 +272,78 @@ table.dataTable tr.dtrg-level-0 td {
   font-size: 1.8em;
 }
 
+
 </style>
 
 
 </head>
 <body>
-<div class="grid-container-title">
-  <div class="grid-item-title">Wordle Cheater</div>
-</div>
-<div class="grid-container-0">
-  <div class="grid-item-0">Enter A Word -></div>
-  <input id="wordinput" class="grid-item-0" onkeyup="textToButton()" maxlength="5" type="text">
-</div>
-<div class="grid-container-1">
-  <button id="t1" size=1 type="text" class="grid-item-1">
-  <button id="t2" size=1 type="text" class="grid-item-1">
-  <button id="t3" size=1 type="text" class="grid-item-1">
-  <button id="t4" size=1 type="text" class="grid-item-1">
-  <button id="t5" size=1 type="text" class="grid-item-1">
-</div>
-<div class="grid-container-2">
-  <button id="b11" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b12" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b13" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-  <button id="b21" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b22" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b23" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-  <button id="b31" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b32" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b33" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-  <button id="b41" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b42" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b43" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-  <button id="b51" size=1 type="button" class="grid-item-2 green" onClick="onbt1(this.id)">
-  <button id="b52" size=1 type="button" class="grid-item-2 gold" onClick="onbt1(this.id)">
-  <button id="b53" size=1 type="button" class="grid-item-2 grey" onClick="onbt1(this.id)">
-</div>
+<div class="container">
+    <button class="bord" id="title">Wordle Cheater</button>
+    <button class="bord" id="enterword">Enter A Word -></button>
+    <input id="wordinput" class="bord" onkeyup="textToButton()" maxlength="5" type="text"></input>
+    
+    <button id="t1" size=1 type="text" class="bord"></button>
+    <button id="t2" size=1 type="text" class="bord"></button>
+    <button id="t3" size=1 type="text" class="bord"></button>
+    <button id="t4" size=1 type="text" class="bord"></button>
+    <button id="t5" size=1 type="text" class="bord"></button>
 
-<p class="grid-container-3">
-  <button type="button" class="grid-item-3" onClick="add_word()">Add Word</button>
-</p>
+    <button id="b11" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
+    <button id="b12" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
+    <button id="b13" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
 
-<div class="grid-container-5">
-  <div class="grid-container-5w">
-    <button id="w11" size=1 type="text" class="grid-item-5w">
-    <button id="w12" size=1 type="text" class="grid-item-5w">
-    <button id="w13" size=1 type="text" class="grid-item-5w">
-    <button id="w14" size=1 type="text" class="grid-item-5w">
-    <button id="w15" size=1 type="text" class="grid-item-5w">
-    <div class="grid-item-5s"></div>
-  </div>
-  <div class="grid-container-5w">
-    <button id="w21" size=1 type="text" class="grid-item-5w">
-    <button id="w22" size=1 type="text" class="grid-item-5w">
-    <button id="w23" size=1 type="text" class="grid-item-5w">
-    <button id="w24" size=1 type="text" class="grid-item-5w">
-    <button id="w25" size=1 type="text" class="grid-item-5w">
-    <div class="grid-item-5s"></div>
-  </div>
-  <div class="grid-container-5w">
-    <button id="w31" size=1 type="text" class="grid-item-5w">
-    <button id="w32" size=1 type="text" class="grid-item-5w">
-    <button id="w33" size=1 type="text" class="grid-item-5w">
-    <button id="w34" size=1 type="text" class="grid-item-5w">
-    <button id="w35" size=1 type="text" class="grid-item-5w">
-    <div class="grid-item-5s"></div>
-  </div>
-  <div class="grid-container-5w">
-    <button id="w41" size=1 type="text" class="grid-item-5w">
-    <button id="w42" size=1 type="text" class="grid-item-5w">
-    <button id="w43" size=1 type="text" class="grid-item-5w">
-    <button id="w44" size=1 type="text" class="grid-item-5w">
-    <button id="w45" size=1 type="text" class="grid-item-5w">
-    <div class="grid-item-5s"></div>
-  </div>
-  <div class="grid-container-5w">
-    <button id="w51" size=1 type="text" class="grid-item-5w">
-    <button id="w52" size=1 type="text" class="grid-item-5w">
-    <button id="w53" size=1 type="text" class="grid-item-5w">
-    <button id="w54" size=1 type="text" class="grid-item-5w">
-    <button id="w55" size=1 type="text" class="grid-item-5w">
-    <div class="grid-item-5s"></div>
-  </div>
+    <button id="b21" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
+    <button id="b22" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
+    <button id="b23" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+
+    <button id="b31" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
+    <button id="b32" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
+    <button id="b33" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+
+    <button id="b41" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
+    <button id="b42" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
+    <button id="b43" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+
+    <button id="b51" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
+    <button id="b52" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
+    <button id="b53" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+
+    <button id="addword" type="button" class="bord" onClick="add_word()">Add Word</button>
+
+    <button id="w11" size=1 type="text" class="bord"></button>
+    <button id="w12" size=1 type="text" class="bord"></button>
+    <button id="w13" size=1 type="text" class="bord"></button>
+    <button id="w14" size=1 type="text" class="bord"></button>
+    <button id="w15" size=1 type="text" class="bord"></button>
+
+    <button id="w21" size=1 type="text" class="bord"></button>
+    <button id="w22" size=1 type="text" class="bord"></button>
+    <button id="w23" size=1 type="text" class="bord"></button>
+    <button id="w24" size=1 type="text" class="bord"></button>
+    <button id="w25" size=1 type="text" class="bord"></button>
+
+    <button id="w31" size=1 type="text" class="bord"></button>
+    <button id="w32" size=1 type="text" class="bord"></button>
+    <button id="w33" size=1 type="text" class="bord"></button>
+    <button id="w34" size=1 type="text" class="bord"></button>
+    <button id="w35" size=1 type="text" class="bord"></button>
+
+    <button id="w41" size=1 type="text" class="bord"></button>
+    <button id="w42" size=1 type="text" class="bord"></button>
+    <button id="w43" size=1 type="text" class="bord"></button>
+    <button id="w44" size=1 type="text" class="bord"></button>
+    <button id="w45" size=1 type="text" class="bord"></button>
+
+    <button id="w51" size=1 type="text" class="bord"></button>
+    <button id="w52" size=1 type="text" class="bord"></button>
+    <button id="w53" size=1 type="text" class="bord"></button>
+    <button id="w54" size=1 type="text" class="bord"></button>
+    <button id="w55" size=1 type="text" class="bord"></button>
+    <button id="findwords" class="bord" type="button" onClick="try_it()">Find All Possible Words</button>
 </div>
-
-<p class="grid-container-4">
-  <button class="grid-item-4" type="button" onClick="try_it()">Find All Possible Words</button>
-</p>
-
-<div class="grid-container-6">
-  <table class="grid-item-6" id="json_results"></table>
+<div class="container2">
+    <table class="bord" id="json_results"></table>
 </div>
 
 
