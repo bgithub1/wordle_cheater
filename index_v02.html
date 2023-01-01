@@ -236,7 +236,8 @@
 .container {
   display:grid;
   grid-template-columns:repeat(15,1fr);
-  grid-template-rows: 2.5fr 1.5fr 1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr;
+/*  grid-template-rows: 2.5fr 1.5fr 1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr;*/
+  grid-template-rows: 2.5fr 1.5fr 1fr 1fr 2fr 1fr 1fr 1fr;
   font-size: var(--text_font);
   font-weight: bold;
   grid-template-areas: 
@@ -247,8 +248,8 @@
     "ai ai ai ai ai ai ai ai ai ai ai ai ai ai ai"
     ". . w11 w12 w13 w14 w15 . w21 w22 w23 w24 w25 . ."
     ". . w31 w32 w33 w34 w35 . w41 w42 w43 w44 w45 . ."
-    ". . w51 w52 w53 w54 w55 . .   .   .   .   .   . ."
-    "fw fw fw fw fw fw fw fw fw fw fw fw fw fw fw";
+    ". . .   .   .   w51 w52 w53 w54 w55   .   . . . .";
+    /*"fw fw fw fw fw fw fw fw fw fw fw fw fw fw fw";*/
   grid-gap:2px;
   height:60vh;
   width:90vw;
@@ -355,7 +356,9 @@ table.dataTable tr.dtrg-level-0 td {
     <button id="w53" size=1 type="text" class="bord"></button>
     <button id="w54" size=1 type="text" class="bord"></button>
     <button id="w55" size=1 type="text" class="bord"></button>
-    <button id="findwords" class="bord curved" type="button" onClick="try_it()">Find All Possible Words</button>
+    
+    <!-- <button id="findwords" class="bord curved" type="button" onClick="try_it()">Find All Possible Words</button> -->
+
 </div>
 
 <div class="container2">
@@ -489,6 +492,7 @@ function add_word(){
   // document.getElementById("add_word_results").innerHTML = [words,words_choices].join();
   display_saved_word(words.length-1);
   reset_all(reset_words=0);
+  try_it();
 };
 
 
