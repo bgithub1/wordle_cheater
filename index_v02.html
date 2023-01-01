@@ -30,12 +30,15 @@
 
 .green {
   background-color: var(--green);
+  color: var(--green);
 }
 .gold {
   background-color: var(--gold);
+  color: var(--gold);
 }
 .grey {
   background-color: var(--grey);
+  color: var(--grey);
 }
 .lighttan {
   background-color: var(--lighttan);
@@ -233,7 +236,7 @@
 .container {
   display:grid;
   grid-template-columns:repeat(15,1fr);
-  grid-template-rows: 3fr 1.5fr 1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr;
+  grid-template-rows: 2.5fr 1.5fr 1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr;
   font-size: var(--text_font);
   font-weight: bold;
   grid-template-areas: 
@@ -296,25 +299,25 @@ table.dataTable tr.dtrg-level-0 td {
     <button id="t4" size=1 type="text" class="bord"></button>
     <button id="t5" size=1 type="text" class="bord"></button>
 
-    <button id="b11" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
-    <button id="b12" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
-    <button id="b13" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+    <button id="b11" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
+    <button id="b12" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
+    <button id="b13" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
 
-    <button id="b21" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
-    <button id="b22" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
-    <button id="b23" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+    <button id="b21" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
+    <button id="b22" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
+    <button id="b23" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
 
-    <button id="b31" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
-    <button id="b32" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
-    <button id="b33" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+    <button id="b31" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
+    <button id="b32" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
+    <button id="b33" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
 
-    <button id="b41" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
-    <button id="b42" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
-    <button id="b43" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+    <button id="b41" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
+    <button id="b42" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
+    <button id="b43" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
 
-    <button id="b51" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
-    <button id="b52" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
-    <button id="b53" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+    <button id="b51" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
+    <button id="b52" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
+    <button id="b53" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
 
     <button id="addword" type="button" class="bord curved" onClick="add_word()">Add Word</button>
 
@@ -377,7 +380,7 @@ var fetch_url = "https://c732-13-57-204-106.ngrok.io/wordl?filters=";
 function reset_all(reset_words=1) {
   for (let i = 1; i < 6; i++) {
     v = "t" + i;
-    document.getElementById(v).innerHTML = "";
+    document.getElementById(v).innerHTML = ".";
     document.getElementById(v).style.backgroundColor = grey;
     // for (j=1;j<4;j++){
     //   col_id = "b"+i+j;
@@ -400,7 +403,7 @@ function textToButton() {
   for (let i = 0; i < 5; i++) {
     var v = i+1;
     v = "t" + v.toString();
-    document.getElementById(v).innerHTML = "";
+    document.getElementById(v).innerHTML = ".";
   };  
   xlen = Math.min(x.length,5);
   for (let i = 0; i < xlen; i++) {
@@ -453,7 +456,7 @@ function reset_saved_word(word_index){
   for (k=0;k<5;k++){
     var idx2 = k+1;
     var letter_element = document.getElementById("w"+idx1+idx2);
-    letter_element.innerHTML = "_";
+    letter_element.innerHTML = ".";
     letter_element.style.backgroundColor = grey;
   }
 }
