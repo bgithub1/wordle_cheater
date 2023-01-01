@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wordle Cheater</title>
+<style>
+
+
+:root {
+  --green: #49BE25;
+  --gold: #D5C450; 
+  /*--grey: #A0A0A0;*/
+  --grey:#C9C9C9;
+  --blue: #0040FF;
+  --lighttan: #F6E3CE;
+  --midtan: #F5D0A9;
+  --lightblue:#A9D0F5;
+  --midblue: #5882FA;
+  --lightmagenta:#F6CEF5;
+  --verylightmagenta:#F8E0F7;
+  --halfheight:30px;
+  --height: 50px;
+  --height_0:50px;
+  --width1: 100%;
+  --width2: 94%;
+  --text_font:30px;
+  --button_font:30px;
+}
+
+.green {
+  background-color: var(--green);
+}
+.gold {
+  background-color: var(--gold);
+}
+.grey {
+  background-color: var(--grey);
+}
+.lighttan {
+  background-color: var(--lighttan);
+}
+.midtan {
+  background-color: var(--midtan);
+}
+
+.tcent {
+}
+
+#title {
+  grid-area: ti;
+  color:blue;
+  text-align: center;  
+  font-size: var(--text_font);
+}
+
+#enterword {
+  grid-area: en;
+  font-size: var(--button_font);
+}
+
+#wordinput {
+  grid-area: wi;
+  font-size: var(--text_font);
+
+}
+
+#t1 {
+  grid-area:t1;
+}
+
+#t2 {
+  grid-area:t2;
+}
+#t3 {
+  grid-area:t3;
+}
+#t4 {
+  grid-area:t4;
+}
+#t5 {
+  grid-area:t5;
+}
+
+#b11 {
+  grid-area:b11;
+}
+#b12 {
+  grid-area:b12;
+}
+#b13 {
+  grid-area:b13;
+}
+
+#b21 {
+  grid-area:b21;
+}
+#b22 {
+  grid-area:b22;
+}
+#b23 {
+  grid-area:b23;
+}
+
+#b31 {
+  grid-area:b31;
+}
+#b32 {
+  grid-area:b32;
+}
+#b33 {
+  grid-area:b33;
+}
+
+#b41 {
+  grid-area:b41;
+}
+#b42 {
+  grid-area:b42;
+}
+#b43 {
+  grid-area:b43;
+}
+
+#b51 {
+  grid-area:b51;
+}
+#b52 {
+  grid-area:b52;
+}
+#b53 {
+  grid-area:b53;
+}
+
+#addword {
+  grid-area:ai;
+}
+
+#w11 {
+  grid-area: w11;
+}
+#w12 {
+  grid-area: w12;
+}
+#w13 {
+  grid-area: w13;
+}
+#w14 {
+  grid-area: w14;
+}
+#w15 {
+  grid-area: w15;
+}
+
+#w21 {
+  grid-area: w21;
+}
+#w22 {
+  grid-area: w22;
+}
+#w23 {
+  grid-area: w23;
+}
+#w24 {
+  grid-area: w24;
+}
+#w25 {
+  grid-area: w25;
+}
+
+#w31 {
+  grid-area: w31;
+}
+#w32 {
+  grid-area: w32;
+}
+#w33 {
+  grid-area: w33;
+}
+#w34 {
+  grid-area: w34;
+}
+#w35 {
+  grid-area: w35;
+}
+
+#w41 {
+  grid-area: w41;
+}
+#w42 {
+  grid-area: w42;
+}
+#w43 {
+  grid-area: w43;
+}
+#w44 {
+  grid-area: w44;
+}
+#w45 {
+  grid-area: w45;
+}
+
+#w51 {
+  grid-area: w51;
+}
+#w52 {
+  grid-area: w52;
+}
+#w53 {
+  grid-area: w53;
+}
+#w54 {
+  grid-area: w54;
+}
+#w55 {
+  grid-area: w55;
+}
+
+.bord {
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.container {
+  display:grid;
+  grid-template-columns:repeat(15,1fr);
+  grid-template-rows: 3fr 1.5fr 1fr 1fr 1.5fr;
+  font-size: var(--text_font);
+  font-weight: bold;
+  grid-template-areas: 
+    "ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti"
+    "en en en en en en en en en wi wi wi wi wi wi"
+    "t1 t1 t1 t2 t2 t2 t3 t3 t3 t4 t4 t4 t5 t5 t5"
+    "b11 b12 b13 b21 b22 b23 b31 b32 b33 b41 b42 b43 b51 b52 b53"
+    "ai ai ai ai ai ai ai ai ai ai ai ai ai ai ai";
+  grid-gap:2px;
+  height:50vh;
+}
+
+button {
+  text-align: center;
+  align-content: center;
+  height:100%;
+  width: 100%;
+  font-size: var(--button_font);
+  font-weight: bold;
+}
+
+table.dataTable td {
+  font-size: 1.6em;
+}
+table.dataTable tr.dtrg-level-0 td {
+  font-size: 1.8em;
+}
+
+
+</style>
+
+
+</head>
+<body>
+<div class="container">
+    <button class="bord" id="title">Wordle Cheater</button>
+    <button class="bord" id="enterword">Enter A Word -></button>
+    <input id="wordinput" class="bord" onkeyup="textToButton()" maxlength="5" type="text"></input>
+    
+    <button id="t1" size=1 type="text" class="bord"></button>
+    <button id="t2" size=1 type="text" class="bord"></button>
+    <button id="t3" size=1 type="text" class="bord"></button>
+    <button id="t4" size=1 type="text" class="bord"></button>
+    <button id="t5" size=1 type="text" class="bord"></button>
+
+    <button id="b11" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
+    <button id="b12" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
+    <button id="b13" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+
+    <button id="b21" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
+    <button id="b22" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
+    <button id="b23" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+
+    <button id="b31" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
+    <button id="b32" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
+    <button id="b33" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+
+    <button id="b41" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
+    <button id="b42" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
+    <button id="b43" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+
+    <button id="b51" size=1 type="button" class="green" onClick="onbt1(this.id)"></button>
+    <button id="b52" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
+    <button id="b53" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
+
+    <button id="addword" type="button" class="bord" onClick="add_word()">Add Word</button>
+
+<!--    
+
+    <button id="w11" size=1 type="text" class=""></button>
+    <button id="w12" size=1 type="text" class=""></button>
+    <button id="w13" size=1 type="text" class=""></button>
+    <button id="w14" size=1 type="text" class=""></button>
+    <button id="w15" size=1 type="text" class=""></button>
+
+    <button id="w21" size=1 type="text" class=""></button>
+    <button id="w22" size=1 type="text" class=""></button>
+    <button id="w23" size=1 type="text" class=""></button>
+    <button id="w24" size=1 type="text" class=""></button>
+    <button id="w25" size=1 type="text" class=""></button>
+
+    <button id="w31" size=1 type="text" class=""></button>
+    <button id="w32" size=1 type="text" class=""></button>
+    <button id="w33" size=1 type="text" class=""></button>
+    <button id="w34" size=1 type="text" class=""></button>
+    <button id="325" size=1 type="text" class=""></button>
+
+    <button id="w41" size=1 type="text" class=""></button>
+    <button id="w42" size=1 type="text" class=""></button>
+    <button id="w43" size=1 type="text" class=""></button>
+    <button id="w44" size=1 type="text" class=""></button>
+    <button id="w45" size=1 type="text" class=""></button>
+
+    <button id="w51" size=1 type="text" class=""></button>
+    <button id="w52" size=1 type="text" class=""></button>
+    <button id="w53" size=1 type="text" class=""></button>
+    <button id="w54" size=1 type="text" class=""></button>
+    <button id="w55" size=1 type="text" class=""></button>
+
+    <button class="grid-item-4" type="button" onClick="try_it()">Find All Possible Words</button>
+
+    <div class=""><table class="grid-item-6" id="json_results"></table></div> -->
+
+</div>
+
+
+<!--  ************ Scripts below ************** -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+<script> 
+var words = [];
+var words_choices = [];
+var green = "#49BE25";
+var gold = "#D5C450"; 
+var grey = "#C9C9C9" // "#A0A0A0" #D8D8D8
+
+var color_arr = [green, gold, grey]
+
+// var fetch_url = "http://127.0.0.1:8000/wordl?filters";
+var fetch_url = "https://c732-13-57-204-106.ngrok.io/wordl?filters=";
+
+
+function reset_all(reset_words=1) {
+  for (let i = 1; i < 6; i++) {
+    v = "t" + i;
+    document.getElementById(v).innerHTML = "";
+    document.getElementById(v).style.backgroundColor = grey;
+    // for (j=1;j<4;j++){
+    //   col_id = "b"+i+j;
+    //   document.getElementById(col_id).innerHTML = "";  
+      
+    // }
+  };
+  if (reset_words==1){
+    words = [];
+    words_choices = [];
+    for (i=0;i<5;i++){
+      reset_saved_word(i);
+    }
+  };
+  document.getElementById("wordinput").value = "";
+};
+
+function textToButton() {
+  var x = document.getElementById("wordinput").value;
+  for (let i = 0; i < 5; i++) {
+    var v = i+1;
+    v = "t" + v.toString();
+    document.getElementById(v).innerHTML = "";
+  };  
+  xlen = Math.min(x.length,5);
+  for (let i = 0; i < xlen; i++) {
+    var v = i+1;
+    v = "t" + v.toString();
+    document.getElementById(v).innerHTML = x[i].toUpperCase();
+  }; 
+  
+  
+};
+
+// var br_list = ["br1","br2","br3"];
+
+// function onbt1(clicked_id) {
+//   var row_id = clicked_id[1];
+  
+//   for (let i = 0;i<3;i++){
+//       var col_id = i+1
+//       b_clicked = "b"+row_id+col_id;
+//       if (clicked_id != b_clicked) {
+//         document.getElementById(b_clicked).innerHTML = "";
+//       }
+//   };
+//   document.getElementById(clicked_id).innerHTML = "X";
+// }
+
+function rgb_to_hex(rgb_object) {
+  rgb_string = rgb_object.toString();
+  rgb = rgb_string.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+
+  function hexCode(i) {
+    return ("0" + parseInt(i).toString(16)).slice(-2);
+  }
+  var hex_value = "#" + hexCode(rgb[1]) + hexCode(rgb[2]) 
+          + hexCode(rgb[3]);
+  hex_value = hex_value.toUpperCase();
+  return hex_value;
+  }
+
+function onbt1(clicked_id) {
+  var t_id = clicked_id[1];
+  var letter_id = Number(clicked_id[2])
+  var color_sub = letter_id-1;
+  var color = color_arr[color_sub];
+  document.getElementById("t"+t_id).style.backgroundColor = color;
+}
+
+function reset_saved_word(word_index){
+  var idx1 = word_index + 1;
+  for (k=0;k<5;k++){
+    var idx2 = k+1;
+    var letter_element = document.getElementById("w"+idx1+idx2);
+    letter_element.innerHTML = "_";
+    letter_element.style.backgroundColor = grey;
+  }
+}
+
+function display_saved_word(word_index){
+  var word = words[word_index]
+  var word_choices = words_choices[word_index];
+  var idx1 = word_index + 1;
+  for (i=0;i<5;i++){
+    var idx2 = i+1;
+    var letter_element = document.getElementById("w"+idx1+idx2);
+    letter_element.innerHTML = word[i];
+    var color_index = Number(word_choices[i])-1;
+    letter_element.style.backgroundColor = color_arr[color_index];
+  }
+}
+
+function add_word(){
+  var word = "";
+  // ggg is GreenGoldGrey
+  var ggg_choices = "";
+  for (i=1;i<6;i++) {
+    word = word + document.getElementById("t"+i).innerHTML;
+    var rgb_value = document.getElementById("t"+i).style.backgroundColor;
+    var hex_value = rgb_to_hex(rgb_value)
+    color_id = color_arr.indexOf(hex_value) + 1;
+    ggg_choices = ggg_choices + color_id;
+    // for (j=1;j<4;j++){
+    //   var button_value = document.getElementById("b"+i+j).innerHTML.toLowerCase();
+    //   if ( button_value=="x"){
+    //       ggg_choices = ggg_choices + j;
+    //   };
+    // };
+  };
+
+  words.push(word);
+  words_choices.push(ggg_choices);
+  // document.getElementById("add_word_results").innerHTML = [words,words_choices].join();
+  display_saved_word(words.length-1);
+  reset_all(reset_words=0);
+};
+
+
+function try_it(){
+  var filters = "";
+  for (i=0;i<words.length;i++){
+    filters = filters + words[i] + "," + words_choices[i] + ",";
+  };
+  filters = filters.slice(0,filters.length-1).toLowerCase();
+  // fetch("http://127.0.0.1:8000/wordl?filters="+filters, 
+  fetch(fetch_url+filters, 
+  {
+      method: 'GET',
+      headers: {
+          'Accept': 'application/json',
+      },
+  })
+  // .then(response => response.text())
+  .then(
+    function(response) {
+      var r = response.text();
+      // console.log(r);
+      return r;
+    }
+  )
+  .then(text => JSON.parse(text))
+  .then(function(json_results){
+    if ( ! $.fn.DataTable.isDataTable( '#json_results' ) ) {
+      $('#json_results').dataTable( {
+          "data": json_results,
+          "columns":[
+            {"data":"word","title":"word"},
+            {"data":"count","title":"count"},
+            {"data":"probability","title":"probability"}
+          ],
+          order: [[2, 'desc']],
+          "pageLength": 25,
+      } );      
+    } else {
+      var dt = $('#json_results').dataTable();
+      dt.fnClearTable();
+      dt.fnAddData(json_results,redraw=true);
+    }   
+  })
+}
+
+// 
+window.onload = reset_all();
+
+</script>
+
+
+</body>
+</html>
+
