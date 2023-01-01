@@ -251,14 +251,18 @@
     "fw fw fw fw fw fw fw fw fw fw fw fw fw fw fw";
   grid-gap:2px;
   height:60vh;
-  width:var(--width1);
-  padding-left: 10px;
-  padding-right: 10px;
+  width:90vw;
+  margin:auto;
+/*  padding-left: 20px;
+  padding-right: 20px;*/
 }
 
 .container2 {
   height:40vh;
-  width:var(--width1);
+  width:90vw;
+  margin:auto;
+/*  padding-left: 20px;
+  padding-right: 20px;*/
 }
 
 button {
@@ -370,6 +374,7 @@ var words_choices = [];
 var green = "#49BE25";
 var gold = "#D5C450"; 
 var grey = "#C9C9C9" // "#A0A0A0" #D8D8D8
+var black = "#000000";
 
 var color_arr = [green, gold, grey]
 
@@ -382,6 +387,7 @@ function reset_all(reset_words=1) {
     v = "t" + i;
     document.getElementById(v).innerHTML = ".";
     document.getElementById(v).style.backgroundColor = grey;
+    document.getElementById(v).style.color = grey;
     // for (j=1;j<4;j++){
     //   col_id = "b"+i+j;
     //   document.getElementById(col_id).innerHTML = "";  
@@ -400,6 +406,7 @@ function reset_all(reset_words=1) {
 
 function textToButton() {
   var x = document.getElementById("wordinput").value;
+  x = x.trim();
   for (let i = 0; i < 5; i++) {
     var v = i+1;
     v = "t" + v.toString();
@@ -410,25 +417,12 @@ function textToButton() {
     var v = i+1;
     v = "t" + v.toString();
     document.getElementById(v).innerHTML = x[i].toUpperCase();
+    document.getElementById(v).style.color = black;
   }; 
   
   
 };
 
-// var br_list = ["br1","br2","br3"];
-
-// function onbt1(clicked_id) {
-//   var row_id = clicked_id[1];
-  
-//   for (let i = 0;i<3;i++){
-//       var col_id = i+1
-//       b_clicked = "b"+row_id+col_id;
-//       if (clicked_id != b_clicked) {
-//         document.getElementById(b_clicked).innerHTML = "";
-//       }
-//   };
-//   document.getElementById(clicked_id).innerHTML = "X";
-// }
 
 function rgb_to_hex(rgb_object) {
   rgb_string = rgb_object.toString();
@@ -458,6 +452,7 @@ function reset_saved_word(word_index){
     var letter_element = document.getElementById("w"+idx1+idx2);
     letter_element.innerHTML = ".";
     letter_element.style.backgroundColor = grey;
+    letter_element.style.color = grey;
   }
 }
 
@@ -471,6 +466,7 @@ function display_saved_word(word_index){
     letter_element.innerHTML = word[i];
     var color_index = Number(word_choices[i])-1;
     letter_element.style.backgroundColor = color_arr[color_index];
+    letter_element.style.color = black;
   }
 }
 
@@ -484,12 +480,6 @@ function add_word(){
     var hex_value = rgb_to_hex(rgb_value)
     color_id = color_arr.indexOf(hex_value) + 1;
     ggg_choices = ggg_choices + color_id;
-    // for (j=1;j<4;j++){
-    //   var button_value = document.getElementById("b"+i+j).innerHTML.toLowerCase();
-    //   if ( button_value=="x"){
-    //       ggg_choices = ggg_choices + j;
-    //   };
-    // };
   };
 
   words.push(word);

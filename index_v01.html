@@ -315,6 +315,7 @@ function reset_all(reset_words=1) {
 
 function textToButton() {
   var x = document.getElementById("wordinput").value;
+  x = x.trim();
   for (let i = 0; i < 5; i++) {
     var v = i+1;
     v = "t" + v.toString();
