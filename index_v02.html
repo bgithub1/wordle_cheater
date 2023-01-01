@@ -265,6 +265,11 @@ button {
   font-weight: bold;
 }
 
+.curved {
+  background-color: var(--lighttan);
+  border-radius: 70px;  
+}
+
 table.dataTable td {
   font-size: 1.6em;
 }
@@ -309,7 +314,7 @@ table.dataTable tr.dtrg-level-0 td {
     <button id="b52" size=1 type="button" class="gold" onClick="onbt1(this.id)"></button>
     <button id="b53" size=1 type="button" class="grey" onClick="onbt1(this.id)"></button>
 
-    <button id="addword" type="button" class="bord" onClick="add_word()">Add Word</button>
+    <button id="addword" type="button" class="bord curved" onClick="add_word()">Add Word</button>
 
     <button id="w11" size=1 type="text" class="bord"></button>
     <button id="w12" size=1 type="text" class="bord"></button>
@@ -340,7 +345,7 @@ table.dataTable tr.dtrg-level-0 td {
     <button id="w53" size=1 type="text" class="bord"></button>
     <button id="w54" size=1 type="text" class="bord"></button>
     <button id="w55" size=1 type="text" class="bord"></button>
-    <button id="findwords" class="bord" type="button" onClick="try_it()">Find All Possible Words</button>
+    <button id="findwords" class="bord curved" type="button" onClick="try_it()">Find All Possible Words</button>
 </div>
 <div class="container2">
     <table class="bord" id="json_results"></table>
