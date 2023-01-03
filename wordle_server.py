@@ -195,7 +195,14 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Welcome to wordle_server"}
+
+@app.get("/wordl/solutions")
+async def solutions():
+    wdl = wrdlc.wordl()
+    df = wdl.df_word_history.dropna()
+    # df['number'] = df['number'].astype(str)
+    return df.to_dict(orient="records")
 
 @app.get("/wordl")
 async def load_wordl(filters:str="slate,33333,minor,33223,goony,32123"):

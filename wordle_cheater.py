@@ -124,6 +124,7 @@ def new_condition(word,letter_status):
         return new_conditions
     return inner_test,good_letters
 
+
 class wordl():
     def __init__(self,show_progress=True):
         self.wordlist = []
@@ -186,4 +187,53 @@ def filter_words(words):
     df_new['probability'] = df_new['count']/count_sum
     df_new.index = range(1,len(df_new)+1)
     return df_new
+
+def get_letter_status(your_word,the_word):
+    nums =[]
+    for i,l in enumerate(list(your_word)):
+        if l == the_word[i]:
+            nums.append(1)
+        elif l in the_word:
+            nums.append(2)
+        else:
+            nums.append(3)
+    return nums    
+        
+def letter_list_to_str(letter_list):
+    return ''.join(
+        [str(v) for v in letter_list]
+    )
+def get_filter(your_word,the_word):
+    letter_string = letter_list_to_str(
+        get_letter_list(your_word,td_word)
+    )
+    return your_word + "," + letter_string
+
+def solve(initial_words,solution):
+    wdl = wordl()
+
+    # Loop on 5 times, either loading wdl instance with words from the
+    #    intial_list array, or by loading the most possible word that
+    #    the method wrdlc.filter_words returns (after there are no more intial_words)
+    # Also, save the list of possible words at after loading a new word.
+    list_df = []
+    words_used = []
+    for i in range(5):
+        if i<len(initial_words):
+            w = initial_words[i]
+        else:
+            # Get last DataFrame from list_df
+            df_last = list_df[i-1]
+            w = df_last.iloc[0].word
+        words_used.append(w)
+        letter_status = get_letter_status(w,solution)
+        # Add a word to the wdl instance
+        wdl.add_word(w,letter_status)
+        wdl_possible_words_json = wdl.try_it() 
+        # Append the DataFrame with the list of possible words, at this stage
+        df = filter_words(wdl_possible_words_json).dropna().copy()
+        list_df.append(df)
+        if len(df)<=1:
+            break
+    return words_used,list_df
 
