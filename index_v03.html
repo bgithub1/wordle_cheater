@@ -25,7 +25,8 @@
   --width1: 100%;
   --width2: 94%;
   --text_font:50px;
-  --button_font:30px;
+  --button_font:20px;
+  --option_font:20px;
 }
 
 .green {
@@ -47,11 +48,27 @@
   background-color: var(--midtan);
 }
 
+.option{
+  text-align: center;  
+  font-size: var(--option_font);
+}
+
 #title {
   grid-area: ti;
   color:blue;
   text-align: center;  
   font-size: var(--text_font);
+}
+
+#selectdate {
+  grid-area:sd;
+  text-align: center;  
+  font-size: var(--button_font);  
+}
+#solutions {
+  grid-area:sl;
+  text-align: center;  
+  font-size: var(--button_font);
 }
 
 #enterword {
@@ -61,12 +78,11 @@
 
 #wordinput {
   grid-area: wi;
-  font-size: var(--text_font);
+  font-size: var(--button_font);
   resize: none;
   initial-scale:1;
   maximum-scale:1;
   user-scalable:0;
-
 }
 
 #t1 {
@@ -235,21 +251,35 @@
 
 .container {
   display:grid;
-  grid-template-columns:repeat(15,1fr);
+  grid-template-columns:repeat(10,1fr);
 /*  grid-template-rows: 2.5fr 1.5fr 1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr;*/
-  grid-template-rows: 2.5fr 1.5fr 1fr 1fr 2fr 1fr 1fr 1fr;
+  grid-template-rows: 2.5fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr;
   font-size: var(--text_font);
   font-weight: bold;
   grid-template-areas: 
+    "ti ti ti ti ti ti ti ti ti ti"
+    "en en en en en w11 w12 w13 w14 w15"    
+    "en en en en en w21 w22 w23 w24 w25"    
+    "wi wi wi wi wi w31 w32 w33 w34 w35"
+    "sd sd sd sd sd w41 w42 w43 w44 w45"
+    "sl sl sl sl sl w51 w52 w53 w54 w55"
+/*
     "ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti"
-    "en en en en en en en en en wi wi wi wi wi wi"
-    "t1 t1 t1 t2 t2 t2 t3 t3 t3 t4 t4 t4 t5 t5 t5"
+    "sd sd sd sd sd sd sd sd sd sd w11 w12 w13 w14 w15"
+    "sl sl sl sl sl sl sl sl sl sl w21 w22 w23 w24 w25"
+    "sl sl sl sl sl sl sl sl sl sl w31 w32 w33 w34 w35"
+    "en en en en en en en en en en w41 w42 w43 w44 w45"
+    "wi wi wi wi wi wi wi wi wi wi w51 w52 w53 w54 w55"
     "b11 b12 b13 b21 b22 b23 b31 b32 b33 b41 b42 b43 b51 b52 b53"
-    "ai ai ai ai ai ai ai ai ai ai ai ai ai ai ai"
+    ". . .   .   .   w11 w12 w13 w14 w15   .   . . . ."
+    ". . .   .   .   w21 w22 w23 w24 w25   .   . . . ."
+    ". . .   .   .   w31 w32 w33 w34 w35   .   . . . ."
+    ". . .   .   .   w41 w42 w43 w44 w45   .   . . . ."
+    ". . .   .   .   w51 w52 w53 w54 w55   .   . . . ."
+/*    "ai ai ai ai ai ai ai ai ai ai ai ai ai ai ai"
     ". . w11 w12 w13 w14 w15 . w21 w22 w23 w24 w25 . ."
     ". . w31 w32 w33 w34 w35 . w41 w42 w43 w44 w45 . ."
-    ". . .   .   .   w51 w52 w53 w54 w55   .   . . . .";
-    /*"fw fw fw fw fw fw fw fw fw fw fw fw fw fw fw";*/
+    ". . .   .   .   w51 w52 w53 w54 w55   .   . . . ."*/;
   grid-gap:2px;
   height:60vh;
   width:90vw;
@@ -296,37 +326,22 @@ table.dataTable tr.dtrg-level-0 td {
 <body>
 <div class="container">
     <button class="bord" id="title">Wordle Cheater</button>
-    <button class="bord" id="enterword">Enter A Word -></button>
+    <button class="bord" id="selectdate">Select A Date -></button>
+    <select class="bord" name="cars" id="solutions">
+      <option class="option" value="volvo">Volvo</option>
+      <option class="option" value="saab">Saab</option>
+      <option class="option" value="opel">Opel</option>
+      <option class="option" value="audi">Audi</option>
+    </select>
+
+    <button class="bord" id="enterword">Enter Initial Words -></button>
     <input id="wordinput" class="bord" onkeyup="textToButton()" maxlength="5" type="text"></input>
     
-    <button id="t1" size=1 type="text" class="bord"></button>
+<!--     <button id="t1" size=1 type="text" class="bord"></button>
     <button id="t2" size=1 type="text" class="bord"></button>
     <button id="t3" size=1 type="text" class="bord"></button>
     <button id="t4" size=1 type="text" class="bord"></button>
-    <button id="t5" size=1 type="text" class="bord"></button>
-
-    <button id="b11" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
-    <button id="b12" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
-    <button id="b13" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
-
-    <button id="b21" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
-    <button id="b22" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
-    <button id="b23" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
-
-    <button id="b31" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
-    <button id="b32" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
-    <button id="b33" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
-
-    <button id="b41" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
-    <button id="b42" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
-    <button id="b43" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
-
-    <button id="b51" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
-    <button id="b52" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
-    <button id="b53" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
-
-    <button id="addword" type="button" class="bord curved" onClick="add_word()">Add Word</button>
-
+    <button id="t5" size=1 type="text" class="bord"></button> -->
     <button id="w11" size=1 type="text" class="bord"></button>
     <button id="w12" size=1 type="text" class="bord"></button>
     <button id="w13" size=1 type="text" class="bord"></button>
@@ -356,13 +371,6 @@ table.dataTable tr.dtrg-level-0 td {
     <button id="w53" size=1 type="text" class="bord"></button>
     <button id="w54" size=1 type="text" class="bord"></button>
     <button id="w55" size=1 type="text" class="bord"></button>
-    
-    <!-- <button id="findwords" class="bord curved" type="button" onClick="try_it()">Find All Possible Words</button> -->
-
-</div>
-
-<div class="container2">
-    <table class="bord" id="json_results"></table>
 </div>
 
 
