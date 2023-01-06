@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wordle Cheater v02</title>
+  <title>Wordle Cheater v03</title>
 <!--   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/> -->
   <meta name="viewport" content="user-scalable=no"/>
 <style>
@@ -11,6 +11,7 @@
   --green: #49BE25;
   --gold: #D5C450; 
   /*--grey: #A0A0A0;*/
+  --white: #fffff1;
   --grey:#C9C9C9;
   --blue: #0040FF;
   --lighttan: #F6E3CE;
@@ -26,6 +27,11 @@
   --width2: 94%;
   --text_font:50px;
   --button_font:30px;
+  --option_font:20px;
+}
+
+h2 {
+  font-style: italic;
 }
 
 .green {
@@ -40,11 +46,19 @@
   background-color: var(--grey);
   color: var(--grey);
 }
+.white {
+  background-color: var(--white);  
+}
 .lighttan {
   background-color: var(--lighttan);
 }
 .midtan {
   background-color: var(--midtan);
+}
+
+.option{
+  text-align: center;  
+  font-size: var(--option_font);
 }
 
 #title {
@@ -54,6 +68,17 @@
   font-size: var(--text_font);
 }
 
+#selectdate {
+  grid-area:sd;
+  text-align: center;  
+  font-size: var(--button_font);  
+}
+#solutions {
+  grid-area:sl;
+  text-align: center;  
+  font-size: var(--button_font);
+}
+
 #enterword {
   grid-area: en;
   font-size: var(--button_font);
@@ -61,12 +86,11 @@
 
 #wordinput {
   grid-area: wi;
-  font-size: var(--text_font);
+  font-size: var(--button_font);
   resize: none;
   initial-scale:1;
   maximum-scale:1;
   user-scalable:0;
-
 }
 
 #t1 {
@@ -138,6 +162,7 @@
 
 #addword {
   grid-area:ai;
+  font-size: var(--text_font)
 }
 
 #w11 {
@@ -235,21 +260,36 @@
 
 .container {
   display:grid;
-  grid-template-columns:repeat(15,1fr);
+  grid-template-columns:repeat(10,1fr);
 /*  grid-template-rows: 2.5fr 1.5fr 1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr;*/
-  grid-template-rows: 2.5fr 1.5fr 1fr 1fr 2fr 1fr 1fr 1fr;
+  grid-template-rows: 1.0fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr 0.6fr;
   font-size: var(--text_font);
   font-weight: bold;
   grid-template-areas: 
+    "ti ti ti ti ti ti ti ti ti ti"
+    "en en en en en w11 w12 w13 w14 w15"    
+    "en en en en en w21 w22 w23 w24 w25"    
+    "wi wi wi wi wi w31 w32 w33 w34 w35"
+    "sd sd sd sd sd w41 w42 w43 w44 w45"
+    "sl sl sl sl sl w51 w52 w53 w54 w55"
+    "ai ai ai ai ai ai ai ai ai ai"
+/*
     "ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti"
-    "en en en en en en en en en wi wi wi wi wi wi"
-    "t1 t1 t1 t2 t2 t2 t3 t3 t3 t4 t4 t4 t5 t5 t5"
+    "sd sd sd sd sd sd sd sd sd sd w11 w12 w13 w14 w15"
+    "sl sl sl sl sl sl sl sl sl sl w21 w22 w23 w24 w25"
+    "sl sl sl sl sl sl sl sl sl sl w31 w32 w33 w34 w35"
+    "en en en en en en en en en en w41 w42 w43 w44 w45"
+    "wi wi wi wi wi wi wi wi wi wi w51 w52 w53 w54 w55"
     "b11 b12 b13 b21 b22 b23 b31 b32 b33 b41 b42 b43 b51 b52 b53"
-    "ai ai ai ai ai ai ai ai ai ai ai ai ai ai ai"
+    ". . .   .   .   w11 w12 w13 w14 w15   .   . . . ."
+    ". . .   .   .   w21 w22 w23 w24 w25   .   . . . ."
+    ". . .   .   .   w31 w32 w33 w34 w35   .   . . . ."
+    ". . .   .   .   w41 w42 w43 w44 w45   .   . . . ."
+    ". . .   .   .   w51 w52 w53 w54 w55   .   . . . ."
+/*    "ai ai ai ai ai ai ai ai ai ai ai ai ai ai ai"
     ". . w11 w12 w13 w14 w15 . w21 w22 w23 w24 w25 . ."
     ". . w31 w32 w33 w34 w35 . w41 w42 w43 w44 w45 . ."
-    ". . .   .   .   w51 w52 w53 w54 w55   .   . . . .";
-    /*"fw fw fw fw fw fw fw fw fw fw fw fw fw fw fw";*/
+    ". . .   .   .   w51 w52 w53 w54 w55   .   . . . ."*/;
   grid-gap:2px;
   height:60vh;
   width:90vw;
@@ -259,8 +299,7 @@
 }
 
 .container2 {
-  height:40vh;
-  width:90vw;
+  width:70vw;
   margin:auto;
   margin-top:50px;
 /*  padding-left: 20px;
@@ -296,37 +335,22 @@ table.dataTable tr.dtrg-level-0 td {
 <body>
 <div class="container">
     <button class="bord" id="title">Wordle Cheater</button>
-    <button class="bord" id="enterword">Enter A Word -></button>
-    <input id="wordinput" class="bord" onkeyup="textToButton()" maxlength="5" type="text"></input>
+    <button class="bord" id="selectdate">Select A Date:</button>
+    <select class="bord" name="cars" id="solutions">
+<!--       <option class="option" value="volvo">Volvo</option>
+      <option class="option" value="saab">Saab</option>
+      <option class="option" value="opel">Opel</option>
+      <option class="option" value="audi">Audi</option> -->
+    </select>
+
+    <button class="bord" id="enterword">Enter Initial Words Below:</button>
+    <input id="wordinput" class="bord" onClick="textToButton()" type="text"></input>
     
-    <button id="t1" size=1 type="text" class="bord"></button>
+<!--     <button id="t1" size=1 type="text" class="bord"></button>
     <button id="t2" size=1 type="text" class="bord"></button>
     <button id="t3" size=1 type="text" class="bord"></button>
     <button id="t4" size=1 type="text" class="bord"></button>
-    <button id="t5" size=1 type="text" class="bord"></button>
-
-    <button id="b11" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
-    <button id="b12" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
-    <button id="b13" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
-
-    <button id="b21" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
-    <button id="b22" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
-    <button id="b23" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
-
-    <button id="b31" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
-    <button id="b32" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
-    <button id="b33" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
-
-    <button id="b41" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
-    <button id="b42" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
-    <button id="b43" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
-
-    <button id="b51" size=1 type="button" class="bord green" onClick="onbt1(this.id)">.</button>
-    <button id="b52" size=1 type="button" class="bord gold" onClick="onbt1(this.id)">.</button>
-    <button id="b53" size=1 type="button" class="bord grey" onClick="onbt1(this.id)">.</button>
-
-    <button id="addword" type="button" class="bord curved" onClick="add_word()">Add Word</button>
-
+    <button id="t5" size=1 type="text" class="bord"></button> -->
     <button id="w11" size=1 type="text" class="bord"></button>
     <button id="w12" size=1 type="text" class="bord"></button>
     <button id="w13" size=1 type="text" class="bord"></button>
@@ -356,13 +380,39 @@ table.dataTable tr.dtrg-level-0 td {
     <button id="w53" size=1 type="text" class="bord"></button>
     <button id="w54" size=1 type="text" class="bord"></button>
     <button id="w55" size=1 type="text" class="bord"></button>
-    
-    <!-- <button id="findwords" class="bord curved" type="button" onClick="try_it()">Find All Possible Words</button> -->
 
+    <button id="addword" type="button" class="bord curved" onClick="add_words()">Find Possible Words</button>
 </div>
 
+<div id="wordsused"></div>
+<p></p>
 <div class="container2">
-    <table class="bord" id="json_results"></table>
+    <h2 id="json_title_0"></h2>
+    <table class="bord" id="json_results_0"></table>
+</div>  
+
+<p></p>
+<div class="container2">
+    <h2 id="json_title_1"></h2>
+    <table class="bord" id="json_results_1"></table>
+</div>
+
+<p></p>
+<div class="container2">
+    <h2 id="json_title_2"></h2>
+    <table class="bord" id="json_results_2"></table>
+</div>
+
+<p></p>
+<div class="container2">
+    <h2 id="json_title_3"></h2>
+    <table class="bord" id="json_results_3"></table>
+</div>
+
+<p></p>
+<div class="container2">
+    <h2 id="json_title_4"></h2>
+    <table class="bord" id="json_results_4"></table>
 </div>
 
 
@@ -380,50 +430,82 @@ var green = "#49BE25";
 var gold = "#D5C450"; 
 var grey = "#C9C9C9" // "#A0A0A0" #D8D8D8
 var black = "#000000";
+var white = "#fffff9";
 
 var color_arr = [green, gold, grey]
 
-// var fetch_url = "http://127.0.0.1:8000/wordl?filters";
-var fetch_url = "https://c732-13-57-204-106.ngrok.io/wordl?filters=";
+var default_initial_words = "alert,noisy";
+// var fetch_url = "http://127.0.0.1:8000/wordl/solve";
+// var dates_url = "http://127.0.0.1:8000/wordl/solutions";
+var fetch_url = "https://c732-13-57-204-106.ngrok.io/wordl/solve";
+var dates_url = "https://c732-13-57-204-106.ngrok.io/wordl/solutions";
+
 
 
 function reset_all(reset_words=1) {
-  for (let i = 1; i < 6; i++) {
-    v = "t" + i;
-    document.getElementById(v).innerHTML = ".";
-    document.getElementById(v).style.backgroundColor = grey;
-    document.getElementById(v).style.color = grey;
-    // for (j=1;j<4;j++){
-    //   col_id = "b"+i+j;
-    //   document.getElementById(col_id).innerHTML = "";  
-      
-    // }
-  };
   if (reset_words==1){
     words = [];
     words_choices = [];
-    for (i=0;i<5;i++){
+    for (var i=0;i<5;i++){
       reset_saved_word(i);
     }
+  for (i=0;i<5;i++) {
+    var tbn = 'json_results_' + i;
+    document.getElementById(tbn).innerHTML = "";
+  }
   };
-  document.getElementById("wordinput").value = "";
+  if (document.getElementById("wordinput").value.length <1) {
+    document.getElementById("wordinput").value = default_initial_words;
+  }
+
+  add_options();
 };
 
+function add_options(){
+  fetch(dates_url, 
+  {
+      method: 'GET',
+      headers: {
+          'Accept': 'application/json',
+      },
+  })
+  // .then(response => response.text())
+  .then(
+    function(response) {
+      var r = response.text();
+      return r;
+    }
+  )
+  .then(text => JSON.parse(text))
+  .then(function(json_results){
+    var select = document.getElementById('solutions');
+    for (i=0;i<json_results.length;i++){
+      json_result = json_results[i];
+      // Add an option
+      let option = document.createElement('option');
+      option.value = json_result['solution'];
+      option.text = json_result['date'];
+      select.add(option);      
+    };
+  })
+
+}
+
 function textToButton() {
-  var x = document.getElementById("wordinput").value;
-  x = x.trim();
-  for (let i = 0; i < 5; i++) {
-    var v = i+1;
-    v = "t" + v.toString();
-    document.getElementById(v).innerHTML = ".";
-  };  
-  xlen = Math.min(x.length,5);
-  for (let i = 0; i < xlen; i++) {
-    var v = i+1;
-    v = "t" + v.toString();
-    document.getElementById(v).innerHTML = x[i].toUpperCase();
-    document.getElementById(v).style.color = black;
-  }; 
+  // var x = document.getElementById("wordinput").value;
+  // x = x.trim();
+  // for (let i = 0; i < 5; i++) {
+  //   var v = i+1;
+  //   v = "t" + v.toString();
+  //   document.getElementById(v).innerHTML = ".";
+  // };  
+  // xlen = Math.min(x.length,5);
+  // for (let i = 0; i < xlen; i++) {
+  //   var v = i+1;
+  //   v = "t" + v.toString();
+  //   document.getElementById(v).innerHTML = x[i].toUpperCase();
+  //   document.getElementById(v).style.color = black;
+  // }; 
   
   
 };
@@ -456,61 +538,44 @@ function reset_saved_word(word_index){
     var idx2 = k+1;
     var letter_element = document.getElementById("w"+idx1+idx2);
     letter_element.innerHTML = ".";
-    letter_element.style.backgroundColor = grey;
-    letter_element.style.color = grey;
+    letter_element.style.backgroundColor = white;
+    letter_element.style.color = white;
   }
 }
 
-function display_saved_word(word_index){
-  var word = words[word_index]
-  var word_choices = words_choices[word_index];
+function display_word(word,word_index,letter_status){
   var idx1 = word_index + 1;
   for (i=0;i<5;i++){
     var idx2 = i+1;
     var letter_element = document.getElementById("w"+idx1+idx2);
     letter_element.innerHTML = word[i];
-    var color_index = Number(word_choices[i])-1;
+    var color_index = Number(letter_status[i])-1;
     letter_element.style.backgroundColor = color_arr[color_index];
     letter_element.style.color = black;
   }
 }
 
-function add_word(){
-  var word = "";
-  // ggg is GreenGoldGrey
-  var ggg_choices = "";
-  for (i=1;i<6;i++) {
-    word = word + document.getElementById("t"+i).innerHTML;
-    var rgb_value = document.getElementById("t"+i).style.backgroundColor;
-    var hex_value = rgb_to_hex(rgb_value)
-    color_id = color_arr.indexOf(hex_value) + 1;
-    ggg_choices = ggg_choices + color_id;
-  };
-
-  words.push(word);
-  words_choices.push(ggg_choices);
-  // document.getElementById("add_word_results").innerHTML = [words,words_choices].join();
-  display_saved_word(words.length-1);
-  reset_all(reset_words=0);
+function add_words(){
   try_it();
 };
 
 
 function try_it(){
-  var filters = "";
-  for (i=0;i<words.length;i++){
-    filters = filters + words[i] + "," + words_choices[i] + ",";
-  };
-  filters = filters.slice(0,filters.length-1).toLowerCase();
-  // fetch("http://127.0.0.1:8000/wordl?filters="+filters, 
-  fetch(fetch_url+filters, 
+  var words_element = document.getElementById("wordinput");
+  var initialwords = words_element.value.toLowerCase()
+  var solution = document.getElementById("solutions").value.toLowerCase();
+  if (initialwords.length > 0) {
+    full_url = fetch_url + "?initialwords=" + initialwords + "&solution=" + solution;
+  } else {
+    full_url = fetch_url + "solution=" + solution;
+  }
+  fetch(full_url, 
   {
       method: 'GET',
       headers: {
           'Accept': 'application/json',
       },
   })
-  // .then(response => response.text())
   .then(
     function(response) {
       var r = response.text();
@@ -520,23 +585,42 @@ function try_it(){
   )
   .then(text => JSON.parse(text))
   .then(function(json_results){
-    if ( ! $.fn.DataTable.isDataTable( '#json_results' ) ) {
-      $('#json_results').dataTable( {
-          "data": json_results,
-          "columns":[
-            {"data":"word","title":"word"},
-            {"data":"count","title":"count"},
-            {"data":"probability","title":"probability"}
-          ],
-          order: [[2, 'desc']],
-          "pageLength": 25,
-      } );      
-    } else {
-      var dt = $('#json_results').dataTable();
-      dt.fnClearTable();
-      dt.fnAddData(json_results,redraw=true);
-    }   
+    var words_used = json_results['wordsused'];
+    var letter_status_used = json_results['letterstatusused'];
+    
+    // for (i=0;i<words_used.length;i++){
+    for (var i=0;i<5;i++){
+      var tbn = 'json_results_' + i;
+      if (i>=words_used.length){
+        document.getElementById("json_title_"+i).innerHTML = "";
+        document.getElementById(tbn).innerHTML = "";
+        reset_saved_word(i);
+      } else {
+        // add this word used to the title of the DataTable
+        document.getElementById("json_title_"+i).innerHTML = "Possible words after using the word: " + words_used[i].toUpperCase();
+        // add this word to the Wordle letter display
+        display_word(words_used[i],i,letter_status_used[i]);
+        // display the DataTable of possible next words for this word used
+        var df = json_results[words_used[i]];
+        if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
+          $("#" + tbn).dataTable( {
+              "data": df,
+              "columns":[
+                {"data":"word","title":"word"},
+                {"data":"probability","title":"probability"}
+              ],
+              order: [[1, 'desc']],
+              "pageLength": 25,
+          } );      
+        } else {
+          var dt = $("#" + tbn).dataTable();
+          dt.fnClearTable();
+          dt.fnAddData(df,redraw=true);
+        }      
+      }
+    };
   })
+
 }
 
 // 
