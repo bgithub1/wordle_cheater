@@ -30,6 +30,10 @@
   --option_font:20px;
 }
 
+h2 {
+  font-style: italic;
+}
+
 .green {
   background-color: var(--green);
   color: var(--green);
@@ -295,8 +299,7 @@
 }
 
 .container2 {
-  height:40vh;
-  width:90vw;
+  width:70vw;
   margin:auto;
   margin-top:50px;
 /*  padding-left: 20px;
@@ -340,7 +343,7 @@ table.dataTable tr.dtrg-level-0 td {
       <option class="option" value="audi">Audi</option> -->
     </select>
 
-    <button class="bord" id="enterword">Enter Initial Words -></button>
+    <button class="bord" id="enterword">Enter Initial Words Below:</button>
     <input id="wordinput" class="bord" onClick="textToButton()" type="text"></input>
     
 <!--     <button id="t1" size=1 type="text" class="bord"></button>
@@ -384,26 +387,31 @@ table.dataTable tr.dtrg-level-0 td {
 <div id="wordsused"></div>
 <p></p>
 <div class="container2">
+    <h2 id="json_title_0"></h2>
     <table class="bord" id="json_results_0"></table>
 </div>  
 
 <p></p>
 <div class="container2">
+    <h2 id="json_title_1"></h2>
     <table class="bord" id="json_results_1"></table>
 </div>
 
 <p></p>
 <div class="container2">
+    <h2 id="json_title_2"></h2>
     <table class="bord" id="json_results_2"></table>
 </div>
 
 <p></p>
 <div class="container2">
+    <h2 id="json_title_3"></h2>
     <table class="bord" id="json_results_3"></table>
 </div>
 
 <p></p>
 <div class="container2">
+    <h2 id="json_title_4"></h2>
     <table class="bord" id="json_results_4"></table>
 </div>
 
@@ -440,6 +448,10 @@ function reset_all(reset_words=1) {
     for (i=0;i<5;i++){
       reset_saved_word(i);
     }
+  for (i=0;i<5;i++) {
+    var tbn = 'json_results_' + i;
+    document.getElementById(tbn).innerHTML = "";
+  }
   };
   if (document.getElementById("wordinput").value.length <1) {
     document.getElementById("wordinput").value = default_initial_words;
@@ -545,21 +557,11 @@ function display_saved_word(word_index){
 }
 
 function add_words(){
-  // words_element = document.getElementById("wordinput");
-  // words = words_element.innerHTML.toLowerCase()
-  // reset_all(reset_words=0);
   try_it();
 };
 
 
 function try_it(){
-  // fetch("http://127.0.0.1:8000/wordl?filters="+filters, 
-  // var initialwords = "";
-  // for (i=0;i<words.length;i++){
-  //   initialwords = initialwords + words[i] + ",";
-  // };
-
-  // initialwords = initialwords.slice(0,initialwords.length-1).toLowerCase();
   var words_element = document.getElementById("wordinput");
   var initialwords = words_element.value.toLowerCase()
   var solution = document.getElementById("solutions").value.toLowerCase();
@@ -575,7 +577,6 @@ function try_it(){
           'Accept': 'application/json',
       },
   })
-  // .then(response => response.text())
   .then(
     function(response) {
       var r = response.text();
@@ -586,23 +587,30 @@ function try_it(){
   .then(text => JSON.parse(text))
   .then(function(json_results){
     var words_used = json_results['wordsused'];
-    for (i=0;i<words_used.length;i++){
-      var df = json_results[words_used[i]];
-      tbn = 'json_results_' + i;
-      if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
-        $("#" + tbn).dataTable( {
-            "data": df,
-            "columns":[
-              {"data":"word","title":"word"},
-              {"data":"probability","title":"probability"}
-            ],
-            order: [[1, 'desc']],
-            "pageLength": 25,
-        } );      
+    // for (i=0;i<words_used.length;i++){
+    for (i=0;i<5;i++){
+      var tbn = 'json_results_' + i;
+      if (i>=words_used.length){
+        document.getElementById("json_title_"+i).innerHTML = "";
+        document.getElementById(tbn).innerHTML = "";
       } else {
-        var dt = $("#" + tbn).dataTable();
-        dt.fnClearTable();
-        dt.fnAddData(df,redraw=true);
+        document.getElementById("json_title_"+i).innerHTML = "Possible words after using the word: " + words_used[i].toUpperCase();
+        var df = json_results[words_used[i]];
+        if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
+          $("#" + tbn).dataTable( {
+              "data": df,
+              "columns":[
+                {"data":"word","title":"word"},
+                {"data":"probability","title":"probability"}
+              ],
+              order: [[1, 'desc']],
+              "pageLength": 25,
+          } );      
+        } else {
+          var dt = $("#" + tbn).dataTable();
+          dt.fnClearTable();
+          dt.fnAddData(df,redraw=true);
+        }      
       }
     };
   })
