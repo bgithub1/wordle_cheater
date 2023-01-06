@@ -348,7 +348,7 @@ table.dataTable tr.dtrg-level-0 td {
     <input id="wordinput" class="bord black" onClick="textToButton()" type="text"></input>
     
     <button class="bord black" id="selectdate">Select A Date:</button>
-    <select class="bord black" name="cars" id="solutions">
+    <select class="bord black" name="cars" id="solutions" onchange="selectDateChange()">
     </select>
     
     <button id="w11" size=1 type="text" class="bord"></button>
@@ -443,7 +443,7 @@ var dates_url = "https://c732-13-57-204-106.ngrok.io/wordl/solutions";
 
 
 
-function reset_all(reset_words=1) {
+function reset_all(reset_words=1,reset_wordinput=1) {
   if (reset_words==1){
     words = [];
     words_choices = [];
@@ -451,12 +451,18 @@ function reset_all(reset_words=1) {
       reset_saved_word(i);
     }
   for (i=0;i<5;i++) {
-    var tbn = 'json_results_' + i;
-    document.getElementById(tbn).innerHTML = "";
+    // $('#json_results_' + i).destroy();
+    if ($('#json_results_'+i).hasClass('dataTable')) {
+      $('#json_results_'+i).DataTable().destroy();
+    }
+    document.getElementById('json_results_' + i).innerHTML = '';
+    document.getElementById('json_title_' + i).innerHTML = '';
   }
   };
-  if (document.getElementById("wordinput").value.length <1) {
-    document.getElementById("wordinput").value = default_initial_words;
+  if (reset_wordinput==1) {
+    if (document.getElementById("wordinput").value.length <1) {
+      document.getElementById("wordinput").value = default_initial_words;
+    }
   }
 
   add_options();
@@ -493,24 +499,11 @@ function add_options(){
 }
 
 function textToButton() {
-  // var x = document.getElementById("wordinput").value;
-  // x = x.trim();
-  // for (let i = 0; i < 5; i++) {
-  //   var v = i+1;
-  //   v = "t" + v.toString();
-  //   document.getElementById(v).innerHTML = ".";
-  // };  
-  // xlen = Math.min(x.length,5);
-  // for (let i = 0; i < xlen; i++) {
-  //   var v = i+1;
-  //   v = "t" + v.toString();
-  //   document.getElementById(v).innerHTML = x[i].toUpperCase();
-  //   document.getElementById(v).style.color = black;
-  // }; 
-  
-  
 };
 
+function selectDateChange() {
+  reset_all(reset_words=1,reset_wordinput=0);
+}
 
 function rgb_to_hex(rgb_object) {
   rgb_string = rgb_object.toString();
