@@ -341,7 +341,7 @@ table.dataTable tr.dtrg-level-0 td {
     </select>
 
     <button class="bord" id="enterword">Enter Initial Words -></button>
-    <input id="wordinput" class="bord" onkeyup="textToButton()" maxlength="5" type="text"></input>
+    <input id="wordinput" class="bord" onClick="textToButton()" type="text"></input>
     
 <!--     <button id="t1" size=1 type="text" class="bord"></button>
     <button id="t2" size=1 type="text" class="bord"></button>
@@ -426,6 +426,7 @@ var white = "#fffff9";
 
 var color_arr = [green, gold, grey]
 
+var default_initial_words = "alert,noisy";
 var fetch_url = "http://127.0.0.1:8000/wordl/solve";
 var dates_url = "http://127.0.0.1:8000/wordl/solutions";
 // var fetch_url = "https://c732-13-57-204-106.ngrok.io/wordl/solve";
@@ -440,7 +441,10 @@ function reset_all(reset_words=1) {
       reset_saved_word(i);
     }
   };
-  document.getElementById("wordinput").value = "";
+  if (document.getElementById("wordinput").value.length <1) {
+    document.getElementById("wordinput").value = default_initial_words;
+  }
+
   add_options();
 };
 
@@ -475,20 +479,20 @@ function add_options(){
 }
 
 function textToButton() {
-  var x = document.getElementById("wordinput").value;
-  x = x.trim();
-  for (let i = 0; i < 5; i++) {
-    var v = i+1;
-    v = "t" + v.toString();
-    document.getElementById(v).innerHTML = ".";
-  };  
-  xlen = Math.min(x.length,5);
-  for (let i = 0; i < xlen; i++) {
-    var v = i+1;
-    v = "t" + v.toString();
-    document.getElementById(v).innerHTML = x[i].toUpperCase();
-    document.getElementById(v).style.color = black;
-  }; 
+  // var x = document.getElementById("wordinput").value;
+  // x = x.trim();
+  // for (let i = 0; i < 5; i++) {
+  //   var v = i+1;
+  //   v = "t" + v.toString();
+  //   document.getElementById(v).innerHTML = ".";
+  // };  
+  // xlen = Math.min(x.length,5);
+  // for (let i = 0; i < xlen; i++) {
+  //   var v = i+1;
+  //   v = "t" + v.toString();
+  //   document.getElementById(v).innerHTML = x[i].toUpperCase();
+  //   document.getElementById(v).style.color = black;
+  // }; 
   
   
 };
@@ -541,27 +545,29 @@ function display_saved_word(word_index){
 }
 
 function add_words(){
-  words_element = document.getElementById("wordinput");
-  words = words_element.innerHTML.toLowerCase()
-  reset_all(reset_words=0);
+  // words_element = document.getElementById("wordinput");
+  // words = words_element.innerHTML.toLowerCase()
+  // reset_all(reset_words=0);
   try_it();
 };
 
 
 function try_it(){
   // fetch("http://127.0.0.1:8000/wordl?filters="+filters, 
-  var initialwords = "";
-  for (i=0;i<words.length;i++){
-    initialwords = initialwords + words[i] + ",";
-  };
-  initialwords = initialwords.slice(0,initialwords.length-1).toLowerCase();
+  // var initialwords = "";
+  // for (i=0;i<words.length;i++){
+  //   initialwords = initialwords + words[i] + ",";
+  // };
 
+  // initialwords = initialwords.slice(0,initialwords.length-1).toLowerCase();
+  var words_element = document.getElementById("wordinput");
+  var initialwords = words_element.value.toLowerCase()
+  var solution = document.getElementById("solutions").value.toLowerCase();
   if (initialwords.length > 0) {
-    full_url = fetch_url + "?initialwords=" + initialwords
+    full_url = fetch_url + "?initialwords=" + initialwords + "&solution=" + solution;
   } else {
-    full_url = fetch_url
+    full_url = fetch_url + "solution=" + solution;
   }
-  
   fetch(full_url, 
   {
       method: 'GET',
