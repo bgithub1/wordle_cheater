@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wordle Cheater v02</title>
+  <title>Wordle Cheater v03</title>
 <!--   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/> -->
   <meta name="viewport" content="user-scalable=no"/>
 <style>
@@ -26,7 +26,7 @@
   --width1: 100%;
   --width2: 94%;
   --text_font:50px;
-  --button_font:20px;
+  --button_font:30px;
   --option_font:20px;
 }
 
@@ -262,7 +262,7 @@ h2 {
   display:grid;
   grid-template-columns:repeat(10,1fr);
 /*  grid-template-rows: 2.5fr 1.5fr 1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr;*/
-  grid-template-rows: 2.5fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr 0.6fr;
+  grid-template-rows: 1.0fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr 0.6fr;
   font-size: var(--text_font);
   font-weight: bold;
   grid-template-areas: 
@@ -335,7 +335,7 @@ table.dataTable tr.dtrg-level-0 td {
 <body>
 <div class="container">
     <button class="bord" id="title">Wordle Cheater</button>
-    <button class="bord" id="selectdate">Select A Date -></button>
+    <button class="bord" id="selectdate">Select A Date:</button>
     <select class="bord" name="cars" id="solutions">
 <!--       <option class="option" value="volvo">Volvo</option>
       <option class="option" value="saab">Saab</option>
@@ -445,7 +445,7 @@ function reset_all(reset_words=1) {
   if (reset_words==1){
     words = [];
     words_choices = [];
-    for (i=0;i<5;i++){
+    for (var i=0;i<5;i++){
       reset_saved_word(i);
     }
   for (i=0;i<5;i++) {
@@ -542,15 +542,13 @@ function reset_saved_word(word_index){
   }
 }
 
-function display_saved_word(word_index){
-  var word = words[word_index]
-  var word_choices = words_choices[word_index];
+function display_word(word,word_index,letter_status){
   var idx1 = word_index + 1;
   for (i=0;i<5;i++){
     var idx2 = i+1;
     var letter_element = document.getElementById("w"+idx1+idx2);
     letter_element.innerHTML = word[i];
-    var color_index = Number(word_choices[i])-1;
+    var color_index = Number(letter_status[i])-1;
     letter_element.style.backgroundColor = color_arr[color_index];
     letter_element.style.color = black;
   }
@@ -587,14 +585,21 @@ function try_it(){
   .then(text => JSON.parse(text))
   .then(function(json_results){
     var words_used = json_results['wordsused'];
+    var letter_status_used = json_results['letterstatusused'];
+    
     // for (i=0;i<words_used.length;i++){
-    for (i=0;i<5;i++){
+    for (var i=0;i<5;i++){
       var tbn = 'json_results_' + i;
       if (i>=words_used.length){
         document.getElementById("json_title_"+i).innerHTML = "";
         document.getElementById(tbn).innerHTML = "";
+        reset_saved_word(i);
       } else {
+        // add this word used to the title of the DataTable
         document.getElementById("json_title_"+i).innerHTML = "Possible words after using the word: " + words_used[i].toUpperCase();
+        // add this word to the Wordle letter display
+        display_word(words_used[i],i,letter_status_used[i]);
+        // display the DataTable of possible next words for this word used
         var df = json_results[words_used[i]];
         if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
           $("#" + tbn).dataTable( {

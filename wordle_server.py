@@ -61,10 +61,11 @@ async def solve(initialwords:str="alert,noisy",solution:str=None):
     wdl = wrdlc.wordl()
     if solution is None:
         solution = wdl.todays_word
-    words_used,list_df = wrdlc.solve(initial_words,solution)
+    words_used,letter_status_used,list_df = wrdlc.solve(initial_words,solution)
 
     return_dict = {
-        'wordsused':words_used
+        'wordsused':words_used,
+        'letterstatusused':letter_status_used
     }
 
     for i,df in enumerate(list_df):
