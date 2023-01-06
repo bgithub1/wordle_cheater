@@ -232,6 +232,7 @@ def solve(initial_words,solution):
         wdl_possible_words_json = wdl.try_it() 
         # Append the DataFrame with the list of possible words, at this stage
         df = filter_words(wdl_possible_words_json).dropna().copy()
+        df = df[['word','probability']]
         list_df.append(df)
         if len(df)<=1:
             break

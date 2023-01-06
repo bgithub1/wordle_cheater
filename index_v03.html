@@ -11,6 +11,7 @@
   --green: #49BE25;
   --gold: #D5C450; 
   /*--grey: #A0A0A0;*/
+  --white: #fffff1;
   --grey:#C9C9C9;
   --blue: #0040FF;
   --lighttan: #F6E3CE;
@@ -40,6 +41,9 @@
 .grey {
   background-color: var(--grey);
   color: var(--grey);
+}
+.white {
+  background-color: var(--white);  
 }
 .lighttan {
   background-color: var(--lighttan);
@@ -154,6 +158,7 @@
 
 #addword {
   grid-area:ai;
+  font-size: var(--text_font)
 }
 
 #w11 {
@@ -253,7 +258,7 @@
   display:grid;
   grid-template-columns:repeat(10,1fr);
 /*  grid-template-rows: 2.5fr 1.5fr 1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr;*/
-  grid-template-rows: 2.5fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr;
+  grid-template-rows: 2.5fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr 0.6fr;
   font-size: var(--text_font);
   font-weight: bold;
   grid-template-areas: 
@@ -263,6 +268,7 @@
     "wi wi wi wi wi w31 w32 w33 w34 w35"
     "sd sd sd sd sd w41 w42 w43 w44 w45"
     "sl sl sl sl sl w51 w52 w53 w54 w55"
+    "ai ai ai ai ai ai ai ai ai ai"
 /*
     "ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti"
     "sd sd sd sd sd sd sd sd sd sd w11 w12 w13 w14 w15"
@@ -328,10 +334,10 @@ table.dataTable tr.dtrg-level-0 td {
     <button class="bord" id="title">Wordle Cheater</button>
     <button class="bord" id="selectdate">Select A Date -></button>
     <select class="bord" name="cars" id="solutions">
-      <option class="option" value="volvo">Volvo</option>
+<!--       <option class="option" value="volvo">Volvo</option>
       <option class="option" value="saab">Saab</option>
       <option class="option" value="opel">Opel</option>
-      <option class="option" value="audi">Audi</option>
+      <option class="option" value="audi">Audi</option> -->
     </select>
 
     <button class="bord" id="enterword">Enter Initial Words -></button>
@@ -371,6 +377,34 @@ table.dataTable tr.dtrg-level-0 td {
     <button id="w53" size=1 type="text" class="bord"></button>
     <button id="w54" size=1 type="text" class="bord"></button>
     <button id="w55" size=1 type="text" class="bord"></button>
+
+    <button id="addword" type="button" class="bord curved" onClick="add_words()">Add Word</button>
+</div>
+
+<div id="wordsused"></div>
+<p></p>
+<div class="container2">
+    <table class="bord" id="json_results_0"></table>
+</div>  
+
+<p></p>
+<div class="container2">
+    <table class="bord" id="json_results_1"></table>
+</div>
+
+<p></p>
+<div class="container2">
+    <table class="bord" id="json_results_2"></table>
+</div>
+
+<p></p>
+<div class="container2">
+    <table class="bord" id="json_results_3"></table>
+</div>
+
+<p></p>
+<div class="container2">
+    <table class="bord" id="json_results_4"></table>
 </div>
 
 
@@ -388,25 +422,17 @@ var green = "#49BE25";
 var gold = "#D5C450"; 
 var grey = "#C9C9C9" // "#A0A0A0" #D8D8D8
 var black = "#000000";
+var white = "#fffff9";
 
 var color_arr = [green, gold, grey]
 
-// var fetch_url = "http://127.0.0.1:8000/wordl?filters";
-var fetch_url = "https://c732-13-57-204-106.ngrok.io/wordl?filters=";
+var fetch_url = "http://127.0.0.1:8000/wordl/solve";
+var dates_url = "http://127.0.0.1:8000/wordl/solutions";
+// var fetch_url = "https://c732-13-57-204-106.ngrok.io/wordl/solve";
+
 
 
 function reset_all(reset_words=1) {
-  for (let i = 1; i < 6; i++) {
-    v = "t" + i;
-    document.getElementById(v).innerHTML = ".";
-    document.getElementById(v).style.backgroundColor = grey;
-    document.getElementById(v).style.color = grey;
-    // for (j=1;j<4;j++){
-    //   col_id = "b"+i+j;
-    //   document.getElementById(col_id).innerHTML = "";  
-      
-    // }
-  };
   if (reset_words==1){
     words = [];
     words_choices = [];
@@ -415,7 +441,38 @@ function reset_all(reset_words=1) {
     }
   };
   document.getElementById("wordinput").value = "";
+  add_options();
 };
+
+function add_options(){
+  fetch(dates_url, 
+  {
+      method: 'GET',
+      headers: {
+          'Accept': 'application/json',
+      },
+  })
+  // .then(response => response.text())
+  .then(
+    function(response) {
+      var r = response.text();
+      return r;
+    }
+  )
+  .then(text => JSON.parse(text))
+  .then(function(json_results){
+    var select = document.getElementById('solutions');
+    for (i=0;i<json_results.length;i++){
+      json_result = json_results[i];
+      // Add an option
+      let option = document.createElement('option');
+      option.value = json_result['solution'];
+      option.text = json_result['date'];
+      select.add(option);      
+    };
+  })
+
+}
 
 function textToButton() {
   var x = document.getElementById("wordinput").value;
@@ -464,8 +521,8 @@ function reset_saved_word(word_index){
     var idx2 = k+1;
     var letter_element = document.getElementById("w"+idx1+idx2);
     letter_element.innerHTML = ".";
-    letter_element.style.backgroundColor = grey;
-    letter_element.style.color = grey;
+    letter_element.style.backgroundColor = white;
+    letter_element.style.color = white;
   }
 }
 
@@ -483,35 +540,29 @@ function display_saved_word(word_index){
   }
 }
 
-function add_word(){
-  var word = "";
-  // ggg is GreenGoldGrey
-  var ggg_choices = "";
-  for (i=1;i<6;i++) {
-    word = word + document.getElementById("t"+i).innerHTML;
-    var rgb_value = document.getElementById("t"+i).style.backgroundColor;
-    var hex_value = rgb_to_hex(rgb_value)
-    color_id = color_arr.indexOf(hex_value) + 1;
-    ggg_choices = ggg_choices + color_id;
-  };
-
-  words.push(word);
-  words_choices.push(ggg_choices);
-  // document.getElementById("add_word_results").innerHTML = [words,words_choices].join();
-  display_saved_word(words.length-1);
+function add_words(){
+  words_element = document.getElementById("wordinput");
+  words = words_element.innerHTML.toLowerCase()
   reset_all(reset_words=0);
   try_it();
 };
 
 
 function try_it(){
-  var filters = "";
-  for (i=0;i<words.length;i++){
-    filters = filters + words[i] + "," + words_choices[i] + ",";
-  };
-  filters = filters.slice(0,filters.length-1).toLowerCase();
   // fetch("http://127.0.0.1:8000/wordl?filters="+filters, 
-  fetch(fetch_url+filters, 
+  var initialwords = "";
+  for (i=0;i<words.length;i++){
+    initialwords = initialwords + words[i] + ",";
+  };
+  initialwords = initialwords.slice(0,initialwords.length-1).toLowerCase();
+
+  if (initialwords.length > 0) {
+    full_url = fetch_url + "?initialwords=" + initialwords
+  } else {
+    full_url = fetch_url
+  }
+  
+  fetch(full_url, 
   {
       method: 'GET',
       headers: {
@@ -528,23 +579,28 @@ function try_it(){
   )
   .then(text => JSON.parse(text))
   .then(function(json_results){
-    if ( ! $.fn.DataTable.isDataTable( '#json_results' ) ) {
-      $('#json_results').dataTable( {
-          "data": json_results,
-          "columns":[
-            {"data":"word","title":"word"},
-            {"data":"count","title":"count"},
-            {"data":"probability","title":"probability"}
-          ],
-          order: [[2, 'desc']],
-          "pageLength": 25,
-      } );      
-    } else {
-      var dt = $('#json_results').dataTable();
-      dt.fnClearTable();
-      dt.fnAddData(json_results,redraw=true);
-    }   
+    var words_used = json_results['wordsused'];
+    for (i=0;i<words_used.length;i++){
+      var df = json_results[words_used[i]];
+      tbn = 'json_results_' + i;
+      if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
+        $("#" + tbn).dataTable( {
+            "data": df,
+            "columns":[
+              {"data":"word","title":"word"},
+              {"data":"probability","title":"probability"}
+            ],
+            order: [[1, 'desc']],
+            "pageLength": 25,
+        } );      
+      } else {
+        var dt = $("#" + tbn).dataTable();
+        dt.fnClearTable();
+        dt.fnAddData(df,redraw=true);
+      }
+    };
   })
+
 }
 
 // 
