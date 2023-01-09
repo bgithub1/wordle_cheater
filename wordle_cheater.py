@@ -32,6 +32,58 @@ else:
     df_ugf = pd.read_csv(csv_export_url)
 
 
+def get_xpath_solution_value(v):
+    d = v.text_content().strip().split('Wordle')
+    d = d[1].split()[-1]
+    return d.strip()
+
+def get_xpath_solution_date(v):
+    d = v.text_content().strip().split('Wordle')
+    d = d[0].split()[-2:]
+    d[0] = d[0][0:3]
+    d = ' '.join(d)
+    return d.strip()
+
+def get_xpath_solution_number(v):
+    r = str(v.text_content().strip().split()[-1])
+    n = int(r.replace('#','').replace(')',''))
+    return n
+
+def get_word_history_2():
+    ret_val = None
+    url_to_search = "https://gamerant.com/todays-wordle-solution-every-answer-ny-times-archive/"
+    xpath_solution_number = "//h2[contains(@id,'wordle-solution')]"
+    xpath_solution = "//h2[contains(@id,'wordle-solution')]/following-sibling::section//p"
+    # Make an HTTP request to the webpage
+    response = requests.get(
+        url_to_search, 
+        headers={
+            "User-Agent" : "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
+        }
+    )
+
+    # Parse the HTML content
+    doc = html.fromstring(response.content)
+
+    # Execute an XPath search on the document
+    solutions = doc.xpath(xpath_solution)
+    solution_numbers = doc.xpath(xpath_solution_number)
+
+    if len(solutions)>0:
+        ret_val = [
+            [
+                get_xpath_solution_date(solutions[i]),
+                get_xpath_solution_number(solution_numbers[i]),
+                get_xpath_solution_value(solutions[i])
+            ]
+            for i in range(len(solutions))
+        ]
+        df_word_hist = pd.DataFrame(ret_val,columns=['date','number','solution'])
+        df_word_hist = df_word_hist.sort_values('number',ascending=False)
+        df_word_hist.index = range(len(df_word_hist))
+    return df_word_hist
+
+
 def get_word_history():
     ret_val = None
     url_to_search = "https://screenrant.com/wordle-answers-updated-word-puzzle-guide/"
@@ -70,6 +122,15 @@ def get_word_history():
         df_word_hist = df_word_hist.sort_values('number',ascending=False)
         df_word_hist.index = range(len(df_word_hist))
     return df_word_hist
+
+def get_combined_word_histories():
+    df_word_hist = get_word_history()
+    df_word_hist_2 = get_word_history_2()
+    df_wh = pd.concat([df_word_hist,df_word_hist_2],ignore_index=True)
+    df_wh = df_wh.drop_duplicates('date')
+    df_wh = df_wh.sort_values('number',ascending=False)
+    df_wh.index = range(len(df_wh))
+    return df_wh
 
 # +
 # nltk_words = df.word.values
@@ -155,10 +216,18 @@ class wordl():
             pass
         c1 = self.df_word_history['date']==get_monthday()
         if len(self.df_word_history[c1])!=1:
-            self.df_word_history = get_word_history()
+            # self.df_word_history = get_word_history()
+            self.df_word_history = get_combined_word_histories()
             self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
                         
-        self.todays_word = self.df_word_history.iloc[0].solution.lower()
+        # self.todays_word = self.df_word_history.iloc[0].solution.lower()
+        # don't show histories that are in the future
+        curr_num = self.df_word_history[c1].number.values[0]
+        c2 = self.df_word_history['number']<=curr_num
+        # use the c2 condition to only show word histories before the current monthday
+        self.df_word_history = self.df_word_history[c2]
+        # save todays word (solution)
+        self.todays_word = self.df_word_history[c1].solution.values[-1].lower()
 
     
     def add_word(self,word,letter_status,debug_word=''):
