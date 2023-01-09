@@ -143,8 +143,16 @@ class wordl():
             ]
         )
 
-        # get wordle word history
-        self.df_word_history = pd.read_csv('./temp_folder/df_word_history.csv')
+        # Get wordle word history
+        # First, init a blank DataFrame, in case you have never run get_word_history()
+        self.df_word_history = pd.DataFrame(
+            {'date':[],'number':[],'solution':[]}
+        )
+        try:
+            # if you have never run this before, the exception will be thrown
+            self.df_word_history = pd.read_csv('./temp_folder/df_word_history.csv')
+        except:
+            pass
         c1 = self.df_word_history['date']==get_monthday()
         if len(self.df_word_history[c1])!=1:
             self.df_word_history = get_word_history()
