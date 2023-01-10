@@ -441,7 +441,13 @@ var default_initial_words = "alert,noisy";
 var fetch_url = "https://c732-13-57-204-106.ngrok.io/wordl/solve";
 var dates_url = "https://c732-13-57-204-106.ngrok.io/wordl/solutions";
 
-
+function reset_datatable(idx) {
+  if ($('#json_results_'+idx).hasClass('dataTable')) {
+    $('#json_results_'+idx).DataTable().destroy();
+  }
+  document.getElementById('json_results_' + idx).innerHTML = '';
+  document.getElementById('json_title_' + idx).innerHTML = '';
+};
 
 function reset_all(reset_words=1,reset_wordinput=1) {
   if (reset_words==1){
@@ -451,12 +457,12 @@ function reset_all(reset_words=1,reset_wordinput=1) {
       reset_saved_word(i);
     }
   for (i=0;i<5;i++) {
-    // $('#json_results_' + i).destroy();
-    if ($('#json_results_'+i).hasClass('dataTable')) {
-      $('#json_results_'+i).DataTable().destroy();
-    }
-    document.getElementById('json_results_' + i).innerHTML = '';
-    document.getElementById('json_title_' + i).innerHTML = '';
+    // if ($('#json_results_'+i).hasClass('dataTable')) {
+    //   $('#json_results_'+i).DataTable().destroy();
+    // }
+    // document.getElementById('json_results_' + i).innerHTML = '';
+    // document.getElementById('json_title_' + i).innerHTML = '';
+    reset_datatable(i);
   }
   };
   if (reset_wordinput==1) {
@@ -591,7 +597,7 @@ function try_it(){
     var words_used = json_results['wordsused'];
     var letter_status_used = json_results['letterstatusused'];
     
-    // for (i=0;i<words_used.length;i++){
+    // loop over each word that was returned from the call to the restful wordle_server's solve route
     for (var i=0;i<5;i++){
       var tbn = 'json_results_' + i;
       if (i>=words_used.length){
@@ -605,21 +611,25 @@ function try_it(){
         display_word(words_used[i],i,letter_status_used[i]);
         // display the DataTable of possible next words for this word used
         var df = json_results[words_used[i]];
-        if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
-          $("#" + tbn).dataTable( {
-              "data": df,
-              "columns":[
-                {"data":"word","title":"word"},
-                {"data":"probability","title":"probability"}
-              ],
-              order: [[1, 'desc']],
-              "pageLength": 25,
-          } );      
+        if (df.length < 1) {
+          reset_datatable(i);
         } else {
-          var dt = $("#" + tbn).dataTable();
-          dt.fnClearTable();
-          dt.fnAddData(df,redraw=true);
-        }      
+          if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
+            $("#" + tbn).dataTable( {
+                "data": df,
+                "columns":[
+                  {"data":"word","title":"word"},
+                  {"data":"probability","title":"probability"}
+                ],
+                order: [[1, 'desc']],
+                "pageLength": 25,
+            } );      
+          } else {
+            var dt = $("#" + tbn).dataTable();
+            dt.fnClearTable();
+            dt.fnAddData(df,redraw=true);
+          }      
+        }
       }
     };
   })
