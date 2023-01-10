@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wordle Cheater v03</title>
-<!--   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/> -->
-  <meta name="viewport" content="user-scalable=no"/>
+  <title>Wordle Cheater v04</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <style>
 
 
@@ -72,9 +71,18 @@ h2 {
 #title {
   grid-area: ti;
   color:blue;
-  text-align: center;  
+  text-align: center; 
   font-size: var(--text_font);
 }
+
+@media (min-height: 600px) and (max-width: 600px) {
+    #title {
+      grid-area: ti;
+      color:blue;
+      text-align: center; 
+      font-size: var(--button_font);
+  }
+} 
 
 #selectdate {
   grid-area:sd;
@@ -172,6 +180,12 @@ h2 {
   grid-area:ai;
   font-size: var(--text_font)
 }
+@media (min-height: 600px) and (max-width: 600px) {
+  #addword {
+    grid-area:ai;
+    font-size: var(--button_font)
+  }
+}
 
 #w11 {
   grid-area: w11;
@@ -261,50 +275,66 @@ h2 {
   grid-area:df;
 }
 
+#last_p {
+  grid-area: pp;
+}
+
 .bord {
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
-.container {
-  display:grid;
-  grid-template-columns:repeat(10,1fr);
-/*  grid-template-rows: 2.5fr 1.5fr 1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr;*/
-  grid-template-rows: 0.7fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.5fr;
-  font-size: var(--text_font);
-  font-weight: bold;
-  grid-template-areas: 
-    "ti ti ti ti ti ti ti ti ti ti"
-    "en en en en en w11 w12 w13 w14 w15"    
-    "en en en en en w21 w22 w23 w24 w25"    
-    "wi wi wi wi wi w31 w32 w33 w34 w35"
-    "sd sd sd sd sd w41 w42 w43 w44 w45"
-    "sl sl sl sl sl w51 w52 w53 w54 w55"
-    "ai ai ai ai ai ai ai ai ai ai"
-/*
-    "ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti"
-    "sd sd sd sd sd sd sd sd sd sd w11 w12 w13 w14 w15"
-    "sl sl sl sl sl sl sl sl sl sl w21 w22 w23 w24 w25"
-    "sl sl sl sl sl sl sl sl sl sl w31 w32 w33 w34 w35"
-    "en en en en en en en en en en w41 w42 w43 w44 w45"
-    "wi wi wi wi wi wi wi wi wi wi w51 w52 w53 w54 w55"
-    "b11 b12 b13 b21 b22 b23 b31 b32 b33 b41 b42 b43 b51 b52 b53"
-    ". . .   .   .   w11 w12 w13 w14 w15   .   . . . ."
-    ". . .   .   .   w21 w22 w23 w24 w25   .   . . . ."
-    ". . .   .   .   w31 w32 w33 w34 w35   .   . . . ."
-    ". . .   .   .   w41 w42 w43 w44 w45   .   . . . ."
-    ". . .   .   .   w51 w52 w53 w54 w55   .   . . . ."
-/*    "ai ai ai ai ai ai ai ai ai ai ai ai ai ai ai"
-    ". . w11 w12 w13 w14 w15 . w21 w22 w23 w24 w25 . ."
-    ". . w31 w32 w33 w34 w35 . w41 w42 w43 w44 w45 . ."
-    ". . .   .   .   w51 w52 w53 w54 w55   .   . . . ."*/;
-  grid-gap:2px;
-  height:60vh;
-  width:90vw;
-  margin:auto;
-/*  padding-left: 20px;
-  padding-right: 20px;*/
+@media (min-height: 600px) and (max-width: 600px) {
+  .container {
+    display:grid;
+    grid-template-columns:repeat(10,1fr);
+  
+    grid-template-rows: 0.5fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr  0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.5fr 0.25;
+    font-size: var(--text_font);
+    font-weight: bold;
+    grid-template-areas: 
+      "ti ti ti ti ti ti ti ti ti ti"
+      "en en en en en en en en en en"    
+      "wi wi wi wi wi wi wi wi wi wi"
+      "sd sd sd sd sd sd sd sd sd sd"
+      "sl sl sl sl sl sl sl sl sl sl"
+      ". . w11 w12 w13 w14 w15 . . ."
+      ". . w21 w22 w23 w24 w25 . . ."
+      ". . w31 w32 w33 w34 w35 . . ."
+      ". . w41 w42 w43 w44 w45 . . ."
+      ". . w51 w52 w53 w54 w55 . . ."
+      "ai ai ai ai ai ai ai ai ai ai";
+    grid-gap:2px;
+    height:60vh;
+    width:90vw;
+    margin:auto;
+  }
 }
+
+@media screen and (min-width: 600px) {
+  .container {
+    display:grid;
+    grid-template-columns:repeat(10,1fr);
+
+    grid-template-rows: 0.7fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.5fr 0.25;
+    font-size: var(--text_font);
+    font-weight: bold;
+    grid-template-areas: 
+      "ti ti ti ti ti ti ti ti ti ti"
+      "en en en en en w11 w12 w13 w14 w15"    
+      "en en en en en w21 w22 w23 w24 w25"    
+      "wi wi wi wi wi w31 w32 w33 w34 w35"
+      "sd sd sd sd sd w41 w42 w43 w44 w45"
+      "sl sl sl sl sl w51 w52 w53 w54 w55"
+      "ai ai ai ai ai ai ai ai ai ai";
+    grid-gap:2px;
+    height:60vh;
+    width:90vw;
+    margin:auto;
+  }
+}
+
+
 
 .container2 {
   width:70vw;
