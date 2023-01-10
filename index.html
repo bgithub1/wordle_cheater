@@ -537,7 +537,16 @@ function reset_saved_word(word_index){
   }
 }
 
+function add(accumulator, a) {
+  return accumulator + a;
+}
+
 function display_word(word,word_index,letter_status){
+  var ls_sum = letter_status.reduce(add,0);
+  if (ls_sum==5){
+    reset_saved_word(word_index);
+    return;
+  };
   var idx1 = word_index + 1;
   for (i=0;i<5;i++){
     var idx2 = i+1;
