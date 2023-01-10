@@ -27,6 +27,7 @@
   --text_font:50px;
   --button_font:25px;
   --option_font:25px;
+  --minwidth: 800px;
 }
 
 body {
@@ -75,7 +76,7 @@ h2 {
   font-size: var(--text_font);
 }
 
-@media (min-height: 600px) and (max-width: 600px) {
+@media (min-height: 600px) and (max-width: 800px) {
     #title {
       grid-area: ti;
       color:blue;
@@ -180,7 +181,7 @@ h2 {
   grid-area:ai;
   font-size: var(--text_font)
 }
-@media (min-height: 600px) and (max-width: 600px) {
+@media (min-height: 600px) and (max-width: 800px) {
   #addword {
     grid-area:ai;
     font-size: var(--button_font)
