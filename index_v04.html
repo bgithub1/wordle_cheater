@@ -2,8 +2,7 @@
 <html>
 <head>
   <title>Wordle Cheater v04</title>
-<!--   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/> -->
-  <meta name="viewport" content="user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <style>
 
 
@@ -180,6 +179,12 @@ h2 {
 #addword {
   grid-area:ai;
   font-size: var(--text_font)
+}
+@media (min-height: 600px) and (max-width: 600px) {
+  #addword {
+    grid-area:ai;
+    font-size: var(--button_font)
+  }
 }
 
 #w11 {
