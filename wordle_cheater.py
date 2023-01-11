@@ -297,6 +297,32 @@ def solve(initial_words,solution):
     list_df = []
     words_used = []
     letter_status_used = [] 
+    for i in len(initial_words):
+        w = initial_words[i]
+        words_used.append(w)
+        letter_status = get_letter_status(w,solution)
+        letter_status_used.append(letter_status)
+        # Add a word to the wdl instance
+        wdl.add_word(w,letter_status)
+        wdl_possible_words_json = wdl.try_it() 
+        # Append the DataFrame with the list of possible words, at this stage
+        df = filter_words(wdl_possible_words_json).dropna().copy()
+        df = df[['word','probability']]
+        list_df.append(df)
+        if len(df)<=1:
+            break
+    return words_used,letter_status_used,list_df
+
+def solveall(initial_words,solution):
+    wdl = wordl()
+
+    # Loop on 5 times, either loading wdl instance with words from the
+    #    intial_list array, or by loading the most possible word that
+    #    the method wrdlc.filter_words returns (after there are no more intial_words)
+    # Also, save the list of possible words at after loading a new word.
+    list_df = []
+    words_used = []
+    letter_status_used = [] 
     for i in range(5):
         if i<len(initial_words):
             w = initial_words[i]
@@ -317,4 +343,3 @@ def solve(initial_words,solution):
         if len(df)<=1:
             break
     return words_used,letter_status_used,list_df
-
