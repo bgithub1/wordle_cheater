@@ -17,9 +17,10 @@ from fastapi.responses import FileResponse
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 import io
+import os
 
 
-USE_LOCAL_CSV=True
+USE_LOCAL_CSV = os.path.exists('df_wordl_words.csv') and os.path.exists('unigram_freq.csv')
 if USE_LOCAL_CSV:
     df = pd.read_csv('df_wordl_words.csv')
     df_ugf = pd.read_csv('unigram_freq.csv')

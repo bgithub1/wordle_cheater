@@ -1,0 +1,10 @@
+tqdm
+pandas
+lxml
+ipywidgets
+requests
+numpy
+pytz
+fastapi
+ipython
+uvicorn
