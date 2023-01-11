@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wordle Cheater v04</title>
+  <title>Wordle Cheater v05</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <style>
 
@@ -388,8 +388,8 @@ table.dataTable tr.dtrg-level-0 td {
 <div class="container">
     <button class="bord black" id="title">Wordle Cheater</button>
     
-    <button class="bord black" id="enterword">Enter Initial Words Below:</button>
-    <input id="wordinput" class="bord black" onClick="textToButton()" type="text">
+    <button class="bord black" id="enterword">Add Words, Then Tab:</button>
+    <input id="wordinput" class="bord black" onblur="on_new_input()" type="text">
     
     <button class="bord black" id="selectdate">Select A Date:</button>
     <select class="bord black" name="cars" id="solutions" onchange="selectDateChange()">
@@ -426,7 +426,7 @@ table.dataTable tr.dtrg-level-0 td {
     <button id="w55" size=1 type="text" class="bord"></button>
 
     <button id="suggestword" type="button" class="bord curved" onClick="suggest_word()">Suggest Next Word</button>
-    <button id="addword" type="button" class="bord curved" onClick="add_words()">Show Full Solution</button>
+    <button id="addword" type="button" class="bord curved" onClick="show_full_solution()">Show Full Solution</button>
 </div>
 
 <p></p>
@@ -515,7 +515,6 @@ function reset_all(reset_words=1,reset_wordinput=1) {
       document.getElementById("wordinput").value = default_initial_words;
     }
   }
-
   add_options();
 };
 
@@ -545,14 +544,23 @@ function add_options(){
       option.text = json_result['date'];
       select.add(option);      
     };
+    // now display word grid for initial words
+    try_it(display_solution=0);
   })
 
 }
 
-function textToButton() {
+function on_new_input() {
+  selectDateChange(words_to_keep=5);
 };
 
-function selectDateChange() {
+function selectDateChange(words_to_keep=2) {
+  // only show at most the first 2 initial words
+  var init_words = document.getElementById("wordinput").value;
+  var init_words_arr = init_words.split(" ");
+  init_words_arr = init_words_arr.filter(v=>v.length>0).slice(0,words_to_keep);
+  init_words = init_words_arr.join(" ");
+  document.getElementById("wordinput").value = init_words;
   reset_all(reset_words=1,reset_wordinput=0);
 }
 
@@ -609,6 +617,20 @@ function display_word(word,word_index,letter_status){
   }
 }
 
+function build_url(){
+  var words_element = document.getElementById("wordinput");
+  var initialwords = words_element.value.toLowerCase()
+  var solution = document.getElementById("solutions").value.toLowerCase();
+  if (initialwords.length > 0) {
+    full_url = fetch_url + "?initialwords=" + initialwords + "&solution=" + solution;
+  } else {
+    full_url = fetch_url + "solution=" + solution;
+  }
+  return full_url
+}
+
+
+
 function suggest_word() {
   var full_url = build_url();
   fetch(full_url, 
@@ -628,36 +650,31 @@ function suggest_word() {
   .then(text => JSON.parse(text))
   .then(function(json_results){
     var words_used = json_results['wordsused'];
-    var last_word_used = words_used[words_used.length-1]
+    var last_word_used = words_used[words_used.length-1];
     var df = json_results[last_word_used];
+    
     var next_word = ".....";
     if (df.length>1) {
-      next_word = df[0]['word']
-    }
+      var solution_from_df = df[0]['word'].trim();
+      var actual_solution = document.getElementById("solutions").value.toLowerCase();
+      if (solution_from_df != actual_solution) {
+        next_word = df[0]['word'];
+      };
+    };
     var new_wordinput = document.getElementById("wordinput").value + " " + next_word;
     document.getElementById("wordinput").value = new_wordinput;
+    try_it(display_solution=0);
   });
 };
 
-function add_words(){
+
+function show_full_solution(){
   try_it();
 };
 
 
-function build_url(){
-  var words_element = document.getElementById("wordinput");
-  var initialwords = words_element.value.toLowerCase()
-  var solution = document.getElementById("solutions").value.toLowerCase();
-  if (initialwords.length > 0) {
-    full_url = fetch_url + "?initialwords=" + initialwords + "&solution=" + solution;
-  } else {
-    full_url = fetch_url + "solution=" + solution;
-  }
-  return full_url
-}
 
-
-function try_it(){
+function try_it(display_solution=1){
   var full_url = build_url();
   fetch(full_url, 
   {
@@ -681,36 +698,45 @@ function try_it(){
     // loop over each word that was returned from the call to the restful wordle_server's solve route
     for (var i=0;i<5;i++){
       var tbn = 'json_results_' + i;
+      // try this
+      document.getElementById("json_title_"+i).innerHTML = "";
+      document.getElementById(tbn).innerHTML = "";
+      reset_saved_word(i);
+
       if (i>=words_used.length){
         document.getElementById("json_title_"+i).innerHTML = "";
         document.getElementById(tbn).innerHTML = "";
         reset_saved_word(i);
       } else {
-        // add this word used to the title of the DataTable
-        document.getElementById("json_title_"+i).innerHTML = "Possible words after using the word: " + words_used[i].toUpperCase();
         // add this word to the Wordle letter display
         display_word(words_used[i],i,letter_status_used[i]);
-        // display the DataTable of possible next words for this word used
-        var df = json_results[words_used[i]];
-        if (df.length < 1) {
-          reset_datatable(i);
-        } else {
-          if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
-            $("#" + tbn).dataTable( {
-                "data": df,
-                "columns":[
-                  {"data":"word","title":"word"},
-                  {"data":"probability","title":"probability"}
-                ],
-                order: [[1, 'desc']],
-                "pageLength": 25,
-            } );      
+
+        if (display_solution==1){
+          // add this word used to the title of the DataTable
+          document.getElementById("json_title_"+i).innerHTML = "Possible words after using the word: " + words_used[i].toUpperCase();
+          // display the DataTable of possible next words for this word used
+          var df = json_results[words_used[i]];
+          if (df.length < 1) {
+            reset_datatable(i);
           } else {
-            var dt = $("#" + tbn).dataTable();
-            dt.fnClearTable();
-            dt.fnAddData(df,redraw=true);
-          }      
+            if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
+              $("#" + tbn).dataTable( {
+                  "data": df,
+                  "columns":[
+                    {"data":"word","title":"word"},
+                    {"data":"probability","title":"probability"}
+                  ],
+                  order: [[1, 'desc']],
+                  "pageLength": 25,
+              } );      
+            } else {
+              var dt = $("#" + tbn).dataTable();
+              dt.fnClearTable();
+              dt.fnAddData(df,redraw=true);
+            }      
+          }        
         }
+
       }
     };
   })
@@ -718,7 +744,11 @@ function try_it(){
 }
 
 // 
-window.onload = reset_all();
+function initit(){
+  reset_all();
+}
+
+window.onload = initit();
 
 </script>
 
