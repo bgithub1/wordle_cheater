@@ -297,7 +297,7 @@ def solve(initial_words,solution):
     list_df = []
     words_used = []
     letter_status_used = [] 
-    for i in len(initial_words):
+    for i in range(len(initial_words)):
         w = initial_words[i]
         words_used.append(w)
         letter_status = get_letter_status(w,solution)
