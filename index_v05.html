@@ -645,25 +645,28 @@ function build_url(getfull=0){
 
 
 function suggest_word() {
-  var full_url = build_url();
-  fetch(full_url, 
-  {
-      method: 'GET',
-      headers: {
-          'Accept': 'application/json',
-      },
-  })
-  .then(
-    function(response) {
-      var r = response.text();
-      // console.log(r);
-      return r;
-    }
-  )
-  .then(text => JSON.parse(text))
+  var last_word_used = get_wordinput_array();
+  last_word_used = last_word_used.slice(-1)[0];
+  fetch_json_results_from_server(get_full=0)
+  // var full_url = build_url();
+  // fetch(full_url, 
+  // {
+  //     method: 'GET',
+  //     headers: {
+  //         'Accept': 'application/json',
+  //     },
+  // })
+  // .then(
+  //   function(response) {
+  //     var r = response.text();
+  //     // console.log(r);
+  //     return r;
+  //   }
+  // )
+  // .then(text => JSON.parse(text))
   .then(function(json_results){
-    var words_used = json_results['wordsused'];
-    var last_word_used = words_used[words_used.length-1];
+    // var words_used = json_results['wordsused'];
+    // var last_word_used = words_used[words_used.length-1];
     var df = json_results[last_word_used];
     
     var next_word = ".....";
