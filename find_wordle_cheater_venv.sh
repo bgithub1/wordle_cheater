@@ -1,0 +1,1 @@
+python find_venv_activate.py wordle_cheater

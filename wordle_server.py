@@ -74,6 +74,25 @@ async def solve(initialwords:str="alert,noisy",solution:str=None):
     
     return return_dict
 
+@app.get("/wordl/solveall")
+async def solve(initialwords:str="alert,noisy",solution:str=None):
+    initial_words = ','.join(initialwords.split()).split(',')
+    initial_words = [v for v in initial_words if len(v)>0]  
+    wdl = wrdlc.wordl()
+    if solution is None:
+        solution = wdl.todays_word
+    words_used,letter_status_used,list_df = wrdlc.solveall(initial_words,solution)
+
+    return_dict = {
+        'wordsused':words_used,
+        'letterstatusused':letter_status_used
+    }
+
+    for i,df in enumerate(list_df):
+        df.probability = df.probability.round(5)
+        return_dict[words_used[i]] = df.to_dict(orient="records")   
+    
+    return return_dict
 
 
 @app.get("/wordl")

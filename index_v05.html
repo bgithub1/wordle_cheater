@@ -430,7 +430,7 @@ table.dataTable tr.dtrg-level-0 td {
 </div>
 
 <p></p>
-<div id="wordsused"></div>
+<!-- <div id="wordsused"></div> -->
 <p></p>
 <div class="container2">
     <h2 id="json_title_0"></h2>
@@ -484,6 +484,7 @@ var default_initial_words = "alert noisy";
 // var fetch_url = "http://127.0.0.1:8000/wordl/solve";
 // var dates_url = "http://127.0.0.1:8000/wordl/solutions";
 var fetch_url = "https://billybyte.com/wordle_server/wordl/solve";
+var fetch_full_url = "https://billybyte.com/wordle_server/wordl/solveall";
 var dates_url = "https://billybyte.com/wordle_server/wordl/solutions";
 
 function reset_datatable(idx) {
@@ -502,11 +503,6 @@ function reset_all(reset_words=1,reset_wordinput=1) {
       reset_saved_word(i);
     }
   for (i=0;i<5;i++) {
-    // if ($('#json_results_'+i).hasClass('dataTable')) {
-    //   $('#json_results_'+i).DataTable().destroy();
-    // }
-    // document.getElementById('json_results_' + i).innerHTML = '';
-    // document.getElementById('json_title_' + i).innerHTML = '';
     reset_datatable(i);
   }
   };
@@ -545,16 +541,16 @@ function add_options(){
       select.add(option);      
     };
     // now display word grid for initial words
-    try_it(display_solution=0);
-  })
+    try_it(display_solution=0,display_solution_word=1);
+  });
 
-}
-
-function on_new_input() {
-  selectDateChange(words_to_keep=5);
 };
 
-function selectDateChange(words_to_keep=2) {
+function on_new_input() {
+  selectDateChange(words_to_keep=5,display_solution_word=1);
+};
+
+function selectDateChange(words_to_keep=2,display_solution_word=0) {
   // only show at most the first 2 initial words
   var init_words = document.getElementById("wordinput").value;
   var init_words_arr = init_words.split(" ");
@@ -600,9 +596,9 @@ function add(accumulator, a) {
   return accumulator + a;
 }
 
-function display_word(word,word_index,letter_status){
+function display_word(word,word_index,letter_status,display_solution_word=0){
   var ls_sum = letter_status.reduce(add,0);
-  if (ls_sum==5){
+  if (ls_sum==5 && display_solution_word==0){
     reset_saved_word(word_index);
     return;
   };
@@ -617,14 +613,16 @@ function display_word(word,word_index,letter_status){
   }
 }
 
-function build_url(){
+function build_url(getfull=0){
   var words_element = document.getElementById("wordinput");
   var initialwords = words_element.value.toLowerCase()
   var solution = document.getElementById("solutions").value.toLowerCase();
+  var fetch_url_url_to_use = getfull==0 ? fetch_url  : fetch_full_url;
+  var full_url = '';
   if (initialwords.length > 0) {
-    full_url = fetch_url + "?initialwords=" + initialwords + "&solution=" + solution;
+    full_url = fetch_url_url_to_use + "?initialwords=" + initialwords + "&solution=" + solution;
   } else {
-    full_url = fetch_url + "solution=" + solution;
+    full_url = fetch_url_url_to_use + "solution=" + solution;
   }
   return full_url
 }
@@ -668,80 +666,175 @@ function suggest_word() {
 };
 
 
-function show_full_solution(){
-  try_it();
+async function show_full_solution(){
+  // try_it(getfull=1);
+  fetch_json_results_from_server(getfull=0)
+  .then(function(json_results){
+    display_all_words(json_results,display_solution_word=display_solution_word);
+    display_full_solution(json_results);
+  });    
 };
 
-
-
-function try_it(display_solution=1){
-  var full_url = build_url();
-  fetch(full_url, 
+async function fetch_json_results_from_server(getfull=0) {
+  var full_url = build_url(getfull=getfull);
+  const response = await fetch(full_url, 
   {
       method: 'GET',
       headers: {
           'Accept': 'application/json',
       },
   })
-  .then(
-    function(response) {
-      var r = response.text();
-      // console.log(r);
-      return r;
-    }
-  )
-  .then(text => JSON.parse(text))
-  .then(function(json_results){
-    var words_used = json_results['wordsused'];
-    var letter_status_used = json_results['letterstatusused'];
-    
-    // loop over each word that was returned from the call to the restful wordle_server's solve route
-    for (var i=0;i<5;i++){
-      var tbn = 'json_results_' + i;
-      // try this
+  
+  if (response.ok) { // if HTTP-status is 200-299
+    // get the response body (the method explained below)
+    let json = await response.json();
+    return json;
+  } else {
+      alert("HTTP-Error: " + response.status);
+      return null;
+  }  
+
+};
+
+function display_all_words(json_results,display_solution_word=0) {
+// loop over each word that was returned from the call to the restful wordle_server's solve route
+  var words_used = json_results['wordsused'];
+  var letter_status_used = json_results['letterstatusused'];
+  for (var i=0;i<5;i++){
+    var tbn = 'json_results_' + i;
+    // try this
+    document.getElementById("json_title_"+i).innerHTML = "";
+    document.getElementById(tbn).innerHTML = "";
+    reset_saved_word(i);
+
+    if (i>=words_used.length){
       document.getElementById("json_title_"+i).innerHTML = "";
       document.getElementById(tbn).innerHTML = "";
       reset_saved_word(i);
+    } else {
+      // add this word to the Wordle letter display
+      display_word(words_used[i],i,letter_status_used[i],display_solution_word=display_solution_word);
+    }
+  }
+};
 
-      if (i>=words_used.length){
-        document.getElementById("json_title_"+i).innerHTML = "";
-        document.getElementById(tbn).innerHTML = "";
-        reset_saved_word(i);
+function display_full_solution(json_results) {
+  var words_used = json_results['wordsused'];
+  var letter_status_used = json_results['letterstatusused'];
+  for (var i=0;i<5;i++){
+    var tbn = 'json_results_' + i;
+    if (i<words_used.length){
+      // add this word used to the title of the DataTable
+      document.getElementById("json_title_"+i).innerHTML = "Possible words after using the word: " + words_used[i].toUpperCase();
+      // display the DataTable of possible next words for this word used
+      var df = json_results[words_used[i]];
+      if (df.length < 1) {
+        reset_datatable(i);
       } else {
-        // add this word to the Wordle letter display
-        display_word(words_used[i],i,letter_status_used[i]);
+        if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
+          $("#" + tbn).dataTable( {
+              "data": df,
+              "columns":[
+                {"data":"word","title":"word"},
+                {"data":"probability","title":"probability"}
+              ],
+              order: [[1, 'desc']],
+              "pageLength": 25,
+          } );      
+        } else {
+          var dt = $("#" + tbn).dataTable();
+          dt.fnClearTable();
+          dt.fnAddData(df,redraw=true);
+        }      
+      }        
+    }
+  }  
+};
 
-        if (display_solution==1){
-          // add this word used to the title of the DataTable
-          document.getElementById("json_title_"+i).innerHTML = "Possible words after using the word: " + words_used[i].toUpperCase();
-          // display the DataTable of possible next words for this word used
-          var df = json_results[words_used[i]];
-          if (df.length < 1) {
-            reset_datatable(i);
-          } else {
-            if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
-              $("#" + tbn).dataTable( {
-                  "data": df,
-                  "columns":[
-                    {"data":"word","title":"word"},
-                    {"data":"probability","title":"probability"}
-                  ],
-                  order: [[1, 'desc']],
-                  "pageLength": 25,
-              } );      
-            } else {
-              var dt = $("#" + tbn).dataTable();
-              dt.fnClearTable();
-              dt.fnAddData(df,redraw=true);
-            }      
-          }        
-        }
 
-      }
-    };
-  })
+// The method try_it calls the python restful server to obtain a solution to the wordle.  However,
+//   if display_solution!==1, then try_it will only display the words UP BUT NOT INCLUDING
+//   the solution word, and will update the w11 .. w55 letter displays to the proper colors.
+function try_it(display_solution=1,display_solution_word=0,getfull=0){
+  fetch_json_results_from_server(getfull=getfull)
+  .then(function(json_results){
+    display_all_words(json_results,display_solution_word=display_solution_word);
+    if (display_solution==1){
+      display_full_solution(json_results);
+    }
+  });  
+};
 
-}
+
+
+// function try_it2(display_solution=1){
+//   var full_url = build_url();
+//   fetch(full_url, 
+//   {
+//       method: 'GET',
+//       headers: {
+//           'Accept': 'application/json',
+//       },
+//   })
+//   .then(
+//     function(response) {
+//       var r = response.text();
+//       // console.log(r);
+//       return r;
+//     }
+//   )
+//   .then(text => JSON.parse(text))
+//   .then(function(json_results){
+//     var words_used = json_results['wordsused'];
+//     var letter_status_used = json_results['letterstatusused'];
+    
+//     // loop over each word that was returned from the call to the restful wordle_server's solve route
+//     for (var i=0;i<5;i++){
+//       var tbn = 'json_results_' + i;
+//       // try this
+//       document.getElementById("json_title_"+i).innerHTML = "";
+//       document.getElementById(tbn).innerHTML = "";
+//       reset_saved_word(i);
+
+//       if (i>=words_used.length){
+//         document.getElementById("json_title_"+i).innerHTML = "";
+//         document.getElementById(tbn).innerHTML = "";
+//         reset_saved_word(i);
+//       } else {
+//         // add this word to the Wordle letter display
+//         display_word(words_used[i],i,letter_status_used[i]);
+
+//         if (display_solution==1){
+//           // add this word used to the title of the DataTable
+//           document.getElementById("json_title_"+i).innerHTML = "Possible words after using the word: " + words_used[i].toUpperCase();
+//           // display the DataTable of possible next words for this word used
+//           var df = json_results[words_used[i]];
+//           if (df.length < 1) {
+//             reset_datatable(i);
+//           } else {
+//             if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
+//               $("#" + tbn).dataTable( {
+//                   "data": df,
+//                   "columns":[
+//                     {"data":"word","title":"word"},
+//                     {"data":"probability","title":"probability"}
+//                   ],
+//                   order: [[1, 'desc']],
+//                   "pageLength": 25,
+//               } );      
+//             } else {
+//               var dt = $("#" + tbn).dataTable();
+//               dt.fnClearTable();
+//               dt.fnAddData(df,redraw=true);
+//             }      
+//           }        
+//         }
+
+//       }
+//     };
+//   })
+
+// }
 
 // 
 function initit(){
