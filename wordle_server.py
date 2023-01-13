@@ -74,6 +74,7 @@ async def solve(initialwords:str="alert,noisy",solution:str=None):
     
     return return_dict
 
+
 @app.get("/wordl/solveall")
 async def solve(initialwords:str="alert,noisy",solution:str=None):
     initial_words = ','.join(initialwords.split()).split(',')

@@ -483,7 +483,8 @@ var color_arr = [green, gold, grey]
 var default_initial_words = "alert noisy";
 // var fetch_url = "http://127.0.0.1:8000/wordl/solve";
 // var dates_url = "http://127.0.0.1:8000/wordl/solutions";
-var fetch_url = "https://billybyte.com/wordle_server/wordl/solve";
+// var fetch_url = "https://billybyte.com/wordle_server/wordl/solve";
+var fetch_url = "https://billybyte.com/wordle_server/wordl/solveall";
 var fetch_full_url = "https://billybyte.com/wordle_server/wordl/solveall";
 var dates_url = "https://billybyte.com/wordle_server/wordl/solutions";
 
@@ -541,21 +542,36 @@ function add_options(){
       select.add(option);      
     };
     // now display word grid for initial words
-    try_it(display_solution=0,display_solution_word=1);
+    // try_it(display_solution=0,display_solution_word=1);
+    // try_it(display_solution=0,display_solution_word=0);
+    fetch_json_results_from_server(getfull=0)
+    .then(function(json_results){
+      display_all_words(json_results,display_solution_word=0);
+    });    
+
   });
 
 };
 
 function on_new_input() {
-  selectDateChange(words_to_keep=5,display_solution_word=1);
+  selectDateChange(words_to_keep=5,display_solution_word=0);
 };
 
-function selectDateChange(words_to_keep=2,display_solution_word=0) {
-  // only show at most the first 2 initial words
+function get_wordinput_array(words_to_keep=5){
   var init_words = document.getElementById("wordinput").value;
   var init_words_arr = init_words.split(" ");
   init_words_arr = init_words_arr.filter(v=>v.length>0).slice(0,words_to_keep);
-  init_words = init_words_arr.join(" ");
+  return init_words_arr
+
+}
+
+function selectDateChange(words_to_keep=2,display_solution_word=0) {
+  // only show at most the first 2 initial words
+  // var init_words = document.getElementById("wordinput").value;
+  // var init_words_arr = init_words.split(" ");
+  // init_words_arr = init_words_arr.filter(v=>v.length>0).slice(0,words_to_keep);
+  var init_words_arr = get_wordinput_array(words_to_keep=words_to_keep);
+  var init_words = init_words_arr.join(" ");
   document.getElementById("wordinput").value = init_words;
   reset_all(reset_words=1,reset_wordinput=0);
 }
@@ -618,11 +634,10 @@ function build_url(getfull=0){
   var initialwords = words_element.value.toLowerCase()
   var solution = document.getElementById("solutions").value.toLowerCase();
   var fetch_url_url_to_use = getfull==0 ? fetch_url  : fetch_full_url;
-  var full_url = '';
   if (initialwords.length > 0) {
-    full_url = fetch_url_url_to_use + "?initialwords=" + initialwords + "&solution=" + solution;
+    var full_url = fetch_url_url_to_use + "?initialwords=" + initialwords + "&solution=" + solution;
   } else {
-    full_url = fetch_url_url_to_use + "solution=" + solution;
+    var full_url = fetch_url_url_to_use + "solution=" + solution;
   }
   return full_url
 }
@@ -670,7 +685,7 @@ async function show_full_solution(){
   // try_it(getfull=1);
   fetch_json_results_from_server(getfull=1)
   .then(function(json_results){
-    display_all_words(json_results,display_solution_word=display_solution_word);
+    display_all_words(json_results,display_solution_word=1);
     display_full_solution(json_results);
   });    
 };
@@ -698,23 +713,30 @@ async function fetch_json_results_from_server(getfull=0) {
 
 function display_all_words(json_results,display_solution_word=0) {
 // loop over each word that was returned from the call to the restful wordle_server's solve route
-  var words_used = json_results['wordsused'];
+  if (display_solution_word==1) {
+    var words_used = json_results['wordsused'];
+  } else {
+    var words_used = get_wordinput_array();
+  }
+  
   var letter_status_used = json_results['letterstatusused'];
-  for (var i=0;i<5;i++){
+  // for (var i=0;i<5;i++){
+  for (var i=0;i<words_used.length;i++){
     var tbn = 'json_results_' + i;
     // try this
     document.getElementById("json_title_"+i).innerHTML = "";
     document.getElementById(tbn).innerHTML = "";
     reset_saved_word(i);
 
-    if (i>=words_used.length){
-      document.getElementById("json_title_"+i).innerHTML = "";
-      document.getElementById(tbn).innerHTML = "";
-      reset_saved_word(i);
-    } else {
-      // add this word to the Wordle letter display
-      display_word(words_used[i],i,letter_status_used[i],display_solution_word=display_solution_word);
-    }
+    // if (i>=words_used.length){
+    //   document.getElementById("json_title_"+i).innerHTML = "";
+    //   document.getElementById(tbn).innerHTML = "";
+    //   reset_saved_word(i);
+    // } else {
+    //   // add this word to the Wordle letter display
+    //   display_word(words_used[i],i,letter_status_used[i],display_solution_word=display_solution_word);
+    // }
+    display_word(words_used[i],i,letter_status_used[i],display_solution_word=1);
   }
 };
 
