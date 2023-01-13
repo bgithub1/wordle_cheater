@@ -668,7 +668,7 @@ function suggest_word() {
 
 async function show_full_solution(){
   // try_it(getfull=1);
-  fetch_json_results_from_server(getfull=0)
+  fetch_json_results_from_server(getfull=1)
   .then(function(json_results){
     display_all_words(json_results,display_solution_word=display_solution_word);
     display_full_solution(json_results);
