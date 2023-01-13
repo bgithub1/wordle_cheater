@@ -346,4 +346,7 @@ def solveall(initial_words,solution):
     df_last = list_df[-1]
     w = df_last.iloc[0].word
     words_used.append(w)
+    letter_status = get_letter_status(w,solution)
+    letter_status_used.append(letter_status)
+
     return words_used,letter_status_used,list_df
