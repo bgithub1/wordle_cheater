@@ -26,6 +26,7 @@
   --width2: 94%;
   --text_font:50px;
   --button_font:25px;
+  --input_font:19px;
   --option_font:25px;
   --minwidth: 800px;
 }
@@ -76,7 +77,8 @@ h2 {
   font-size: var(--text_font);
 }
 
-@media (min-height: 600px) and (max-width: 800px) {
+/*@media (min-height: 600px) and (max-width: 800px) {*/
+@media (min-height: 600px) and (max-width: 8000px) {
     #title {
       grid-area: ti;
       color:blue;
@@ -103,11 +105,17 @@ h2 {
 
 #wordinput {
   grid-area: wi;
-  font-size: var(--button_font);
+  font-size: var(--input_font);
   resize: none;
   initial-scale:1;
   maximum-scale:1;
   user-scalable:0;
+}
+
+#gobutton {
+  grid-area: gb;
+  font-size: var(--button_font);
+
 }
 
 #t1 {
@@ -188,7 +196,8 @@ h2 {
 }
 
 
-@media (min-height: 600px) and (max-width: 800px) {
+/*@media (min-height: 600px) and (max-width: 800px) {*/
+@media (min-height: 600px) and (max-width: 8000px) {
   #addword {
     grid-area:ai;
     font-size: var(--button_font)
@@ -296,7 +305,8 @@ h2 {
   border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
-@media (min-height: 600px) and (max-width: 600px) {
+/*@media (min-height: 600px) and (max-width: 600px) {*/
+@media (min-height: 600px) and (max-width: 6000px) {
   .container {
     display:grid;
     grid-template-columns:repeat(10,1fr);
@@ -307,7 +317,7 @@ h2 {
     grid-template-areas: 
       "ti ti ti ti ti ti ti ti ti ti"
       "en en en en en en en en en en"    
-      "wi wi wi wi wi wi wi wi wi wi"
+      "wi wi wi wi wi wi wi wi gb gb"
       "sd sd sd sd sd sd sd sd sd sd"
       "sl sl sl sl sl sl sl sl sl sl"
       ". . w11 w12 w13 w14 w15 . . ."
@@ -324,7 +334,7 @@ h2 {
   }
 }
 
-@media screen and (min-width: 600px) {
+/*@media screen and (min-width: 600px) {
   .container {
     display:grid;
     grid-template-columns:repeat(10,1fr);
@@ -348,7 +358,7 @@ h2 {
   }
 }
 
-
+*/
 
 .container2 {
   width:70vw;
@@ -388,9 +398,10 @@ table.dataTable tr.dtrg-level-0 td {
 <div class="container">
     <button class="bord black" id="title">Wordle Cheater</button>
     
-    <button class="bord black" id="enterword">Add Words, Then Tab:</button>
-    <input id="wordinput" class="bord black" onblur="on_new_input()" type="text">
-    
+    <button class="bord black" id="enterword">Add a New Word, Hit GO:</button>
+<!--     <input id="wordinput" class="bord black" onblur="on_new_input()" type="text"> -->
+    <input id="wordinput" class="bord black" type="text">
+    <button id="gobutton" class="bord lighttan" onclick="on_new_input()">GO</button>
     <button class="bord black" id="selectdate">Select A Date:</button>
     <select class="bord black" name="cars" id="solutions" onchange="selectDateChange()">
     </select>
