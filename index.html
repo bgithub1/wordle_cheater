@@ -26,7 +26,7 @@
   --width2: 94%;
   --text_font:50px;
   --button_font:25px;
-  --input_font:21px;
+  --input_font:20px;
   --option_font:25px;
   --minwidth: 800px;
 }
@@ -81,12 +81,14 @@ h2 {
 #selectdate {
   grid-area:sd;
   text-align: center;  
-  font-size: var(--button_font);  
+/*  font-size: var(--button_font);  */
+  font-size: var(--input_font);  
 }
 #solutions {
   grid-area:sl;
   text-align: center;  
-  font-size: var(--button_font);
+/*  font-size: var(--button_font);*/
+  font-size: var(--input_font);
 }
 
 #enterword {
@@ -291,15 +293,17 @@ h2 {
   display:grid;
   grid-template-columns:repeat(10,1fr);
 
-  grid-template-rows: 0.5fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr;
+/*  grid-template-rows: 0.5fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr;*/
+  grid-template-rows: 0.5fr repeat(10,0.25fr);
   font-size: var(--text_font);
   font-weight: bold;
   grid-template-areas: 
     "ti ti ti ti ti ti ti ti ti ti"
-    "en en en en en en en en en en"    
-    "wi wi wi wi wi wi wi wi gb gb"
-    "sd sd sd sd sd sd sd sd sd sd"
-    "sl sl sl sl sl sl sl sl sl sl"
+    "sd sd sd sd sd sl sl sl sl sl"
+/*    "sl sl sl sl sl sl sl sl sl sl"*/
+/*    "en en en en en en en en en en"    */
+    "wi wi wi wi wi wi wi wi wi wi"
+    "gb gb gb gb gb gb gb gb gb gb"
     ". . w11 w12 w13 w14 w15 . . ."
     ". . w21 w22 w23 w24 w25 . . ."
     ". . w31 w32 w33 w34 w35 . . ."
@@ -355,8 +359,7 @@ table.dataTable tr.dtrg-level-0 td {
 <div class="container">
     <button class="bord black" id="title">Wordle Cheater</button>
     
-    <button class="bord black" id="enterword">Add a New Word, Hit GO:</button>
-<!--     <input id="wordinput" class="bord black" onblur="on_new_input()" type="text"> -->
+<!--     <button class="bord black" id="enterword">Add a New Word, Hit GO:</button> -->
     <input id="wordinput" class="bord black" type="text">
     <button id="gobutton" class="bord black lighttan" onclick="on_new_input()">GO</button>
     <button class="bord black" id="selectdate">Select A Date:</button>
