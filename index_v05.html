@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Wordle Cheater v05</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 user-scalable=n"/>
 <style>
 
 
@@ -26,7 +26,7 @@
   --width2: 94%;
   --text_font:50px;
   --button_font:25px;
-  --input_font:19px;
+  --input_font:21px;
   --option_font:25px;
   --minwidth: 800px;
 }
@@ -77,8 +77,7 @@ h2 {
   font-size: var(--text_font);
 }
 
-/*@media (min-height: 600px) and (max-width: 800px) {*/
-@media (min-height: 600px) and (max-width: 8000px) {
+@media (min-height: 600px) and (max-width: 600px) {
     #title {
       grid-area: ti;
       color:blue;
@@ -114,8 +113,11 @@ h2 {
 
 #gobutton {
   grid-area: gb;
-  font-size: var(--button_font);
-
+  font-size: var(--input_font);
+  resize: none;
+  initial-scale:1;
+  maximum-scale:1;
+  user-scalable:0;
 }
 
 #t1 {
@@ -196,8 +198,7 @@ h2 {
 }
 
 
-/*@media (min-height: 600px) and (max-width: 800px) {*/
-@media (min-height: 600px) and (max-width: 8000px) {
+@media (min-height: 600px) and (max-width: 600px) {
   #addword {
     grid-area:ai;
     font-size: var(--button_font)
@@ -305,8 +306,7 @@ h2 {
   border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
-/*@media (min-height: 600px) and (max-width: 600px) {*/
-@media (min-height: 600px) and (max-width: 6000px) {
+@media (min-height: 600px) and (max-width: 600px) {
   .container {
     display:grid;
     grid-template-columns:repeat(10,1fr);
@@ -334,7 +334,7 @@ h2 {
   }
 }
 
-/*@media screen and (min-width: 600px) {
+@media screen and (min-width: 600px) {
   .container {
     display:grid;
     grid-template-columns:repeat(10,1fr);
@@ -346,7 +346,7 @@ h2 {
       "ti ti ti ti ti ti ti ti ti ti"
       "en en en en en w11 w12 w13 w14 w15"    
       "en en en en en w21 w22 w23 w24 w25"    
-      "wi wi wi wi wi w31 w32 w33 w34 w35"
+      "wi wi wi wi gb w31 w32 w33 w34 w35"
       "sd sd sd sd sd w41 w42 w43 w44 w45"
       "sl sl sl sl sl w51 w52 w53 w54 w55"
       "sg sg sg sg sg sg sg sg sg sg"
@@ -358,7 +358,7 @@ h2 {
   }
 }
 
-*/
+
 
 .container2 {
   width:70vw;
@@ -401,7 +401,7 @@ table.dataTable tr.dtrg-level-0 td {
     <button class="bord black" id="enterword">Add a New Word, Hit GO:</button>
 <!--     <input id="wordinput" class="bord black" onblur="on_new_input()" type="text"> -->
     <input id="wordinput" class="bord black" type="text">
-    <button id="gobutton" class="bord lighttan" onclick="on_new_input()">GO</button>
+    <button id="gobutton" class="bord black lighttan" onclick="on_new_input()">GO</button>
     <button class="bord black" id="selectdate">Select A Date:</button>
     <select class="bord black" name="cars" id="solutions" onchange="selectDateChange()">
     </select>
