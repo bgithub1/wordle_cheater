@@ -1,813 +1,535 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wordle Cheater v06</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 user-scalable=n"/>
-<style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  
+    :root {
+      --green: #49BE25;
+      --gold: #D5C450; 
+      /*--grey: #A0A0A0;*/
+      --white: #fffff1;
+      --grey:#C9C9C9;
+      --blue: #0040FF;
+      --lighttan: #F6E3CE;
+      --midtan: #F5D0A9;
+      --lightblue:#A9D0F5;
+      --midblue: #5882FA;
+      --lightmagenta:#F6CEF5;
+      --verylightmagenta:#F8E0F7;
+      --halfheight:30px;
+      --height: 50px;
+      --height_0:50px;
+      --width1: 100%;
+      --width2: 94%;
+      --text_font:50px;
+      --button_font:20px;
+      --input_font:20px;
+      --option_font:20px;
+      --minwidth: 800px;
+    }
 
+    .black {
+      color:#000000;
+    }
+    .green {
+      background-color: var(--green);
+      color: var(--green);
+    }
+    .gold {
+      background-color: var(--gold);
+      color: var(--gold);
+    }
+    .grey {
+      background-color: var(--grey);
+      color: var(--grey);
+    }
+    .white {
+      background-color: var(--white);  
+    }
+    .lighttan {
+      background-color: var(--lighttan);
+    }
+    .midtan {
+      background-color: var(--midtan);
+    }
 
-:root {
-  --green: #49BE25;
-  --gold: #D5C450; 
-  /*--grey: #A0A0A0;*/
-  --white: #fffff1;
-  --grey:#C9C9C9;
-  --blue: #0040FF;
-  --lighttan: #F6E3CE;
-  --midtan: #F5D0A9;
-  --lightblue:#A9D0F5;
-  --midblue: #5882FA;
-  --lightmagenta:#F6CEF5;
-  --verylightmagenta:#F8E0F7;
-  --halfheight:30px;
-  --height: 50px;
-  --height_0:50px;
-  --width1: 100%;
-  --width2: 94%;
-  --text_font:50px;
-  --button_font:22px;
-  --input_font:22px;
-  --option_font:25px;
-  --minwidth: 800px;
-}
+    .option{
+      text-align: center;  
+      font-size: var(--option_font);
+    }
 
-body {
-  height: 100%;
-  height: 100vh;  
-}
+    .curved {
+      background-color: var(--lighttan);
+      border-radius: 70px;  
+    }
 
-h2 {
-  font-style: italic;
-}
+    div {
+      text-align: center;
+      height:50px;
+      font-size: var(--button_font);
+    }
 
-.black {
-  color:#000000;
-}
-.green {
-  background-color: var(--green);
-  color: var(--green);
-}
-.gold {
-  background-color: var(--gold);
-  color: var(--gold);
-}
-.grey {
-  background-color: var(--grey);
-  color: var(--grey);
-}
-.white {
-  background-color: var(--white);  
-}
-.lighttan {
-  background-color: var(--lighttan);
-}
-.midtan {
-  background-color: var(--midtan);
-}
-
-.option{
-  text-align: center;  
-  font-size: var(--option_font);
-}
-
-
-#title {
-    grid-area: ti;
-    color:blue;
-    text-align: center; 
-    font-size: var(--button_font);
-}
-
-#selectdate {
-  grid-area:sd;
-  text-align: center;  
-/*  font-size: var(--button_font);  */
-  font-size: var(--input_font);  
-}
-#solutions {
-  grid-area:sl;
-  text-align: center;  
-/*  font-size: var(--button_font);*/
-  font-size: var(--input_font);
-}
-
-#enterword {
-  grid-area: en;
-  font-size: var(--button_font);
-}
-
-#wordinput {
-  grid-area: wi;
-  font-size: var(--input_font);
-/*  resize: none;
-  initial-scale:1;
-  maximum-scale:1;
-  user-scalable:0;*/
-}
-
-#gobutton {
-  grid-area: gb;
-/*  font-size: var(--input_font);
-  resize: none;
-  initial-scale:1;
-  maximum-scale:1;
-  user-scalable:0;*/
-}
-
-#t1 {
-  grid-area:t1;
-}
-
-#t2 {
-  grid-area:t2;
-}
-#t3 {
-  grid-area:t3;
-}
-#t4 {
-  grid-area:t4;
-}
-#t5 {
-  grid-area:t5;
-}
-
-#b11 {
-  grid-area:b11;
-}
-#b12 {
-  grid-area:b12;
-}
-#b13 {
-  grid-area:b13;
-}
-
-#b21 {
-  grid-area:b21;
-}
-#b22 {
-  grid-area:b22;
-}
-#b23 {
-  grid-area:b23;
-}
-
-#b31 {
-  grid-area:b31;
-}
-#b32 {
-  grid-area:b32;
-}
-#b33 {
-  grid-area:b33;
-}
-
-#b41 {
-  grid-area:b41;
-}
-#b42 {
-  grid-area:b42;
-}
-#b43 {
-  grid-area:b43;
-}
-
-#b51 {
-  grid-area:b51;
-}
-#b52 {
-  grid-area:b52;
-}
-#b53 {
-  grid-area:b53;
-}
+    button, input, select{
+      text-align: center;
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      height:50px;
+      font-size: var(--button_font);
+    }   
 
 
 
-#addword {
-  grid-area:ai;
-  font-size: var(--button_font)
-}
-#suggestword {
-  grid-area:sg;
-  font-size: var(--button_font)
-}
+    #title {
+        color:blue;
+    }
 
-#w11 {
-  grid-area: w11;
-}
-#w12 {
-  grid-area: w12;
-}
-#w13 {
-  grid-area: w13;
-}
-#w14 {
-  grid-area: w14;
-}
-#w15 {
-  grid-area: w15;
-}
+    table.dataTable td {
+      font-size: 1.6em;
+    }
+    table.dataTable tr.dtrg-level-0 td {
+      font-size: 1.8em;
+    }
 
-#w21 {
-  grid-area: w21;
-}
-#w22 {
-  grid-area: w22;
-}
-#w23 {
-  grid-area: w23;
-}
-#w24 {
-  grid-area: w24;
-}
-#w25 {
-  grid-area: w25;
-}
-
-#w31 {
-  grid-area: w31;
-}
-#w32 {
-  grid-area: w32;
-}
-#w33 {
-  grid-area: w33;
-}
-#w34 {
-  grid-area: w34;
-}
-#w35 {
-  grid-area: w35;
-}
-
-#w41 {
-  grid-area: w41;
-}
-#w42 {
-  grid-area: w42;
-}
-#w43 {
-  grid-area: w43;
-}
-#w44 {
-  grid-area: w44;
-}
-#w45 {
-  grid-area: w45;
-}
-
-#w51 {
-  grid-area: w51;
-}
-#w52 {
-  grid-area: w52;
-}
-#w53 {
-  grid-area: w53;
-}
-#w54 {
-  grid-area: w54;
-}
-#w55 {
-  grid-area: w55;
-}
-
-#findwords {
-  grid-area:fw;
-}
-
-#json_results {
-  grid-area:df;
-}
-
-#last_p {
-  grid-area: pp;
-}
-
-.bord {
-  text-align: center;
-  border: 1px solid rgba(0, 0, 0, 0.8);
-}
-
-/*.container {
-  display:grid;
-  grid-template-columns:repeat(10,1fr);
-
-  grid-template-rows: 0.5fr repeat(10,0.25fr);
-  font-size: var(--text_font);
-  font-weight: bold;
-  grid-template-areas: 
-    "ti ti ti ti ti ti ti ti ti ti"
-    "sd sd sd sd sd sl sl sl sl sl"
-    "wi wi wi wi wi wi wi wi wi wi"
-    "gb gb gb gb gb gb gb gb gb gb"
-    ". . w11 w12 w13 w14 w15 . . ."
-    ". . w21 w22 w23 w24 w25 . . ."
-    ". . w31 w32 w33 w34 w35 . . ."
-    ". . w41 w42 w43 w44 w45 . . ."
-    ". . w51 w52 w53 w54 w55 . . ."
-    "sg sg sg sg sg sg sg sg sg sg"
-    "ai ai ai ai ai ai ai ai ai ai";
-  grid-gap:2px;
-  height:60vh;
-  width:90vw;
-  margin:auto;
-}*/
-
-.container {
-  display:grid;
-  grid-template-columns:repeat(10,1fr);
-
-  grid-template-rows: 0.35fr repeat(9,0.25fr);
-  font-size: var(--text_font);
-  font-weight: bold;
-  grid-template-areas: 
-    "ti ti ti ti ti ti ti ti ti ti"
-    "sd sd sd sd sd sl sl sl sl sl"
-    "wi wi wi wi wi wi wi wi gb gb"
-    ". . w11 w12 w13 w14 w15 . . ."
-    ". . w21 w22 w23 w24 w25 . . ."
-    ". . w31 w32 w33 w34 w35 . . ."
-    ". . w41 w42 w43 w44 w45 . . ."
-    ". . w51 w52 w53 w54 w55 . . ."
-    "sg sg sg sg sg sg sg sg sg sg"
-    "ai ai ai ai ai ai ai ai ai ai";
-  grid-gap:2px;
-  height:60vh;
-  width:90vw;
-  margin:auto;
-}
-
-
-
-.container2 {
-  width:70vw;
-  margin:auto;
-  margin-top:50px;
-/*  padding-left: 20px;
-  padding-right: 20px;*/
-}
-
-button {
-  text-align: center;
-  align-content: center;
-  height:100%;
-  width: 100%;
-  font-size: var(--button_font);
-  font-weight: bold;
-}
-
-.curved {
-  background-color: var(--lighttan);
-  border-radius: 70px;  
-}
-
-table.dataTable td {
-  font-size: 1.6em;
-}
-table.dataTable tr.dtrg-level-0 td {
-  font-size: 1.8em;
-}
-
-
-</style>
-
-
+  </style>
 </head>
 <body>
-<div class="container">
-    <button class="bord black" id="title">Wordle Cheater</button>
-    
-<!--     <button class="bord black" id="enterword">Add a New Word, Hit GO:</button> -->
-    <input id="wordinput" class="bord black" type="text">
-    <button id="gobutton" class="bord black lighttan" onclick="on_new_input()">GO</button>
-    <button class="bord black" id="selectdate">Select A Date:</button>
-    <select class="bord black" name="cars" id="solutions" onchange="selectDateChange()">
-    </select>
-    
-    <button id="w11" size=1 type="text" class="bord"></button>
-    <button id="w12" size=1 type="text" class="bord"></button>
-    <button id="w13" size=1 type="text" class="bord"></button>
-    <button id="w14" size=1 type="text" class="bord"></button>
-    <button id="w15" size=1 type="text" class="bord"></button>
 
-    <button id="w21" size=1 type="text" class="bord"></button>
-    <button id="w22" size=1 type="text" class="bord"></button>
-    <button id="w23" size=1 type="text" class="bord"></button>
-    <button id="w24" size=1 type="text" class="bord"></button>
-    <button id="w25" size=1 type="text" class="bord"></button>
+  <div class="container-fluid">
+    <div class="row">
+        <button class="col-xs-12" id="title">Wordle Cheater</button>
+      </div>
+    <div class="row">
+        <input id="wordinput" class="col-xs-10" type="text">
+        <button id="gobutton" class="col-xs-2 lighttan" onclick="on_new_input()">GO</button>
+      </div>
+      
+    <div class="row">
+        <button class="col-xs-6" id="selectdate">Select A Date:</button>
+        <select class="col-xs-6" name="cars" id="solutions" onchange="selectDateChange()">
+        </select>
+      </div>
+      
+    <div class="row">
+      <div class='col-xs-1'></div>
+        <button id="w11" size=1 type="text" class="col-xs-2"></button>
+        <button id="w12" size=1 type="text" class="col-xs-2"></button>
+        <button id="w13" size=1 type="text" class="col-xs-2"></button>
+        <button id="w14" size=1 type="text" class="col-xs-2"></button>
+        <button id="w15" size=1 type="text" class="col-xs-2"></button>
+      <div class='col-xs-1'></div>
+    </div>
+      
+    <div class="row">
+      <div class='col-xs-1'></div>
+        <button id="w21" size=1 type="text" class="col-xs-2"></button>
+        <button id="w22" size=1 type="text" class="col-xs-2"></button>
+        <button id="w23" size=1 type="text" class="col-xs-2"></button>
+        <button id="w24" size=1 type="text" class="col-xs-2"></button>
+        <button id="w25" size=1 type="text" class="col-xs-2"></button>
+      <div class='col-xs-1'></div>
+    </div>
+      
+    <div class="row">
+      <div class='col-xs-1'></div>
+        <button id="w31" size=1 type="text" class="col-xs-2"></button>
+        <button id="w32" size=1 type="text" class="col-xs-2"></button>
+        <button id="w33" size=1 type="text" class="col-xs-2"></button>
+        <button id="w34" size=1 type="text" class="col-xs-2"></button>
+        <button id="w35" size=1 type="text" class="col-xs-2"></button>
+      <div class='col-xs-1'></div>
+    </div>
+      
+    <div class="row">
+      <div class='col-xs-1'></div>
+        <button id="w41" size=1 type="text" class="col-xs-2"></button>
+        <button id="w42" size=1 type="text" class="col-xs-2"></button>
+        <button id="w43" size=1 type="text" class="col-xs-2"></button>
+        <button id="w44" size=1 type="text" class="col-xs-2"></button>
+        <button id="w45" size=1 type="text" class="col-xs-2"></button>
+      <div class='col-xs-1'></div>
+    </div>
+      
+    <div class="row">
+      <div class='col-xs-1'></div>
+        <button id="w51" size=1 type="text" class="col-xs-2"></button>
+        <button id="w52" size=1 type="text" class="col-xs-2"></button>
+        <button id="w53" size=1 type="text" class="col-xs-2"></button>
+        <button id="w54" size=1 type="text" class="col-xs-2"></button>
+        <button id="w55" size=1 type="text" class="col-xs-2"></button>
+      <div class='col-xs-1'></div>
+    </div>
+      
+    <div class="row">
+        <button id="suggestword" type="button" class="col-xs-6 curved" onClick="suggest_word()">Suggest A Word</button>
+        <button id="addword" type="button" class="col-xs-6 curved" onClick="show_full_solution()">Show Solution</button>
+      </div>
+  </div>
 
-    <button id="w31" size=1 type="text" class="bord"></button>
-    <button id="w32" size=1 type="text" class="bord"></button>
-    <button id="w33" size=1 type="text" class="bord"></button>
-    <button id="w34" size=1 type="text" class="bord"></button>
-    <button id="w35" size=1 type="text" class="bord"></button>
+  <p></p>
+  <!-- <div id="wordsused"></div> -->
+  <p></p>
+  <div class="container2">
+      <h2 id="json_title_0"></h2>
+      <table class="bord" id="json_results_0"></table>
+  </div>  
 
-    <button id="w41" size=1 type="text" class="bord"></button>
-    <button id="w42" size=1 type="text" class="bord"></button>
-    <button id="w43" size=1 type="text" class="bord"></button>
-    <button id="w44" size=1 type="text" class="bord"></button>
-    <button id="w45" size=1 type="text" class="bord"></button>
+  <p></p>
+  <div class="container2">
+      <h2 id="json_title_1"></h2>
+      <table class="bord" id="json_results_1"></table>
+  </div>
 
-    <button id="w51" size=1 type="text" class="bord"></button>
-    <button id="w52" size=1 type="text" class="bord"></button>
-    <button id="w53" size=1 type="text" class="bord"></button>
-    <button id="w54" size=1 type="text" class="bord"></button>
-    <button id="w55" size=1 type="text" class="bord"></button>
+  <p></p>
+  <div class="container2">
+      <h2 id="json_title_2"></h2>
+      <table class="bord" id="json_results_2"></table>
+  </div>
 
-    <button id="suggestword" type="button" class="bord curved" onClick="suggest_word()">Suggest Next Word</button>
-    <button id="addword" type="button" class="bord curved" onClick="show_full_solution()">Show Full Solution</button>
-</div>
+  <p></p>
+  <div class="container2">
+      <h2 id="json_title_3"></h2>
+      <table class="bord" id="json_results_3"></table>
+  </div>
 
-<p></p>
-<!-- <div id="wordsused"></div> -->
-<p></p>
-<div class="container2">
-    <h2 id="json_title_0"></h2>
-    <table class="bord" id="json_results_0"></table>
-</div>  
+  <p></p>
+  <div class="container2">
+      <h2 id="json_title_4"></h2>
+      <table class="bord" id="json_results_4"></table>
+  </div>
 
-<p></p>
-<div class="container2">
-    <h2 id="json_title_1"></h2>
-    <table class="bord" id="json_results_1"></table>
-</div>
+  <!-- Latest compiled and minified CSS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-<p></p>
-<div class="container2">
-    <h2 id="json_title_2"></h2>
-    <table class="bord" id="json_results_2"></table>
-</div>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 
-<p></p>
-<div class="container2">
-    <h2 id="json_title_3"></h2>
-    <table class="bord" id="json_results_3"></table>
-</div>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
-<p></p>
-<div class="container2">
-    <h2 id="json_title_4"></h2>
-    <table class="bord" id="json_results_4"></table>
-</div>
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
 
-<!--  ************ Scripts below ************** -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script> 
+    var words = [];
+    var words_choices = [];
+    var green = "#49BE25";
+    var gold = "#D5C450"; 
+    var grey = "#C9C9C9" // "#A0A0A0" #D8D8D8
+    var black = "#000000";
+    var white = "#fffff9";
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-  
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    var color_arr = [green, gold, grey]
 
-<script> 
-var words = [];
-var words_choices = [];
-var green = "#49BE25";
-var gold = "#D5C450"; 
-var grey = "#C9C9C9" // "#A0A0A0" #D8D8D8
-var black = "#000000";
-var white = "#fffff9";
+    var default_initial_words = "alert";
+    var fetch_url = "https://billybyte.com/wordle_server/wordl/solveall";
+    var fetch_full_url = "https://billybyte.com/wordle_server/wordl/solveall";
+    var dates_url = "https://billybyte.com/wordle_server/wordl/solutions";
 
-var color_arr = [green, gold, grey]
-
-var default_initial_words = "alert";
-// var fetch_url = "http://127.0.0.1:8000/wordl/solve";
-// var dates_url = "http://127.0.0.1:8000/wordl/solutions";
-// var fetch_url = "https://billybyte.com/wordle_server/wordl/solve";
-var fetch_url = "https://billybyte.com/wordle_server/wordl/solveall";
-var fetch_full_url = "https://billybyte.com/wordle_server/wordl/solveall";
-var dates_url = "https://billybyte.com/wordle_server/wordl/solutions";
-
-function reset_datatable(idx) {
-  if ($('#json_results_'+idx).hasClass('dataTable')) {
-    $('#json_results_'+idx).DataTable().destroy();
-  }
-  document.getElementById('json_results_' + idx).innerHTML = '';
-  document.getElementById('json_title_' + idx).innerHTML = '';
-};
-
-function reset_all(reset_words=1,reset_wordinput=1) {
-  if (reset_words==1){
-    words = [];
-    words_choices = [];
-    for (var i=0;i<5;i++){
-      reset_saved_word(i);
-    }
-  for (i=0;i<5;i++) {
-    reset_datatable(i);
-  }
-  };
-  if (reset_wordinput==1) {
-    if (document.getElementById("wordinput").value.length <1) {
-      document.getElementById("wordinput").value = default_initial_words;
-    }
-  }
-  add_options();
-};
-
-function add_options(){
-  fetch(dates_url, 
-  {
-      method: 'GET',
-      headers: {
-          'Accept': 'application/json',
-      },
-  })
-  // .then(response => response.text())
-  .then(
-    function(response) {
-      var r = response.text();
-      return r;
-    }
-  )
-  .then(text => JSON.parse(text))
-  .then(function(json_results){
-    var select = document.getElementById('solutions');
-    for (i=0;i<json_results.length;i++){
-      json_result = json_results[i];
-      // Add an option
-      let option = document.createElement('option');
-      option.value = json_result['solution'];
-      option.text = json_result['date'];
-      select.add(option);      
+    function reset_datatable(idx) {
+      if ($('#json_results_'+idx).hasClass('dataTable')) {
+        $('#json_results_'+idx).DataTable().destroy();
+      }
+      document.getElementById('json_results_' + idx).innerHTML = '';
+      document.getElementById('json_title_' + idx).innerHTML = '';
     };
-    // now display word grid for initial words
-    // try_it(display_solution=0,display_solution_word=1);
-    // try_it(display_solution=0,display_solution_word=0);
-    fetch_json_results_from_server(getfull=0)
-    .then(function(json_results){
-      display_all_words(json_results,display_solution_word=0);
-    });    
 
-  });
-
-};
-
-function on_new_input() {
-  selectDateChange(words_to_keep=5,display_solution_word=0);
-};
-
-function get_wordinput_array(words_to_keep=5){
-  var init_words = document.getElementById("wordinput").value;
-  var init_words_arr = init_words.split(" ");
-  init_words_arr = init_words_arr.filter(v=>v.length>0).slice(0,words_to_keep);
-  return init_words_arr
-
-}
-
-function selectDateChange(words_to_keep=2,display_solution_word=0) {
-  // only show at most the first 2 initial words
-  // var init_words = document.getElementById("wordinput").value;
-  // var init_words_arr = init_words.split(" ");
-  // init_words_arr = init_words_arr.filter(v=>v.length>0).slice(0,words_to_keep);
-  var init_words_arr = get_wordinput_array(words_to_keep=words_to_keep);
-  var init_words = init_words_arr.join(" ");
-  document.getElementById("wordinput").value = init_words;
-  reset_all(reset_words=1,reset_wordinput=0);
-}
-
-function rgb_to_hex(rgb_object) {
-  rgb_string = rgb_object.toString();
-  rgb = rgb_string.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-
-  function hexCode(i) {
-    return ("0" + parseInt(i).toString(16)).slice(-2);
-  }
-  var hex_value = "#" + hexCode(rgb[1]) + hexCode(rgb[2]) 
-          + hexCode(rgb[3]);
-  hex_value = hex_value.toUpperCase();
-  return hex_value;
-  }
-
-function onbt1(clicked_id) {
-  var t_id = clicked_id[1];
-  var letter_id = Number(clicked_id[2])
-  var color_sub = letter_id-1;
-  var color = color_arr[color_sub];
-  document.getElementById("t"+t_id).style.backgroundColor = color;
-}
-
-function reset_saved_word(word_index){
-  var idx1 = word_index + 1;
-  for (k=0;k<5;k++){
-    var idx2 = k+1;
-    var letter_element = document.getElementById("w"+idx1+idx2);
-    letter_element.innerHTML = ".";
-    letter_element.style.backgroundColor = white;
-    letter_element.style.color = white;
-  }
-}
-
-function add(accumulator, a) {
-  return accumulator + a;
-}
-
-function display_word(word,word_index,letter_status,display_solution_word=0){
-  var ls_sum = letter_status.reduce(add,0);
-  if (ls_sum==5 && display_solution_word==0){
-    reset_saved_word(word_index);
-    return;
-  };
-  var idx1 = word_index + 1;
-  for (i=0;i<5;i++){
-    var idx2 = i+1;
-    var letter_element = document.getElementById("w"+idx1+idx2);
-    letter_element.innerHTML = word[i];
-    var color_index = Number(letter_status[i])-1;
-    letter_element.style.backgroundColor = color_arr[color_index];
-    letter_element.style.color = black;
-  }
-}
-
-function build_url(getfull=0){
-  var words_element = document.getElementById("wordinput");
-  var initialwords = words_element.value.toLowerCase()
-  var solution = document.getElementById("solutions").value.toLowerCase();
-  var fetch_url_url_to_use = getfull==0 ? fetch_url  : fetch_full_url;
-  if (initialwords.length > 0) {
-    var full_url = fetch_url_url_to_use + "?initialwords=" + initialwords + "&solution=" + solution;
-  } else {
-    var full_url = fetch_url_url_to_use + "solution=" + solution;
-  }
-  return full_url
-}
-
-
-
-// function suggest_word() {
-//   var last_word_used = get_wordinput_array();
-//   last_word_used = last_word_used.slice(-1)[0];
-//   fetch_json_results_from_server(get_full=0)
-//   .then(function(json_results){
-//     var df = json_results[last_word_used];    
-//     var next_word = ".....";
-//     if (df.length>1) {
-//       var solution_from_df = df[0]['word'].trim();
-//       var actual_solution = document.getElementById("solutions").value.toLowerCase();
-//       if (solution_from_df != actual_solution) {
-//         next_word = df[0]['word'];
-//       };
-//     };
-//     var new_wordinput = document.getElementById("wordinput").value + " " + next_word;
-//     document.getElementById("wordinput").value = new_wordinput;
-//     try_it(display_solution=0);
-//   });
-// };
-
-function get_letter_status(your_word,the_word) {
-  var nums =[];
-  for (var i=0;i<your_word.length;i++){
-    let l = your_word[i];
-    if (the_word[i] == l) {
-      nums.push(1);
-    } else if (the_word.includes(l)) {
-      nums.push(2);
-    } else {
-      nums.push(3);
-    }
-  }
-  return nums;
-};
-
-
-
-function suggest_word() {
-  var last_word_used = get_wordinput_array();
-  last_word_used = last_word_used.slice(-1)[0];
-  fetch_json_results_from_server(get_full=0)
-  .then(function(json_results){
-    var df = json_results[last_word_used]; 
-    var next_word = ".....";
-    // set last_letter_status_sum to a number higher than 15
-    var last_letter_sum = 100;
-    var actual_solution = document.getElementById("solutions").value.toLowerCase();
-    if (df.length>1) {
-      for (var i=0;i<df.length;i++) {
-        var solution_from_df = df[i]['word'].trim();
-        if (solution_from_df != actual_solution) {
-          var letter_status = get_letter_status(solution_from_df,actual_solution);
-          var letter_sum =  letter_status.reduce((a, b) => a + b, 0);
-          if (letter_sum < last_letter_sum){
-            last_letter_sum = letter_sum;
-            next_word = df[i]['word'];
-          }
-        };
-      };
-    }   
-    var new_wordinput = document.getElementById("wordinput").value + " " + next_word;
-    document.getElementById("wordinput").value = new_wordinput;
-    try_it(display_solution=0);
-  });
-};
-
-
-async function show_full_solution(){
-  // try_it(getfull=1);
-  fetch_json_results_from_server(getfull=1)
-  .then(function(json_results){
-    display_all_words(json_results,display_solution_word=1);
-    display_full_solution(json_results);
-  });    
-};
-
-async function fetch_json_results_from_server(getfull=0) {
-  var full_url = build_url(getfull=getfull);
-  const response = await fetch(full_url, 
-  {
-      method: 'GET',
-      headers: {
-          'Accept': 'application/json',
-      },
-  })
-  
-  if (response.ok) { // if HTTP-status is 200-299
-    // get the response body (the method explained below)
-    let json = await response.json();
-    return json;
-  } else {
-      alert("HTTP-Error: " + response.status);
-      return null;
-  }  
-
-};
-
-function display_all_words(json_results,display_solution_word=0) {
-// loop over each word that was returned from the call to the restful wordle_server's solve route
-  if (display_solution_word==1) {
-    var words_used = json_results['wordsused'];
-  } else {
-    var words_used = get_wordinput_array();
-  }
-  
-  var letter_status_used = json_results['letterstatusused'];
-  // for (var i=0;i<5;i++){
-  for (var i=0;i<words_used.length;i++){
-    var tbn = 'json_results_' + i;
-    // try this
-    document.getElementById("json_title_"+i).innerHTML = "";
-    document.getElementById(tbn).innerHTML = "";
-    reset_saved_word(i);
-    display_word(words_used[i],i,letter_status_used[i],display_solution_word=1);
-  }
-};
-
-function display_full_solution(json_results) {
-  var words_used = json_results['wordsused'];
-  var letter_status_used = json_results['letterstatusused'];
-  for (var i=0;i<5;i++){
-    var tbn = 'json_results_' + i;
-    if (i<words_used.length){
-      // add this word used to the title of the DataTable
-      document.getElementById("json_title_"+i).innerHTML = "Possible words after using the word: " + words_used[i].toUpperCase();
-      // display the DataTable of possible next words for this word used
-      var df = json_results[words_used[i]];
-      if (df.length < 1) {
+    function reset_all(reset_words=1,reset_wordinput=1) {
+      if (reset_words==1){
+        words = [];
+        words_choices = [];
+        for (var i=0;i<5;i++){
+          reset_saved_word(i);
+        }
+      for (i=0;i<5;i++) {
         reset_datatable(i);
+      }
+      };
+      if (reset_wordinput==1) {
+        if (document.getElementById("wordinput").value.length <1) {
+          document.getElementById("wordinput").value = default_initial_words;
+        }
+      }
+      add_options();
+    };
+
+    function add_options(){
+      fetch(dates_url, 
+      {
+          method: 'GET',
+          headers: {
+              'Accept': 'application/json',
+          },
+      })
+      // .then(response => response.text())
+      .then(
+        function(response) {
+          var r = response.text();
+          return r;
+        }
+      )
+      .then(text => JSON.parse(text))
+      .then(function(json_results){
+        var select = document.getElementById('solutions');
+        for (i=0;i<json_results.length;i++){
+          json_result = json_results[i];
+          // Add an option
+          let option = document.createElement('option');
+          option.value = json_result['solution'];
+          option.text = json_result['date'];
+          select.add(option);      
+        };
+        // now display word grid for initial words
+        // try_it(display_solution=0,display_solution_word=1);
+        // try_it(display_solution=0,display_solution_word=0);
+        fetch_json_results_from_server(getfull=0)
+        .then(function(json_results){
+          display_all_words(json_results,display_solution_word=0);
+        });    
+
+      });
+
+    };
+
+    function on_new_input() {
+      selectDateChange(words_to_keep=5,display_solution_word=0);
+    };
+
+    function get_wordinput_array(words_to_keep=5){
+      var init_words = document.getElementById("wordinput").value;
+      var init_words_arr = init_words.split(" ");
+      init_words_arr = init_words_arr.filter(v=>v.length>0).slice(0,words_to_keep);
+      return init_words_arr
+
+    }
+
+    function selectDateChange(words_to_keep=2,display_solution_word=0) {
+      var init_words_arr = get_wordinput_array(words_to_keep=words_to_keep);
+      var init_words = init_words_arr.join(" ");
+      document.getElementById("wordinput").value = init_words;
+      reset_all(reset_words=1,reset_wordinput=0);
+    }
+
+    function rgb_to_hex(rgb_object) {
+      rgb_string = rgb_object.toString();
+      rgb = rgb_string.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+
+      function hexCode(i) {
+        return ("0" + parseInt(i).toString(16)).slice(-2);
+      }
+      var hex_value = "#" + hexCode(rgb[1]) + hexCode(rgb[2]) 
+              + hexCode(rgb[3]);
+      hex_value = hex_value.toUpperCase();
+      return hex_value;
+      }
+
+    function onbt1(clicked_id) {
+      var t_id = clicked_id[1];
+      var letter_id = Number(clicked_id[2])
+      var color_sub = letter_id-1;
+      var color = color_arr[color_sub];
+      document.getElementById("t"+t_id).style.backgroundColor = color;
+    }
+
+    function reset_saved_word(word_index){
+      var idx1 = word_index + 1;
+      for (k=0;k<5;k++){
+        var idx2 = k+1;
+        var letter_element = document.getElementById("w"+idx1+idx2);
+        letter_element.innerHTML = ".";
+        letter_element.style.backgroundColor = white;
+        letter_element.style.color = white;
+      }
+    }
+
+    function add(accumulator, a) {
+      return accumulator + a;
+    }
+
+    function display_word(word,word_index,letter_status,display_solution_word=0){
+      var ls_sum = letter_status.reduce(add,0);
+      if (ls_sum==5 && display_solution_word==0){
+        reset_saved_word(word_index);
+        return;
+      };
+      var idx1 = word_index + 1;
+      for (i=0;i<5;i++){
+        var idx2 = i+1;
+        var letter_element = document.getElementById("w"+idx1+idx2);
+        letter_element.innerHTML = word[i];
+        var color_index = Number(letter_status[i])-1;
+        letter_element.style.backgroundColor = color_arr[color_index];
+        letter_element.style.color = black;
+      }
+    }
+
+    function build_url(getfull=0){
+      var words_element = document.getElementById("wordinput");
+      var initialwords = words_element.value.toLowerCase()
+      var solution = document.getElementById("solutions").value.toLowerCase();
+      var fetch_url_url_to_use = getfull==0 ? fetch_url  : fetch_full_url;
+      if (initialwords.length > 0) {
+        var full_url = fetch_url_url_to_use + "?initialwords=" + initialwords + "&solution=" + solution;
       } else {
-        if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
-          $("#" + tbn).dataTable( {
-              "data": df,
-              "columns":[
-                {"data":"word","title":"word"},
-                {"data":"probability","title":"probability"}
-              ],
-              order: [[1, 'desc']],
-              "pageLength": 25,
-          } );      
+        var full_url = fetch_url_url_to_use + "solution=" + solution;
+      }
+      return full_url
+    }
+
+    function get_letter_status(your_word,the_word) {
+      var nums =[];
+      for (var i=0;i<your_word.length;i++){
+        let l = your_word[i];
+        if (the_word[i] == l) {
+          nums.push(1);
+        } else if (the_word.includes(l)) {
+          nums.push(2);
         } else {
-          var dt = $("#" + tbn).dataTable();
-          dt.fnClearTable();
-          dt.fnAddData(df,redraw=true);
-        }      
-      }        
+          nums.push(3);
+        }
+      }
+      return nums;
+    };
+
+
+    function suggest_word() {
+      var last_word_used = get_wordinput_array();
+      last_word_used = last_word_used.slice(-1)[0];
+      fetch_json_results_from_server(get_full=0)
+      .then(function(json_results){
+        var df = json_results[last_word_used]; 
+        var next_word = ".....";
+        // set last_letter_status_sum to a number higher than 15
+        var last_letter_sum = 100;
+        var actual_solution = document.getElementById("solutions").value.toLowerCase();
+        if (df.length>1) {
+          for (var i=0;i<df.length;i++) {
+            var solution_from_df = df[i]['word'].trim();
+            if (solution_from_df != actual_solution) {
+              var letter_status = get_letter_status(solution_from_df,actual_solution);
+              var letter_sum =  letter_status.reduce((a, b) => a + b, 0);
+              if (letter_sum < last_letter_sum){
+                last_letter_sum = letter_sum;
+                next_word = df[i]['word'];
+              }
+            };
+          };
+        }   
+        var new_wordinput = document.getElementById("wordinput").value + " " + next_word;
+        document.getElementById("wordinput").value = new_wordinput;
+        try_it(display_solution=0);
+      });
+    };
+
+
+    async function show_full_solution(){
+      // try_it(getfull=1);
+      fetch_json_results_from_server(getfull=1)
+      .then(function(json_results){
+        display_all_words(json_results,display_solution_word=1);
+        display_full_solution(json_results);
+      });    
+    };
+
+    async function fetch_json_results_from_server(getfull=0) {
+      var full_url = build_url(getfull=getfull);
+      const response = await fetch(full_url, 
+      {
+          method: 'GET',
+          headers: {
+              'Accept': 'application/json',
+          },
+      })
+      
+      if (response.ok) { // if HTTP-status is 200-299
+        // get the response body (the method explained below)
+        let json = await response.json();
+        return json;
+      } else {
+          alert("HTTP-Error: " + response.status);
+          return null;
+      }  
+
+    };
+
+    function display_all_words(json_results,display_solution_word=0) {
+    // loop over each word that was returned from the call to the restful wordle_server's solve route
+      if (display_solution_word==1) {
+        var words_used = json_results['wordsused'];
+      } else {
+        var words_used = get_wordinput_array();
+      }
+      
+      var letter_status_used = json_results['letterstatusused'];
+      // for (var i=0;i<5;i++){
+      for (var i=0;i<words_used.length;i++){
+        var tbn = 'json_results_' + i;
+        // try this
+        document.getElementById("json_title_"+i).innerHTML = "";
+        document.getElementById(tbn).innerHTML = "";
+        reset_saved_word(i);
+        display_word(words_used[i],i,letter_status_used[i],display_solution_word=1);
+      }
+    };
+
+    function display_full_solution(json_results) {
+      var words_used = json_results['wordsused'];
+      var letter_status_used = json_results['letterstatusused'];
+      for (var i=0;i<5;i++){
+        var tbn = 'json_results_' + i;
+        if (i<words_used.length){
+          // add this word used to the title of the DataTable
+          document.getElementById("json_title_"+i).innerHTML = "Possible words after using the word: " + words_used[i].toUpperCase();
+          // display the DataTable of possible next words for this word used
+          var df = json_results[words_used[i]];
+          if (df.length < 1) {
+            reset_datatable(i);
+          } else {
+            if ( ! $.fn.DataTable.isDataTable("#" + tbn) ) {
+              $("#" + tbn).dataTable( {
+                  "data": df,
+                  "columns":[
+                    {"data":"word","title":"word"},
+                    {"data":"probability","title":"probability"}
+                  ],
+                  order: [[1, 'desc']],
+                  "pageLength": 25,
+              } );      
+            } else {
+              var dt = $("#" + tbn).dataTable();
+              dt.fnClearTable();
+              dt.fnAddData(df,redraw=true);
+            }      
+          }        
+        }
+      }  
+    };
+
+
+    // The method try_it calls the python restful server to obtain a solution to the wordle.  However,
+    //   if display_solution!==1, then try_it will only display the words UP BUT NOT INCLUDING
+    //   the solution word, and will update the w11 .. w55 letter displays to the proper colors.
+    function try_it(display_solution=1,display_solution_word=0,getfull=0){
+      fetch_json_results_from_server(getfull=getfull)
+      .then(function(json_results){
+        display_all_words(json_results,display_solution_word=display_solution_word);
+        if (display_solution==1){
+          display_full_solution(json_results);
+        }
+      });  
+    };
+
+
+    function initit(){
+      reset_all();
     }
-  }  
-};
 
+    window.onload = initit();
 
-// The method try_it calls the python restful server to obtain a solution to the wordle.  However,
-//   if display_solution!==1, then try_it will only display the words UP BUT NOT INCLUDING
-//   the solution word, and will update the w11 .. w55 letter displays to the proper colors.
-function try_it(display_solution=1,display_solution_word=0,getfull=0){
-  fetch_json_results_from_server(getfull=getfull)
-  .then(function(json_results){
-    display_all_words(json_results,display_solution_word=display_solution_word);
-    if (display_solution==1){
-      display_full_solution(json_results);
-    }
-  });  
-};
+  </script>
 
-
-function initit(){
-  reset_all();
-}
-
-window.onload = initit();
-
-</script>
 
 
 </body>
-</html>
-
