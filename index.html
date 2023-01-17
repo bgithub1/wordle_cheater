@@ -64,12 +64,12 @@
       border-radius: 70px;  
     }
 
-    div {
+/*    div {
       text-align: center;
       height:50px;
       font-size: var(--button_font);
     }
-
+*/
     button, input, select{
       text-align: center;
       border: 1px solid rgba(0, 0, 0, 0.8);
@@ -88,6 +88,11 @@
     }
     table.dataTable tr.dtrg-level-0 td {
       font-size: 1.8em;
+    }
+
+    .bord {
+      text-align: center;
+      border: 1px solid rgba(0, 0, 0, 0.8);
     }
 
   </style>
@@ -168,33 +173,33 @@
   <p></p>
   <!-- <div id="wordsused"></div> -->
   <p></p>
-  <div class="container2">
-      <h2 id="json_title_0"></h2>
-      <table class="bord" id="json_results_0"></table>
+  <div class="row">
+      <button style="background-color: white; border:0px; font-size: 25; font-weight: bold" class="col-xs-12" id="json_title_0"></button>
+      <table class="bord col-xs-12" id="json_results_0"></table>
   </div>  
 
   <p></p>
-  <div class="container2">
-      <h2 id="json_title_1"></h2>
-      <table class="bord" id="json_results_1"></table>
+  <div class="row">
+      <button style="background-color: white; border:0px; font-size: 25; font-weight: bold" class="col-xs-12" id="json_title_1"></button>
+      <table class="bord col-xs-12" id="json_results_1"></table>
   </div>
 
   <p></p>
-  <div class="container2">
-      <h2 id="json_title_2"></h2>
-      <table class="bord" id="json_results_2"></table>
+  <div class="row">
+      <button style="background-color: white; border:0px; font-size: 25; font-weight: bold" class="col-xs-12" id="json_title_2"></button>
+      <table class="bord col-xs-12" id="json_results_2"></table>
   </div>
 
   <p></p>
-  <div class="container2">
-      <h2 id="json_title_3"></h2>
-      <table class="bord" id="json_results_3"></table>
+  <div class="row">
+      <button style="background-color: white; border:0px; font-size: 25; font-weight: bold" class="col-xs-12" id="json_title_3"></button>
+      <table class="bord col-xs-12" id="json_results_3"></table>
   </div>
 
   <p></p>
-  <div class="container2">
-      <h2 id="json_title_4"></h2>
-      <table class="bord" id="json_results_4"></table>
+  <div class="row">
+      <button style="background-color: white; border:0px; font-size: 25; font-weight: bold" class="col-xs-12" id="json_title_4"></button>
+      <table class="bord col-xs-12" id="json_results_4"></table>
   </div>
 
   <!-- Latest compiled and minified CSS -->
@@ -481,7 +486,7 @@
         var tbn = 'json_results_' + i;
         if (i<words_used.length){
           // add this word used to the title of the DataTable
-          document.getElementById("json_title_"+i).innerHTML = "Possible words after using the word: " + words_used[i].toUpperCase();
+          document.getElementById("json_title_"+i).innerHTML = "Possible words after using: " + words_used[i].toUpperCase();
           // display the DataTable of possible next words for this word used
           var df = json_results[words_used[i]];
           if (df.length < 1) {
