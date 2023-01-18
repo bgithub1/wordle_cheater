@@ -23,8 +23,8 @@
       --width1: 100%;
       --width2: 94%;
       --text_font:50px;
-      --button_font:20px;
-      --input_font:20px;
+      --button_font:23px;
+      --input_font:23px;
       --option_font:20px;
       --minwidth: 800px;
     }
@@ -95,83 +95,87 @@
       border: 1px solid rgba(0, 0, 0, 0.8);
     }
 
+    .fstitle {
+      font-size: var(--button_font);
+    }
+
   </style>
 </head>
 <body>
 
   <div style="width:98vw" class="container-fluid">
     <div class="row">
-        <button class="col-xs-12" id="title">Wordle Cheater</button>
+        <button class="col-xs-12 fstitle" id="title">Wordle Cheater</button>
       </div>
     <div class="row">
-        <input id="wordinput" class="col-xs-10" type="text">
-        <button id="gobutton" class="col-xs-2 lighttan" onclick="on_new_input()">GO</button>
+        <input id="wordinput" style="resize: none" class="fstitle col-xs-10" type="text">
+        <button id="gobutton" class="fstitle col-xs-2 lighttan" onclick="on_new_input()">GO</button>
       </div>
       
     <div class="row">
-        <button class="col-xs-6" id="selectdate">Select A Date:</button>
-        <select class="col-xs-6" name="cars" id="solutions" onchange="selectDateChange()">
+        <button class="fstitle col-xs-6" id="selectdate">Select A Date:</button>
+        <select class="fstitle col-xs-6" name="cars" id="solutions" onchange="selectDateChange()">
         </select>
       </div>
       
     <div class="row">
       <div class='col-xs-1'></div>
-        <button id="w11" size=1 type="text" class="col-xs-2"></button>
-        <button id="w12" size=1 type="text" class="col-xs-2"></button>
-        <button id="w13" size=1 type="text" class="col-xs-2"></button>
-        <button id="w14" size=1 type="text" class="col-xs-2"></button>
-        <button id="w15" size=1 type="text" class="col-xs-2"></button>
+        <button id="w11" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w12" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w13" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w14" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w15" size=1 type="text" class="fstitle col-xs-2"></button>
       <div class='col-xs-1'></div>
     </div>
       
     <div class="row">
       <div class='col-xs-1'></div>
-        <button id="w21" size=1 type="text" class="col-xs-2"></button>
-        <button id="w22" size=1 type="text" class="col-xs-2"></button>
-        <button id="w23" size=1 type="text" class="col-xs-2"></button>
-        <button id="w24" size=1 type="text" class="col-xs-2"></button>
-        <button id="w25" size=1 type="text" class="col-xs-2"></button>
+        <button id="w21" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w22" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w23" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w24" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w25" size=1 type="text" class="fstitle col-xs-2"></button>
       <div class='col-xs-1'></div>
     </div>
       
     <div class="row">
       <div class='col-xs-1'></div>
-        <button id="w31" size=1 type="text" class="col-xs-2"></button>
-        <button id="w32" size=1 type="text" class="col-xs-2"></button>
-        <button id="w33" size=1 type="text" class="col-xs-2"></button>
-        <button id="w34" size=1 type="text" class="col-xs-2"></button>
-        <button id="w35" size=1 type="text" class="col-xs-2"></button>
+        <button id="w31" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w32" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w33" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w34" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w35" size=1 type="text" class="fstitle col-xs-2"></button>
       <div class='col-xs-1'></div>
     </div>
       
     <div class="row">
       <div class='col-xs-1'></div>
-        <button id="w41" size=1 type="text" class="col-xs-2"></button>
-        <button id="w42" size=1 type="text" class="col-xs-2"></button>
-        <button id="w43" size=1 type="text" class="col-xs-2"></button>
-        <button id="w44" size=1 type="text" class="col-xs-2"></button>
-        <button id="w45" size=1 type="text" class="col-xs-2"></button>
+        <button id="w41" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w42" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w43" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w44" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w45" size=1 type="text" class="fstitle col-xs-2"></button>
       <div class='col-xs-1'></div>
     </div>
       
     <div class="row">
       <div class='col-xs-1'></div>
-        <button id="w51" size=1 type="text" class="col-xs-2"></button>
-        <button id="w52" size=1 type="text" class="col-xs-2"></button>
-        <button id="w53" size=1 type="text" class="col-xs-2"></button>
-        <button id="w54" size=1 type="text" class="col-xs-2"></button>
-        <button id="w55" size=1 type="text" class="col-xs-2"></button>
+        <button id="w51" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w52" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w53" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w54" size=1 type="text" class="fstitle col-xs-2"></button>
+        <button id="w55" size=1 type="text" class="fstitle col-xs-2"></button>
       <div class='col-xs-1'></div>
     </div>
       
     <div class="row">
-        <button id="suggestword" type="button" class="col-xs-6 curved" onClick="suggest_word()">Suggest A Word</button>
-        <button id="addword" type="button" class="col-xs-6 curved" onClick="show_full_solution()">Show Solution</button>
+        <button style="font-size: 20" id="suggestword" type="button" class="col-xs-6 curved" onClick="suggest_word()">Suggest A Word</button>
+        <button style="font-size: 20" id="addword" type="button" class="col-xs-6 curved" onClick="show_full_solution()">Show Solution</button>
       </div>
   </div>
 
   <p></p>
-  <!-- <div id="wordsused"></div> -->
+  
   <p></p>
   <div class="row">
       <button style="background-color: white; border:0px; font-size: 25; font-weight: bold" class="col-xs-12" id="json_title_0"></button>
