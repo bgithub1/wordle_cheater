@@ -210,6 +210,7 @@ class wordl():
         self.df_word_history = pd.DataFrame(
             {'date':[],'number':[],'solution':[]}
         )
+
         try:
             # if you have never run this before, the exception will be thrown
             self.df_word_history = pd.read_csv('./temp_folder/df_word_history.csv')
