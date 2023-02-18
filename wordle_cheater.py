@@ -18,6 +18,7 @@ from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 import io
 import os
+import pdb
 
 
 USE_LOCAL_CSV = os.path.exists('df_wordl_words.csv') and os.path.exists('unigram_freq.csv')
@@ -277,7 +278,7 @@ def get_letter_status(your_word,the_word):
         else:
             nums.append(3)
     return nums    
-        
+
 def letter_list_to_str(letter_list):
     return ''.join(
         [str(v) for v in letter_list]
@@ -341,7 +342,9 @@ def solveall(initial_words,solution):
         df = filter_words(wdl_possible_words_json).dropna().copy()
         df = df[['word','probability']]
         list_df.append(df)
-        if len(df)<=1:
+        # if len(df)<=1:
+        #     break
+        if (len(df)<=1) and (len(words_used)>=len(initial_words)):
             break
     # add solution or last word
     df_last = list_df[-1]

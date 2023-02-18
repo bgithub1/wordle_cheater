@@ -233,9 +233,14 @@
     var color_arr = [green, gold, grey]
 
     var default_initial_words = "alert";
-    var fetch_url = "https://billybyte.com/wordle_server/wordl/solveall";
-    var fetch_full_url = "https://billybyte.com/wordle_server/wordl/solveall";
-    var dates_url = "https://billybyte.com/wordle_server/wordl/solutions";
+    var fetch_http = "https://billybyte.com/wordle_server";
+    // var fetch_http = "http://localhost:8000";
+    // var fetch_url = "https://billybyte.com/wordle_server/wordl/solveall";
+    // var fetch_full_url = "https://billybyte.com/wordle_server/wordl/solveall";
+    // var dates_url = "https://billybyte.com/wordle_server/wordl/solutions";
+    var fetch_url = fetch_http + "/wordl/solveall";
+    var fetch_full_url =  fetch_http + "/wordl/solveall";
+    var dates_url = fetch_http + "/wordl/solutions";
 
     function reset_datatable(idx) {
       if ($('#json_results_'+idx).hasClass('dataTable')) {

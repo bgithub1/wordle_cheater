@@ -32,6 +32,8 @@ origins = [
     "https://billybyte.com",
     "http://localhost",
     "http://localhost:3001",
+    "http://127.0.0.1",
+    "http://127.0.0.1:3001",
 ]
 app.add_middleware(
     CORSMiddleware,
@@ -112,5 +114,5 @@ async def load_wordl(filters:str="slate,33333,minor,33223,goony,32123"):
     return df.to_dict(orient="records")       
 
 
- 
+
 
