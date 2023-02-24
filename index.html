@@ -235,9 +235,6 @@
     var default_initial_words = "alert";
     var fetch_http = "https://billybyte.com/wordle_server";
     // var fetch_http = "http://localhost:8000";
-    // var fetch_url = "https://billybyte.com/wordle_server/wordl/solveall";
-    // var fetch_full_url = "https://billybyte.com/wordle_server/wordl/solveall";
-    // var dates_url = "https://billybyte.com/wordle_server/wordl/solutions";
     var fetch_url = fetch_http + "/wordl/solveall";
     var fetch_full_url =  fetch_http + "/wordl/solveall";
     var dates_url = fetch_http + "/wordl/solutions";
@@ -372,10 +369,12 @@
       for (i=0;i<5;i++){
         var idx2 = i+1;
         var letter_element = document.getElementById("w"+idx1+idx2);
-        letter_element.innerHTML = word[i];
+        // letter_element.innerHTML = word[i];
+        letter_element.innerHTML = word[i].toUpperCase();
         var color_index = Number(letter_status[i])-1;
         letter_element.style.backgroundColor = color_arr[color_index];
         letter_element.style.color = black;
+        letter_element.style.fontWeight="bold";
       }
     }
 
