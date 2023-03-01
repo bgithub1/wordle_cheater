@@ -85,6 +85,15 @@ def get_word_history_2():
         df_word_hist.index = range(len(df_word_hist))
     return df_word_hist
 
+def fix_date(d):
+    ds = d.strip().split(' ')
+    try:
+        m = ds[0][0:3]
+        d = str(int(ds[1]))
+        ds = f"{m} {d}"
+    except:
+        return d
+    return ds
 
 def get_word_history():
     ret_val = None
@@ -109,7 +118,12 @@ def get_word_history():
             for v in results
         ]
         ret_val = [
-            [rv[0].strip(),rv[1].strip(),rv[2].strip()] 
+            [
+                # rv[0].strip(),
+                fix_date(rv[0]),
+                rv[1].strip(),
+                rv[2].strip()
+            ] 
             for rv in ret_val if len(rv)==3
         ]
         ret_val = [
@@ -218,6 +232,7 @@ class wordl():
         except:
             pass
         c1 = self.df_word_history['date']==get_monthday()
+        
         if len(self.df_word_history[c1])!=1:
             # self.df_word_history = get_word_history()
             self.df_word_history = get_combined_word_histories()
