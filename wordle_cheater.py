@@ -89,8 +89,7 @@ def fix_date(d):
     ds = d.strip().split(' ')
     try:
         m = ds[0][0:3]
-        d = str(int(ds[1]))
-        ds = f"{m} {d}"
+        ds = f"{m} {ds[1]}"
     except:
         return d
     return ds
@@ -98,7 +97,9 @@ def fix_date(d):
 def get_word_history():
     ret_val = None
     url_to_search = "https://screenrant.com/wordle-answers-updated-word-puzzle-guide/"
-    xpath = "//a[contains(@href,'hints')]/.."
+    # xpath = "//a[contains(@href,'hints')]/.."
+    xpath = "//ul/li//strong/.."
+
     # Make an HTTP request to the webpage
     response = requests.get(
         url_to_search, 
@@ -113,6 +114,7 @@ def get_word_history():
     # Execute an XPath search on the document
     results = doc.xpath(xpath)
     if len(results)>0:
+        ret_val = results[0:300]
         ret_val = [
             v.text_content().split('-') 
             for v in results
@@ -137,7 +139,7 @@ def get_word_history():
         df_word_hist = pd.DataFrame(ret_val,columns=['date','number','solution'])
         df_word_hist = df_word_hist.sort_values('number',ascending=False)
         df_word_hist.index = range(len(df_word_hist))
-    return df_word_hist
+    return df_word_hist.iloc[0:300]
 
 def get_combined_word_histories():
     df_word_hist = get_word_history()
@@ -166,11 +168,12 @@ nltk_words = df_ugf[c1 & c2].word.values
 
 # -
 
-def get_monthday():
+def get_today_monthday():
     eastern = pytz.timezone("US/Eastern")
     now = datetime.datetime.now(tz=eastern)
     month = now.strftime('%b')
-    day = str(int(now.strftime('%d')))
+    # day = str(int(now.strftime('%d')))
+    day = now.strftime('%d')
     monthday = month+" "+day
     return monthday
 
@@ -220,27 +223,28 @@ class wordl():
             ]
         )
 
-        # Get wordle word history
-        # First, init a blank DataFrame, in case you have never run get_word_history()
-        self.df_word_history = pd.DataFrame(
-            {'date':[],'number':[],'solution':[]}
-        )
+        # # Get wordle word history
+        # # First, init a blank DataFrame, in case you have never run get_word_history()
+        # self.df_word_history = pd.DataFrame(
+        #     {'date':[],'number':[],'solution':[]}
+        # )
 
-        try:
-            # if you have never run this before, the exception will be thrown
-            self.df_word_history = pd.read_csv('./temp_folder/df_word_history.csv')
-        except:
-            pass
-        c1 = self.df_word_history['date']==get_monthday()
+        # try:
+        #     # if you have never run this before, the exception will be thrown
+        #     self.df_word_history = pd.read_csv('./temp_folder/df_word_history.csv')
+        # except:
+        #     pass
+        # c1 = self.df_word_history['date']==get_today_monthday()
 
-        if len(self.df_word_history[c1])!=1:
-            # self.df_word_history = get_word_history()
-            # self.df_word_history = get_combined_word_histories()
-            # self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
-            self.df_word_history =  get_word_history()
-            self.df_word_history = self.df_word_history.iloc[0:300]
-            self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
+        # if len(self.df_word_history[c1])!=1:
+        #     # self.df_word_history = get_word_history()
+        #     # self.df_word_history = get_combined_word_histories()
+        #     # self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
+        #     self.df_word_history =  get_word_history()
+        #     self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
 
+        self.df_word_history =  get_word_history()
+        c1 = self.df_word_history['date']==get_today_monthday()
         # self.todays_word = self.df_word_history.iloc[0].solution.lower()
         # don't show histories that are in the future
         curr_num = self.df_word_history[c1].number.values[0]
