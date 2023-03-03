@@ -232,12 +232,15 @@ class wordl():
         except:
             pass
         c1 = self.df_word_history['date']==get_monthday()
-        
+
         if len(self.df_word_history[c1])!=1:
             # self.df_word_history = get_word_history()
-            self.df_word_history = get_combined_word_histories()
+            # self.df_word_history = get_combined_word_histories()
+            # self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
+            self.df_word_history =  get_word_history()
+            self.df_word_history = self.df_word_history.iloc[0:300]
             self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
-                        
+
         # self.todays_word = self.df_word_history.iloc[0].solution.lower()
         # don't show histories that are in the future
         curr_num = self.df_word_history[c1].number.values[0]
