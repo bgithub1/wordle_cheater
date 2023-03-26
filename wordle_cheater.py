@@ -244,15 +244,16 @@ class wordl():
         #     self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
 
         self.df_word_history =  get_word_history()
-        c1 = self.df_word_history['date']==get_today_monthday()
-        # self.todays_word = self.df_word_history.iloc[0].solution.lower()
         # don't show histories that are in the future
-        curr_num = self.df_word_history[c1].number.values[0]
-        c2 = self.df_word_history['number']<=curr_num
-        # use the c2 condition to only show word histories before the current monthday
-        self.df_word_history = self.df_word_history[c2]
+        # try to get this date's word
+        # c1 = self.df_word_history['date']==get_today_monthday()        
+        # curr_num = self.df_word_history[c1].number.values[0]
+        # c2 = self.df_word_history['number']<=curr_num
+        # # use the c2 condition to only show word histories before the current monthday
+        # self.df_word_history = self.df_word_history[c2]
         # save todays word (solution)
-        self.todays_word = self.df_word_history[c1].solution.values[-1].lower()
+        # self.todays_word = self.df_word_history[c1].solution.values[-1].lower()
+        self.todays_word = self.df_word_history.solution.values[0].lower()
 
     
     def add_word(self,word,letter_status,debug_word=''):
