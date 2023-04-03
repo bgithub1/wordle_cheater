@@ -243,7 +243,8 @@ class wordl():
         #     self.df_word_history =  get_word_history()
         #     self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
 
-        self.df_word_history =  get_word_history()
+        # self.df_word_history =  get_word_history()
+        self.df_word_history = get_combined_word_histories()
         # don't show histories that are in the future
         # try to get this date's word
         # c1 = self.df_word_history['date']==get_today_monthday()        
