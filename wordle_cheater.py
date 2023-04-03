@@ -82,6 +82,7 @@ def get_word_history_2():
         ]
         df_word_hist = pd.DataFrame(ret_val,columns=['date','number','solution'])
         df_word_hist = df_word_hist.sort_values('number',ascending=False)
+        df_word_hist['date'] = df_word_hist['date'].apply(fix_date)
         df_word_hist.index = range(len(df_word_hist))
     return df_word_hist
 
@@ -247,11 +248,11 @@ class wordl():
         self.df_word_history = get_combined_word_histories()
         # don't show histories that are in the future
         # try to get this date's word
-        # c1 = self.df_word_history['date']==get_today_monthday()        
-        # curr_num = self.df_word_history[c1].number.values[0]
-        # c2 = self.df_word_history['number']<=curr_num
-        # # use the c2 condition to only show word histories before the current monthday
-        # self.df_word_history = self.df_word_history[c2]
+        c1 = self.df_word_history['date']==get_today_monthday()        
+        curr_num = self.df_word_history[c1].number.values[0]
+        c2 = self.df_word_history['number']<=curr_num
+        # use the c2 condition to only show word histories before the current monthday
+        self.df_word_history = self.df_word_history[c2]
         # save todays word (solution)
         # self.todays_word = self.df_word_history[c1].solution.values[-1].lower()
         self.todays_word = self.df_word_history.solution.values[0].lower()
