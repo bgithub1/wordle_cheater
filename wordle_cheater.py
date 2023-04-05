@@ -86,11 +86,13 @@ def get_word_history_2():
         df_word_hist.index = range(len(df_word_hist))
     return df_word_hist
 
+
 def fix_date(d):
     ds = d.strip().split(' ')
     try:
-        m = ds[0][0:3]
-        ds = f"{m} {ds[1]}"
+        p1 = ds[0][0:3]
+        p2 = f'0{ds[1]}'[-2:]
+        ds = f"{p1} {p2}"
     except:
         return d
     return ds
@@ -226,26 +228,23 @@ class wordl():
 
         # # Get wordle word history
         # # First, init a blank DataFrame, in case you have never run get_word_history()
-        # self.df_word_history = pd.DataFrame(
-        #     {'date':[],'number':[],'solution':[]}
-        # )
+        self.df_word_history = pd.DataFrame(
+            {'date':[],'number':[],'solution':[]}
+        )
 
-        # try:
-        #     # if you have never run this before, the exception will be thrown
-        #     self.df_word_history = pd.read_csv('./temp_folder/df_word_history.csv')
-        # except:
-        #     pass
-        # c1 = self.df_word_history['date']==get_today_monthday()
+        try:
+            # if you have never run this before, the exception will be thrown
+            self.df_word_history = pd.read_csv('./temp_folder/df_word_history.csv')
+        except:
+            pass
+        c1 = self.df_word_history['date']==get_today_monthday()
 
-        # if len(self.df_word_history[c1])!=1:
-        #     # self.df_word_history = get_word_history()
-        #     # self.df_word_history = get_combined_word_histories()
-        #     # self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
-        #     self.df_word_history =  get_word_history()
-        #     self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
+        if len(self.df_word_history[c1])!=1:
+            # self.df_word_history = get_word_history()
+            # self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
+            self.df_word_history = get_combined_word_histories()
+            self.df_word_history.to_csv('./temp_folder/df_word_history.csv',index=False)
 
-        # self.df_word_history =  get_word_history()
-        self.df_word_history = get_combined_word_histories()
         # don't show histories that are in the future
         # try to get this date's word
         c1 = self.df_word_history['date']==get_today_monthday()        
