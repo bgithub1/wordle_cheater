@@ -233,8 +233,15 @@
     var color_arr = [green, gold, grey]
 
     var default_initial_words = "alert";
+
+    // choose which fetch_http domain you will use
+    // WHEN TESTING LOCALLY, comment this line out
     var fetch_http = "https://billybyte.com/wordle_server";
+    
+    // WHEN TESTING LOCALLY, UNCOMMENT this line
     // var fetch_http = "http://localhost:8000";
+
+
     var fetch_url = fetch_http + "/wordl/solveall";
     var fetch_full_url =  fetch_http + "/wordl/solveall";
     var dates_url = fetch_http + "/wordl/solutions";
@@ -418,17 +425,18 @@
         var last_letter_sum = 100;
         var actual_solution = document.getElementById("solutions").value.toLowerCase();
         if (df.length>1) {
-          for (var i=0;i<df.length;i++) {
-            var solution_from_df = df[i]['word'].trim();
-            if (solution_from_df != actual_solution) {
-              var letter_status = get_letter_status(solution_from_df,actual_solution);
-              var letter_sum =  letter_status.reduce((a, b) => a + b, 0);
-              if (letter_sum < last_letter_sum){
-                last_letter_sum = letter_sum;
-                next_word = df[i]['word'];
-              }
-            };
-          };
+          next_word = df[0]['word'];
+          // for (var i=0;i<df.length;i++) {
+          //   var solution_from_df = df[i]['word'].trim();
+          //   if (solution_from_df != actual_solution) {
+          //     var letter_status = get_letter_status(solution_from_df,actual_solution);
+          //     var letter_sum =  letter_status.reduce((a, b) => a + b, 0);
+          //     if (letter_sum < last_letter_sum){
+          //       last_letter_sum = letter_sum;
+          //       next_word = df[i]['word'];
+          //     }
+          //   };
+          // };
         }   
         var new_wordinput = document.getElementById("wordinput").value + " " + next_word;
         document.getElementById("wordinput").value = new_wordinput;
