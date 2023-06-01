@@ -146,8 +146,13 @@ def get_word_history():
 
 def get_combined_word_histories():
     df_word_hist = get_word_history()
-    df_word_hist_2 = get_word_history_2()
-    df_wh = pd.concat([df_word_hist_2,df_word_hist],ignore_index=True)
+    try:
+        df_word_hist_2 = get_word_history_2()
+        df_wh = pd.concat([df_word_hist_2,df_word_hist],ignore_index=True)
+    except Exception as e:
+        print(f'EXCEPTION in get_combined_word_histories: ')
+        print(str(e))
+        df_wh = df_word_hist.copy()
     df_wh = df_wh.drop_duplicates('date')
     df_wh = df_wh.sort_values('number',ascending=False)
     df_wh.index = range(len(df_wh))
