@@ -1,1 +1,1 @@
-http://localhost:3001/wordle_helper.html
+http://localhost:3001
